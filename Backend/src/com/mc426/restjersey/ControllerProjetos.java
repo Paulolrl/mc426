@@ -21,6 +21,11 @@ public class ControllerProjetos {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
 				return Response.status(401).build();
 			}
+			
+			if (Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0)) == null)
+			{
+				System.out.println("Usuario nao encontrado");
+			}
 
 			JSONObject jsonBody = new JSONObject(body);
 
@@ -30,6 +35,7 @@ public class ControllerProjetos {
 			return Response.status(201).build();
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return Response.status(500).build();
 		}
 	}
