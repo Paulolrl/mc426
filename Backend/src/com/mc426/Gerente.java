@@ -14,8 +14,7 @@ public class Gerente extends Usuario{
 		Projeto novoProjeto = new Projeto(nome, descricao, prazo);
 		for (Equipe equipe : equipes) {
 			equipe.adicionarProjeto(novoProjeto);
-		}
-		
+		}	
 	}
 	
 	public void criarNovaEquipe(String nome, List<Usuario> integrantes) throws Exception{
