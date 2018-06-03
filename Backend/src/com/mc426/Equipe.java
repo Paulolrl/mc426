@@ -2,6 +2,7 @@ package com.mc426;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Equipe {
 	
@@ -9,12 +10,13 @@ public class Equipe {
 	private String nome;
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Equipe> equipePorId = new HashMap<Integer, Equipe>();
-	private static HashMap<Integer, Usuario> usuarios = new HashMap<Integer, Usuario>();
-	private static HashMap<Integer, Projeto> projetos = new HashMap<Integer, Projeto>();
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private List<Projeto> projetos = new ArrayList<Projeto>();
 	
-	public Equipe(String nome) {
+	public Equipe(String nome, ArrayList<Usuario> usuarios) throws Exception {
 		this.id = proximoId();
 		this.nome = nome;
+		adicionarMembros(usuarios);
 		Equipe.equipePorId.put(this.id, this);
 	}
 	
@@ -24,8 +26,8 @@ public class Equipe {
 	
 	public void adicionarMembros(ArrayList<Usuario> membros) throws Exception {
 		for(Usuario membro: membros) {
-			if(!usuarios.containsKey(membro.getId())) {
-				usuarios.put(membro.getId(), membro);
+			if(!usuarios.contains(membro)) {
+				usuarios.add(membro);
 			}else {
 				throw new Exception();
 			}
@@ -35,8 +37,8 @@ public class Equipe {
 	
 	public void removerMembros (ArrayList<Usuario> membros) throws Exception {
 		for(Usuario membro: membros) {
-			if(usuarios.containsKey(membro.getId())) {
-				usuarios.remove(membro.getId());
+			if(usuarios.contains(membro)) {
+				usuarios.remove(membro);
 			}else {
 				throw new Exception();
 			}
@@ -44,17 +46,19 @@ public class Equipe {
 	}
 	
 	public void adicionarProjeto(Projeto projeto) throws Exception {
-		if(!projetos.containsKey(projeto.getId())) {
-			projetos.put(projeto.getId(), projeto);
+		if(!projetos.contains(projeto)) {
+			projetos.add(projeto);
+		}else {
+			throw new Exception();
 		}
-		throw new Exception();
 	}
 	
 	public void removerProjeto(Projeto projeto) throws Exception {
-		if(projetos.containsKey(projeto.getId())) {
-			projetos.remove(projeto.getId());
+		if(projetos.contains(projeto)) {
+			this.projetos.remove(projeto);
+		}else {
+			throw new Exception();
 		}
-		throw new Exception();
 	}
 	
 	private static int proximoId() {
@@ -63,5 +67,13 @@ public class Equipe {
 	
 	public String getNome() {
 		return this.nome;
+	}
+	
+	public List<Usuario> getMembros(){
+		return usuarios;
+	}
+	
+	public List<Projeto> getProjetos(){
+		return projetos;
 	}
 }
