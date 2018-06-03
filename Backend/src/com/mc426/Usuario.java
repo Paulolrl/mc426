@@ -64,4 +64,8 @@ public class Usuario {
 			throw new Exception();
 		}
 	}
+	
+	public List<Tarefa> getTarefas(){
+		return tarefas;
+	} 
 }
