@@ -18,14 +18,11 @@ public class ControllerCadastro {
 	public Response Create(@Context HttpHeaders httpheaders, String body) throws JSONException {
 		try {
 			JSONObject jsonBody = new JSONObject(body);
-			if (jsonBody.getBoolean("gerente"))
-			{
+			if (jsonBody.getBoolean("gerente")) {
 				new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
 				System.out.println("Criou gerente " + jsonBody.getString("usuario") + " senha: "
 						+ jsonBody.getString("senha") + " nome: " + jsonBody.getString("nome"));
-			}
-			else
-			{
+			} else {
 				new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
 				System.out.println("Criou usuario " + jsonBody.getString("usuario") + " senha: "
 						+ jsonBody.getString("senha") + " nome: " + jsonBody.getString("nome"));
