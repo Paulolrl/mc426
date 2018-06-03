@@ -1,4 +1,4 @@
-package com.mc426.restjersey;
+package com.mc426;
 
 import java.util.HashMap;
 
