@@ -1,5 +1,6 @@
 package com.mc426;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 public class Tarefa {
 
 	private static HashMap<Integer, Tarefa> tarefaPorId = new HashMap<Integer, Tarefa>();
+	private List<Feedback> feedbacks = new ArrayList<Feedback>();
 	
 	private static int ultimoId = 1;
 	public static Tarefa getPorId(int id) {
@@ -63,5 +65,10 @@ public class Tarefa {
 	}
 	public List<String> getTags() {
 		return tags;
+	}
+	
+	public void adicionarFeedback(Usuario autor, int nota, String comentario) {
+		Feedback feedback = new Feedback(autor, nota, comentario);
+		feedbacks.add(feedback);
 	}
 }
