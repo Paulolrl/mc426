@@ -9,18 +9,14 @@ public class Usuario {
 	private String userName;
 	private String senha;
 	private String nome;
-	private int idade;
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Usuario> usuarioPorId = new HashMap<Integer, Usuario>();
 	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
-	
-	
-	
-	public Usuario(String userName, String senha, String nome, int idade) {
+		
+	public Usuario(String userName, String senha, String nome) {
 		this.id = Usuario.proximoId();
 		this.userName = userName;
 		this.nome = nome;
-		this.idade = idade;
 		this.senha = senha;
 		Usuario.usuarioPorId.put(this.id, this);
 	}
@@ -40,11 +36,7 @@ public class Usuario {
 	public String getNome() {
 		return this.nome;
 	}
-	
-	public int getIdade() {
-		return this.idade;
-	}
-	
+		
 	public int getId() {
 		return this.id;
 	}
