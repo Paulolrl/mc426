@@ -10,6 +10,8 @@ public class Usuario {
 	private int idade;
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Usuario> usuarioPorId = new HashMap<Integer, Usuario>();
+	private static HashMap<Integer, Tarefa> tarefas = new HashMap<Integer, Tarefa>();
+	
 	
 	
 	public Usuario(String userName, String senha, String nome, int idade) {
@@ -43,5 +45,19 @@ public class Usuario {
 	
 	public int getId() {
 		return this.id;
+	}
+	
+	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
+		if(!tarefas.containsKey(tarefa.getId())) {
+			this.tarefas.put(tarefa.getId(), tarefa);
+		}
+		throw new Exception();
+	}
+	
+	public void removerResponsabilidade(Tarefa tarefa) throws Exception {
+		if(tarefas.containsKey(tarefa.getId())) {	
+			tarefas.remove(tarefa.getId());
+		}
+		throw new Exception();
 	}
 }
