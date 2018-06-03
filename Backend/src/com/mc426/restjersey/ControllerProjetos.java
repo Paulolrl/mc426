@@ -30,7 +30,7 @@ public class ControllerProjetos {
 			JSONObject jsonBody = new JSONObject(body);
 			
 
-			new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null);
+			new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null, null);
 			System.out.println(
 					"Criou projeto " + jsonBody.getString("nome") + " descricao: " + jsonBody.getString("descricao"));
 			return Response.status(201).build();

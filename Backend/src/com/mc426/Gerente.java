@@ -9,15 +9,15 @@ public class Gerente extends Usuario{
 		super(userName, senha, nome, idade);
 	}
 	
-	public void criarNovoProjeto(String nome, String descricao,Date prazo, List<Equipe> equipes)
-	throws Exception{
-		Projeto novoProjeto = new Projeto(nome, descricao, prazo);
+	public void criarNovoProjeto(String nome, String descricao,Date prazo,Gerente dono,
+			List<Equipe> equipes) throws Exception{
+		Projeto novoProjeto = new Projeto(nome, descricao, prazo, dono);
 		for (Equipe equipe : equipes) {
 			equipe.adicionarProjeto(novoProjeto);
 		}	
 	}
 	
-	public void criarNovaEquipe(String nome, List<Usuario> integrantes) throws Exception{
-		new Equipe(nome, integrantes);		
+	public void criarNovaEquipe(String nome, List<Usuario> integrantes, Gerente dono) throws Exception{
+		new Equipe(nome, integrantes, dono);		
 	}
 }

@@ -8,14 +8,16 @@ public class Equipe {
 	
 	private int id;
 	private String nome;
+	private Gerente dono;
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Equipe> equipePorId = new HashMap<Integer, Equipe>();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private List<Projeto> projetos = new ArrayList<Projeto>();
 	
-	public Equipe(String nome, List<Usuario> usuarios) throws Exception {
+	public Equipe(String nome, List<Usuario> usuarios, Gerente dono) throws Exception {
 		this.id = proximoId();
 		this.nome = nome;
+		this.dono = dono;
 		adicionarMembros(usuarios);
 		Equipe.equipePorId.put(this.id, this);
 	}
@@ -75,5 +77,9 @@ public class Equipe {
 	
 	public List<Projeto> getProjetos(){
 		return projetos;
+	}
+	
+	public Gerente getDono() {
+		return dono;
 	}
 }

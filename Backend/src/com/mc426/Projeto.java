@@ -9,18 +9,19 @@ public class Projeto {
 	private String nome;
 	private String descricao;
 	private Date prazo;
+	private Gerente dono;
 	private List<Tarefa> listaTarefas;
 	private List<Equipe> listaEquipes;
 	
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Projeto> projetoPorId = new HashMap<Integer, Projeto>();
 	
-	public Projeto(String nome, String descricao, Date prazo) {
+	public Projeto(String nome, String descricao, Date prazo, Gerente dono) {
 		this.id = Projeto.proximoId();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.prazo = prazo;
-		
+		this.dono = dono;
 		Projeto.projetoPorId.put(this.id, this);
 	}
 	
@@ -48,6 +49,10 @@ public class Projeto {
 		return prazo;
 	}
 	
+	public Gerente getDono() {
+		return dono;
+	}
+
 	public void criarTarefa(String nomeTarefa, String descricao, Date prazo, Date duracao,
 			List<Usuario> responsaveis, List<Tarefa> dependencias, List<String> tags) throws Exception{
 		Tarefa novaTarefa = new Tarefa(nomeTarefa, descricao, prazo, tags, dependencias);
