@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Gerente extends Usuario{
 
-	public Gerente(String userName, String senha, String nome, int idade) {
-		super(userName, senha, nome, idade);
+	public Gerente(String userName, String senha, String nome) {
+		super(userName, senha, nome);
 	}
 	
 	public void criarNovoProjeto(String nome, String descricao,Date prazo,Gerente dono,
