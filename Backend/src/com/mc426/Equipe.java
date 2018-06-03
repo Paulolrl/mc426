@@ -13,7 +13,7 @@ public class Equipe {
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private List<Projeto> projetos = new ArrayList<Projeto>();
 	
-	public Equipe(String nome, ArrayList<Usuario> usuarios) throws Exception {
+	public Equipe(String nome, List<Usuario> usuarios) throws Exception {
 		this.id = proximoId();
 		this.nome = nome;
 		adicionarMembros(usuarios);
@@ -24,7 +24,7 @@ public class Equipe {
 		return Equipe.equipePorId.get(id);
 	}
 	
-	public void adicionarMembros(ArrayList<Usuario> membros) throws Exception {
+	public void adicionarMembros(List<Usuario> membros) throws Exception {
 		for(Usuario membro: membros) {
 			if(!usuarios.contains(membro)) {
 				usuarios.add(membro);
@@ -35,7 +35,7 @@ public class Equipe {
 	}
 	
 	
-	public void removerMembros (ArrayList<Usuario> membros) throws Exception {
+	public void removerMembros (List<Usuario> membros) throws Exception {
 		for(Usuario membro: membros) {
 			if(usuarios.contains(membro)) {
 				usuarios.remove(membro);

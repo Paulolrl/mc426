@@ -10,7 +10,7 @@ public class Projeto {
 	private String descricao;
 	private Date prazo;
 	private List<Tarefa> listaTarefas;
-	
+	private List<Equipe> listaEquipes;
 	
 	private static int ultimoId = 1;
 	private static HashMap<Integer, Projeto> projetoPorId = new HashMap<Integer, Projeto>();
@@ -58,5 +58,15 @@ public class Projeto {
 		
 		this.listaTarefas.add(novaTarefa);
 	}
+	
+	
+	public void adicionarEquipe(Equipe equipe) {
+		this.listaEquipes.add(equipe);
+	}
+	
+	public void removerEquipe(Equipe equipe) {
+		this.listaEquipes.remove(equipe);
+	}
+	
 	
 }
