@@ -49,7 +49,7 @@ public class Usuario {
 	
 	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
 		if(!tarefas.containsKey(tarefa.getId())) {
-			this.tarefas.put(tarefa.getId(), tarefa);
+			tarefas.put(tarefa.getId(), tarefa);
 		}
 		throw new Exception();
 	}
