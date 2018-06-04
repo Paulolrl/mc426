@@ -23,14 +23,16 @@ public class ControllerProjetos {
 				return Response.status(401).build();
 			}
 			
-			if (Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0)) == null){
-				System.out.println("Usuario nao encontrado");
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+			if (!(usuario instanceof Gerente)){
+				System.out.println("Usuario nao encontrado ou nao tem permissao de gerente.");
+				return Response.status(401).build();
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
 			
 
-			new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null, null);
+			new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null, (Gerente) usuario);
 			System.out.println(
 					"Criou projeto " + jsonBody.getString("nome") + " descricao: " + jsonBody.getString("descricao"));
 			return Response.status(201).build();
