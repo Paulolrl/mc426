@@ -71,4 +71,8 @@ public class Tarefa {
 		Feedback feedback = new Feedback(autor, nota, comentario);
 		feedbacks.add(feedback);
 	}
+	
+	public void removerTarefa() {
+		tarefaPorId.remove(this.getId());
+	}
 }

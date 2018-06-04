@@ -21,5 +21,10 @@ public class Gerente extends Usuario{
 		new Equipe(nome, integrantes, dono);		
 	}
 	
+	public void removerProjeto(Projeto projeto) throws Exception {
+		if(projeto.getDono().equals(this)) {
+			projeto.removerProjeto();
+		}	
+	}
 	
 }

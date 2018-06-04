@@ -73,5 +73,14 @@ public class Projeto {
 		this.listaEquipes.remove(equipe);
 	}
 	
-	
+	public void removerProjeto() throws Exception {
+		for(Tarefa tarefa: listaTarefas) {
+			tarefa.removerTarefa();
+		}
+		for(Equipe equipe: listaEquipes) {
+			equipe.removerProjeto(this);
+		}
+		projetoPorId.remove(this.getId());
+	}
+	 
 }
