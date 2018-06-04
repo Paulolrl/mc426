@@ -65,11 +65,12 @@ public class ControllerProjetos {
 			}
 			
 			if (!projeto.getDono().equals(usuario)) {
-				System.out.println("Usuário não é dono");
+				System.out.println("Usuario nao e dono");
 				return Response.status(401).build();
 			}
+			Gerente gerente = (Gerente) usuario;
 			
-			usuario.removerProjeto(projeto);
+			gerente.removerProjeto(projeto);
 			
 			return Response.status(200).build();
 		}catch (Exception e) {
