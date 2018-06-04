@@ -5,30 +5,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Usuario {
-	private int id;
 	private String userName;
 	private String senha;
 	private String nome;
-	private static int ultimoId = 1;
-	private static HashMap<Integer, Usuario> usuarioPorId = new HashMap<Integer, Usuario>();
+	private static HashMap<String, Usuario> usuarioPorUserName = new HashMap<String, Usuario>();
 	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
 		
 	public Usuario(String userName, String senha, String nome) {
-		this.id = Usuario.proximoId();
 		this.userName = userName;
 		this.nome = nome;
 		this.senha = senha;
-		Usuario.usuarioPorId.put(this.id, this);
+		Usuario.usuarioPorUserName.put(this.userName, this);
 	}
 	
-	private static int proximoId() {
-		return ultimoId++;
+	public static Usuario verifica(String usuario, String senha) {
+		Usuario retv = usuarioPorUserName.get(usuario);
+		if (retv.senha == senha)
+			return retv;
+		return null;
 	}
-	
-	public static Usuario getPorId(int id){
-		return Usuario.usuarioPorId.get(id);
-	}
-	
+		
 	public String getUserName() {
 		return this.userName;
 	}
@@ -36,11 +32,7 @@ public class Usuario {
 	public String getNome() {
 		return this.nome;
 	}
-		
-	public int getId() {
-		return this.id;
-	}
-	
+			
 	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
 		if(!tarefas.contains(tarefa)) {
 			tarefas.add(tarefa);
