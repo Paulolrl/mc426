@@ -11,6 +11,7 @@ public class Tarefa {
 	private List<Feedback> feedbacks = new ArrayList<Feedback>();
 	
 	private static int ultimoId = 1;
+	
 	public static Tarefa getPorId(int id) {
 		return Tarefa.tarefaPorId.get(id);
 	}
@@ -32,17 +33,23 @@ public class Tarefa {
 	private Status progresso;
 
 	private List<String> tags;
+	
+	private List<Usuario> responsaveis;
 
-	public Tarefa(String nome, String descricao, Date prazo, List<String> tags, List<Tarefa> dependencias) {
+	public Tarefa(String nome, String descricao, Date prazo, List<String> tags, List<Tarefa> dependencias, List<Usuario> responsaveis) throws Exception {
 		super();
 		this.id = Tarefa.proximoId();
-		Tarefa.tarefaPorId.put(this.id, this);
 		this.nome = nome;
 		this.descricao = descricao;
 		this.prazo = prazo;
 		this.tags = tags;
 		this.dependencias = dependencias;
 		this.progresso = new Status("Em espera", 0);
+		for(Usuario responsavel: responsaveis) {
+			responsavel.atribuiResponsabilidade(this);
+		}
+		this.responsaveis = responsaveis;
+		Tarefa.tarefaPorId.put(this.id, this);
 	}
 
 	public List<Tarefa> getDependencias() {
@@ -72,7 +79,10 @@ public class Tarefa {
 		feedbacks.add(feedback);
 	}
 	
-	public void removerTarefa() {
+	public void removerTarefa() throws Exception {
+		for(Usuario responsavel: responsaveis) {
+			responsavel.removerResponsabilidade(this);
+		}
 		tarefaPorId.remove(this.getId());
 	}
 }
