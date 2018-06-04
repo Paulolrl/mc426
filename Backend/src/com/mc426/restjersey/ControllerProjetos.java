@@ -1,5 +1,6 @@
 package com.mc426.restjersey;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,8 +23,7 @@ public class ControllerProjetos {
 				return Response.status(401).build();
 			}
 			
-			if (Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0)) == null)
-			{
+			if (Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0)) == null){
 				System.out.println("Usuario nao encontrado");
 			}
 
@@ -36,6 +36,43 @@ public class ControllerProjetos {
 			return Response.status(201).build();
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return Response.status(500).build();
+		}
+	}
+	
+	@Path("{id}")
+	@DELETE
+	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) throws JSONException{
+		try {
+			
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				return Response.status(401).build();
+			}
+			
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+			
+			if(usuario == null) {
+				System.out.println("Usuario nao encontrado");
+				return Response.status(401).build();
+			}
+			
+			Projeto projeto = Projeto.getPorId(id);
+			
+			if (projeto == null) {
+				System.out.println("Projeto nao encontrado");
+				return Response.status(401).build();
+			}
+			
+			if (!projeto.getDono().equals(usuario)) {
+				System.out.println("Usuário não é dono");
+				return Response.status(401).build();
+			}
+			
+			usuario.removerProjeto(projeto);
+			
+			return Response.status(200).build();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			return Response.status(500).build();
 		}

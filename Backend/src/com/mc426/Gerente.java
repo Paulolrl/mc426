@@ -20,4 +20,6 @@ public class Gerente extends Usuario{
 	public void criarNovaEquipe(String nome, List<Usuario> integrantes, Gerente dono) throws Exception{
 		new Equipe(nome, integrantes, dono);		
 	}
+	
+	
 }
