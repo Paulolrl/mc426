@@ -1,5 +1,8 @@
 package com.mc426.restjersey;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,23 +19,25 @@ import com.mc426.*;
 public class ControllerCadastro {
 	@POST
 	public Response Create(@Context HttpHeaders httpheaders, String body) throws JSONException {
+		String resposta;
 		try {
 			JSONObject jsonBody = new JSONObject(body);
 			if (jsonBody.getBoolean("gerente")) {
-				new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
-				System.out.println("Criou gerente " + jsonBody.getString("usuario") + " senha: "
-						+ jsonBody.getString("senha") + " nome: " + jsonBody.getString("nome"));
+				Gerente gerente = new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
+				resposta = "Gerente criado:\n" + gerente.toString();
 			} else {
-				new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
-				System.out.println("Criou usuario " + jsonBody.getString("usuario") + " senha: "
-						+ jsonBody.getString("senha") + " nome: " + jsonBody.getString("nome"));
+				Usuario usuario = new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
+				resposta = "Usuario criado:\n"+usuario.toString();
 			}
 
-			return Response.status(201).build();
+			return Response.status(201).entity(resposta).build();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return Response.status(500).build();
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
 		}
 	}
 }

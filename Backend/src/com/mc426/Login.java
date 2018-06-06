@@ -15,7 +15,7 @@ public class Login {
 		String decodedString = StringUtils.newStringUsAscii(decoder.decode(htmlAuth.substring("Basic ".length())));
 		
 		String[] split = decodedString.split(":");
-		System.out.println("Autorizacao com usuario: " + split[0] + " e senha: " + split[1]);
+		System.out.println("Tentando autorizacao com usuario: " + split[0] + " e senha: " + split[1]);
 		return Usuario.verifica(split[0], split[1]);
 	}
 }
