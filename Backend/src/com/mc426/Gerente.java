@@ -13,7 +13,7 @@ public class Gerente extends Usuario {
 		new Equipe(nome, integrantes, dono);
 	}
 
-	public void criarNovoProjeto(String nome, String descricao, Date prazo, Gerente dono, List<Equipe> equipes)
+	public void criarNovoProjeto(String nome, String descricao, String prazo, Gerente dono, List<Equipe> equipes)
 			throws Exception {
 		Projeto novoProjeto = new Projeto(nome, descricao, prazo, dono);
 		for (Equipe equipe : equipes) {
