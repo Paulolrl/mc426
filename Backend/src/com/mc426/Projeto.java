@@ -1,5 +1,6 @@
 package com.mc426;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,8 @@ public class Projeto {
 		this.descricao = descricao;
 		this.prazo = prazo;
 		this.dono = dono;
+		this.listaTarefas = new ArrayList<Tarefa>();
+		this.listaEquipes = new ArrayList<Equipe>();
 		Projeto.projetoPorId.put(this.id, this);
 	}
 	
