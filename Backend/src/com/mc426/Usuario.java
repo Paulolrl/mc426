@@ -8,6 +8,10 @@ import java.util.HashMap;
 public class Usuario {
 	private static HashMap<String, Usuario> usuarioPorUserName = new HashMap<String, Usuario>();
 
+	public static Usuario getPorUserName(String userName) {
+		return Usuario.usuarioPorUserName.get(userName);
+	}
+
 	public static Usuario verifica(String usuario, String senha) {
 		Usuario retv = usuarioPorUserName.get(usuario);
 		if (retv.senha.equals(senha))
