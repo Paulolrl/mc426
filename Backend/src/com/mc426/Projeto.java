@@ -75,6 +75,14 @@ public class Projeto {
 		return prazo;
 	}
 
+	public List<Equipe> getListaEquipes() {
+		return listaEquipes;
+	}
+
+	public List<Tarefa> getListaTarefas() {
+		return listaTarefas;
+	}
+
 	public void removerEquipe(Equipe equipe) {
 		this.listaEquipes.remove(equipe);
 	}
