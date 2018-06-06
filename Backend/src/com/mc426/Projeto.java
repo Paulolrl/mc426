@@ -46,7 +46,7 @@ public class Projeto {
 
 	public void criarTarefa(String nomeTarefa, String descricao, Date prazo, Date duracao, List<Usuario> responsaveis,
 			List<Tarefa> dependencias, List<String> tags) throws Exception {
-		Tarefa novaTarefa = new Tarefa(nomeTarefa, descricao, prazo, tags, dependencias, responsaveis);
+		Tarefa novaTarefa = new Tarefa(nomeTarefa, descricao, prazo, this, tags, dependencias, responsaveis);
 
 		for (Usuario usuario : responsaveis) {
 			usuario.atribuiResponsabilidade(novaTarefa);

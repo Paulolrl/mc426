@@ -70,7 +70,7 @@ public class ControllerProjetos {
 
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
-				return Response.status(401).entity(resposta).build();
+				return Response.status(404).entity(resposta).build();
 			}
 			
 			return Response.status(200).entity(projeto.toString()).build();
@@ -105,7 +105,7 @@ public class ControllerProjetos {
 
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
-				return Response.status(401).entity(resposta).build();
+				return Response.status(404).entity(resposta).build();
 			}
 
 			if (!projeto.getDono().equals(usuario)) {
