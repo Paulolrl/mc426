@@ -21,17 +21,17 @@ public class ControllerProjetos {
 
 	@POST
 	public Response Create(@Context HttpHeaders httpheaders, String body) {
-		String response;
+		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				response = "Forneca um Header do tipo Authorization.";
-				return Response.status(401).entity(response).build();
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
 			}
 			
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 			if (!(usuario instanceof Gerente)){
-				response = "Usuario nao encontrado ou nao tem permissao de gerente.";
-				return Response.status(401).entity(response).build();
+				resposta = "Usuario nao encontrado ou nao tem permissao de gerente.";
+				return Response.status(401).entity(resposta).build();
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
@@ -44,50 +44,50 @@ public class ControllerProjetos {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			response = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(response).build();
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
 		}
 	}
 	
 	@Path("{id}")
 	@DELETE
 	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
-		String response;
+		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				response = "Forneca um Header do tipo Authorization.";
-				return Response.status(401).entity(response).build();
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
 			}
 			
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 			
 			if(usuario == null) {
-				response = "Usuario nao encontrado.";
-				return Response.status(401).entity(response).build();
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
 			}
 			
 			Projeto projeto = Projeto.getPorId(id);
 			
 			if (projeto == null) {
-				response = "Projeto nao encontrado";
-				return Response.status(401).entity(response).build();
+				resposta = "Projeto nao encontrado";
+				return Response.status(401).entity(resposta).build();
 			}
 			
 			if (!projeto.getDono().equals(usuario)) {
-				response = "Usuario nao e dono";
-				return Response.status(401).entity(response).build();
+				resposta = "Usuario nao e dono";
+				return Response.status(401).entity(resposta).build();
 			}
 			Gerente gerente = (Gerente) usuario;
 			
 			gerente.removerProjeto(projeto);
-			response = "Projeto removido com sucesso.";
-			return Response.status(200).entity(response).build();
+			resposta = "Projeto removido com sucesso.";
+			return Response.status(200).entity(resposta).build();
 		}catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			response = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(response).build();
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
 		}
 	}
 }
