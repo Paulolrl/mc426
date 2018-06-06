@@ -26,6 +26,7 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "{\n\tautor: " + "/usuarios/" + autor.getUserName() + "\n\tcomentario: " + comentario + "\n\tnota: " + nota + "\n}";
+		return "{\n\tautor: \"" + "/usuarios/" + autor.getUserName() + "\",\n\tcomentario: \"" + comentario
+				+ "\",\n\tnota: \"" + nota + "\"\n}";
 	}
 }

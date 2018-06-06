@@ -82,10 +82,10 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "{\n\tnome: " + nome + "\n\ttarefas: "
+		return "{\n\tnome: \"" + nome + "\",\n\ttarefas: "
 				+ tarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
-				+ "\n\tequipes: " + equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList())
-				+ "\n\tuserName: " + userName + "\n}";
+				+ ",\n\tequipes: " + equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList())
+				+ ",\n\tuserName: \"" + userName + "\"\n}";
 	}
 }

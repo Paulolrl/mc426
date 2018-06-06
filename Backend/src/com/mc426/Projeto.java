@@ -99,11 +99,11 @@ public class Projeto {
 
 	@Override
 	public String toString() {
-		return "{\n\tid: " + id + "\n\tnome: " + nome + "\n\tdescricao: " + descricao + "\n\tprazo: " + prazo
-				+ "\n\tdono: " + dono.getUserName() + "\n\tlistaTarefas: "
+		return "{\n\tid: " + id + ",\n\tnome: \"" + nome + "\",\n\tdescricao: \"" + descricao + "\",\n\tprazo: \"" + prazo
+				+ "\",\n\tdono: \"" + "/usuarios/" + dono.getUserName() + "\",\n\tlistaTarefas: "
 				+ listaTarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
-				+ "\n\tlistaEquipes: "
+				+ ",\n\tlistaEquipes: "
 				+ listaEquipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()) + "\n}";
 	}
 

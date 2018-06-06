@@ -27,6 +27,6 @@ public class Status {
 	}
 	@Override
 	public String toString() {
-		return "{\n\tporcentagem: " + porcentagem + "\n\ttexto: " + texto + "\n}";
+		return "{\n\tporcentagem: " + porcentagem + ",\n\ttexto: \"" + texto + "\"\n}";
 	}
 }

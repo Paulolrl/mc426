@@ -37,15 +37,15 @@ public class Tarefa {
 	private List<Usuario> responsaveis;
 
 	private List<String> tags;
-	
+
 	private Projeto projeto;
 
 	public Projeto getProjeto() {
 		return projeto;
 	}
 
-	public Tarefa(String nome, String descricao, String prazo, Projeto projeto, List<String> tags, List<Tarefa> dependencias,
-			List<Usuario> responsaveis) throws Exception {
+	public Tarefa(String nome, String descricao, String prazo, Projeto projeto, List<String> tags,
+			List<Tarefa> dependencias, List<Usuario> responsaveis) throws Exception {
 		super();
 		this.id = Tarefa.proximoId();
 		this.nome = nome;
@@ -108,10 +108,10 @@ public class Tarefa {
 		return "{\n\tdependencias: "
 				+ dependencias.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
-				+ "\n\tdescricao: " + descricao + "\n\tfeedbacks: " + feedbacks + "\n\tid: " + id + "\n\tnome: " + nome
-				+ "\n\tprazo: " + prazo + "\n\tprogresso: " + progresso + "\n\tresponsaveis: "
-				+ responsaveis.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()) + "\n\ttags: " + tags
-				+ "\n}";
+				+ ",\n\tdescricao: \"" + descricao + "\",\n\tfeedbacks: " + feedbacks + ",\n\tid: " + id + ",\n\tnome: \""
+				+ nome + "\",\n\tprazo: \"" + prazo + "\",\n\tprogresso: " + progresso + ",\n\tresponsaveis: "
+				+ responsaveis.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList())
+				+ ",\n\ttags: " + tags + "\n}";
 	}
 
 }

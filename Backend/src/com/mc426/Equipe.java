@@ -97,8 +97,9 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return "{\n\tdono: " + dono.getUserName() + "\n\tid: " + id + "\n\tnome: " + nome + "\n\tprojetos: "
-				+ projetos.stream().map(x -> "/projetos/" + x.getId()).collect(Collectors.toList()) + "\n\tusuarios: "
+		return "{\n\tdono: \"" + "/usuarios/" + dono.getUserName() + "\",\n\tid: " + id + ",\n\tnome: \"" + nome
+				+ "\",\n\tprojetos: " + projetos.stream().map(x -> "/projetos/" + x.getId()).collect(Collectors.toList())
+				+ ",\n\tusuarios: "
 				+ usuarios.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()) + "\n}";
 	}
 }
