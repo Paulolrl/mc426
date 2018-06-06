@@ -1,0 +1,115 @@
+package com.mc426.restjersey;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.mc426.*;
+
+@Path("equipes")
+public class ControllerEquipes {
+
+	@POST
+	@Produces("application/json")
+	public Response Create(@Context HttpHeaders httpheaders, String body) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+			if (!(usuario instanceof Gerente)) {
+				resposta = "Usuario nao encontrado ou nao tem permissao de gerente.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			JSONObject jsonBody = new JSONObject(body);
+
+			List<Usuario> membros = new ArrayList<Usuario>();
+			JSONArray arr = jsonBody.optJSONArray("membros");
+			if (arr != null)
+			{
+				for (int i = 0; i < arr.length(); i++)
+				{
+					Pattern pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
+					Matcher matcher = pattern.matcher(arr.getString(i));
+					if (matcher.find()) {
+						membros.add(Usuario.getPorUserName(matcher.group(1)));
+					}
+					else
+					{
+						resposta = "Forneca membros no formato /usuarios/{username}";
+						return Response.status(400).entity(resposta).build();
+					}
+				}
+			}
+
+			Equipe equipe = new Equipe(jsonBody.getString("nome"), membros, (Gerente) usuario);
+
+			return Response.status(201).entity(equipe.toString()).build();
+s
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+	
+	@Path("{id}")
+	@GET
+	@Produces("application/json")
+	public Response GetEquipe(@PathParam("id") int id, @Context HttpHeaders httpheaders, String body) throws JSONException {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado ou senha incorreta.";
+				return Response.status(401).entity(resposta).build();
+			}
+			
+			Equipe equipe = Equipe.getPorId(id);
+
+			if (equipe == null) {
+				resposta = "Equipe nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			resposta = equipe.toString();
+			
+			return Response.status(200).entity(resposta).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+	
+}
