@@ -93,9 +93,10 @@ public class Projeto {
 	public String toString() {
 		return "{\n\tid: " + id + "\n\tnome: " + nome + "\n\tdescricao: " + descricao + "\n\tprazo: " + prazo
 				+ "\n\tdono: " + dono.getUserName() + "\n\tlistaTarefas: "
-				+ listaTarefas.stream().mapToInt(x -> x.getId()).boxed().collect(Collectors.toList())
+				+ listaTarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+						.collect(Collectors.toList())
 				+ "\n\tlistaEquipes: "
-				+ listaEquipes.stream().mapToInt(x -> x.getId()).boxed().collect(Collectors.toList()) + "\n}";
+				+ listaEquipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()) + "\n}";
 	}
 
 }

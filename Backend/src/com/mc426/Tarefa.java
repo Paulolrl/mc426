@@ -37,8 +37,14 @@ public class Tarefa {
 	private List<Usuario> responsaveis;
 
 	private List<String> tags;
+	
+	private Projeto projeto;
 
-	public Tarefa(String nome, String descricao, Date prazo, List<String> tags, List<Tarefa> dependencias,
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public Tarefa(String nome, String descricao, Date prazo, Projeto projeto, List<String> tags, List<Tarefa> dependencias,
 			List<Usuario> responsaveis) throws Exception {
 		super();
 		this.id = Tarefa.proximoId();
@@ -47,6 +53,7 @@ public class Tarefa {
 		this.prazo = prazo;
 		this.tags = tags;
 		this.dependencias = dependencias;
+		this.projeto = projeto;
 		this.progresso = new Status("Em espera", 0);
 		this.feedbacks = new ArrayList<Feedback>();
 		for (Usuario responsavel : responsaveis) {
@@ -99,10 +106,11 @@ public class Tarefa {
 	@Override
 	public String toString() {
 		return "{\n\tdependencias: "
-				+ dependencias.stream().mapToInt(x -> x.getId()).boxed().collect(Collectors.toList())
+				+ dependencias.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+						.collect(Collectors.toList())
 				+ "\n\tdescricao: " + descricao + "\n\tfeedbacks: " + feedbacks + "\n\tid: " + id + "\n\tnome: " + nome
 				+ "\n\tprazo: " + prazo + "\n\tprogresso: " + progresso + "\n\tresponsaveis: "
-				+ responsaveis.stream().map(x -> x.getUserName()).collect(Collectors.toList()) + "\n\ttags: " + tags
+				+ responsaveis.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()) + "\n\ttags: " + tags
 				+ "\n}";
 	}
 
