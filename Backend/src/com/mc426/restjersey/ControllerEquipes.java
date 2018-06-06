@@ -44,17 +44,17 @@ public class ControllerEquipes {
 
 			List<Usuario> membros = new ArrayList<Usuario>();
 			JSONArray arr = jsonBody.optJSONArray("membros");
-			if (arr != null)
-			{
-				for (int i = 0; i < arr.length(); i++)
-				{
+			if (arr != null) {
+				for (int i = 0; i < arr.length(); i++) {
 					Pattern pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
 					Matcher matcher = pattern.matcher(arr.getString(i));
 					if (matcher.find()) {
 						membros.add(Usuario.getPorUserName(matcher.group(1)));
-					}
-					else
-					{
+						if (Usuario.getPorUserName(matcher.group(1)) == null) {
+							resposta = "Usuario nao encontrado para adicionar na equipe";
+							return Response.status(404).entity(resposta).build();
+						}
+					} else {
 						resposta = "Forneca membros no formato /usuarios/{username}";
 						return Response.status(400).entity(resposta).build();
 					}
@@ -72,11 +72,12 @@ public class ControllerEquipes {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
+
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public Response GetEquipe(@PathParam("id") int id, @Context HttpHeaders httpheaders, String body) throws JSONException {
+	public Response GetEquipe(@PathParam("id") int id, @Context HttpHeaders httpheaders, String body)
+			throws JSONException {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -90,16 +91,16 @@ public class ControllerEquipes {
 				resposta = "Usuario nao encontrado ou senha incorreta.";
 				return Response.status(401).entity(resposta).build();
 			}
-			
+
 			Equipe equipe = Equipe.getPorId(id);
 
 			if (equipe == null) {
 				resposta = "Equipe nao encontrada";
 				return Response.status(404).entity(resposta).build();
 			}
-			
+
 			resposta = equipe.toString();
-			
+
 			return Response.status(200).entity(resposta).build();
 
 		} catch (Exception e) {
@@ -110,5 +111,71 @@ public class ControllerEquipes {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
+
+	@Path("{id}")
+	@POST
+	@Produces("application/json")
+	public Response UpdateEquipe(@PathParam("id") int id, @Context HttpHeaders httpheaders, String body) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+			Equipe equipe = Equipe.getPorId(id);
+			if (usuario != equipe.getDono()) {
+				resposta = "Usuario nao tem permissao para isso.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			JSONObject jsonBody = new JSONObject(body);
+
+			List<Usuario> membros = new ArrayList<Usuario>();
+			JSONArray arr = jsonBody.optJSONArray("membros");
+			if (arr != null) {
+				for (int i = 0; i < arr.length(); i++) {
+					Pattern pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
+					Matcher matcher = pattern.matcher(arr.getString(i));
+					if (matcher.find()) {
+						membros.add(Usuario.getPorUserName(matcher.group(1)));
+						if (Usuario.getPorUserName(matcher.group(1)) == null) {
+							resposta = "Usuario nao encontrado para adicionar na equipe";
+							return Response.status(404).entity(resposta).build();
+						}
+					} else {
+						resposta = "Forneca membros no formato /usuarios/{username}";
+						return Response.status(400).entity(resposta).build();
+					}
+				}
+			}
+			
+			List<Usuario> membrosNovos = new ArrayList<Usuario>();
+			List<Usuario> membrosRemovidos = new ArrayList<Usuario>();
+			for (Usuario u : membros)
+			{
+				if (!equipe.getMembros().contains(u))
+					membrosNovos.add(u);
+			}
+
+			for (Usuario u : equipe.getMembros())
+			{
+				if (!membros.contains(u))
+					membrosRemovidos.add(u);
+			}
+			
+			equipe.adicionarMembros(membrosNovos);
+			equipe.removerMembros(membrosRemovidos);
+			
+			return Response.status(200).entity(equipe.toString()).build();
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+
 }
