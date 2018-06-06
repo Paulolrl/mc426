@@ -30,7 +30,7 @@ public class Tarefa {
 
 	private String nome;
 
-	private Date prazo;
+	private String prazo;
 
 	private Status progresso;
 
@@ -44,7 +44,7 @@ public class Tarefa {
 		return projeto;
 	}
 
-	public Tarefa(String nome, String descricao, Date prazo, Projeto projeto, List<String> tags, List<Tarefa> dependencias,
+	public Tarefa(String nome, String descricao, String prazo, Projeto projeto, List<String> tags, List<Tarefa> dependencias,
 			List<Usuario> responsaveis) throws Exception {
 		super();
 		this.id = Tarefa.proximoId();
@@ -84,7 +84,7 @@ public class Tarefa {
 		return nome;
 	}
 
-	public Date getPrazo() {
+	public String getPrazo() {
 		return prazo;
 	}
 

@@ -27,9 +27,9 @@ public class Projeto {
 	private List<Tarefa> listaTarefas;
 	private String nome;
 
-	private Date prazo;
+	private String prazo;
 
-	public Projeto(String nome, String descricao, Date prazo, Gerente dono) {
+	public Projeto(String nome, String descricao, String prazo, Gerente dono) {
 		this.id = Projeto.proximoId();
 		this.nome = nome;
 		this.descricao = descricao;
@@ -44,7 +44,7 @@ public class Projeto {
 		this.listaEquipes.add(equipe);
 	}
 
-	public void criarTarefa(String nomeTarefa, String descricao, Date prazo, Date duracao, List<Usuario> responsaveis,
+	public void criarTarefa(String nomeTarefa, String descricao, String prazo, Date duracao, List<Usuario> responsaveis,
 			List<Tarefa> dependencias, List<String> tags) throws Exception {
 		Tarefa novaTarefa = new Tarefa(nomeTarefa, descricao, prazo, this, tags, dependencias, responsaveis);
 
@@ -71,7 +71,7 @@ public class Projeto {
 		return nome;
 	}
 
-	public Date getPrazo() {
+	public String getPrazo() {
 		return prazo;
 	}
 
