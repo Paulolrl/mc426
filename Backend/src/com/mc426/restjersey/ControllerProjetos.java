@@ -1,5 +1,8 @@
 package com.mc426.restjersey;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,67 +20,74 @@ import com.mc426.*;
 public class ControllerProjetos {
 
 	@POST
-	public Response Create(@Context HttpHeaders httpheaders, String body) throws JSONException {
+	public Response Create(@Context HttpHeaders httpheaders, String body) {
+		String response;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				return Response.status(401).build();
+				response = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(response).build();
 			}
 			
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 			if (!(usuario instanceof Gerente)){
-				System.out.println("Usuario nao encontrado ou nao tem permissao de gerente.");
-				return Response.status(401).build();
+				response = "Usuario nao encontrado ou nao tem permissao de gerente.";
+				return Response.status(401).entity(response).build();
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
 			
 
-			new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null, (Gerente) usuario);
-			System.out.println(
-					"Criou projeto " + jsonBody.getString("nome") + " descricao: " + jsonBody.getString("descricao"));
-			return Response.status(201).build();
+			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null, (Gerente) usuario);
+			return Response.status(201).entity(projeto.toString()).build();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return Response.status(500).build();
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			response = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(response).build();
 		}
 	}
 	
 	@Path("{id}")
 	@DELETE
-	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) throws JSONException{
+	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
+		String response;
 		try {
-			
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				return Response.status(401).build();
+				response = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(response).build();
 			}
 			
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 			
 			if(usuario == null) {
-				System.out.println("Usuario nao encontrado");
-				return Response.status(401).build();
+				response = "Usuario nao encontrado.";
+				return Response.status(401).entity(response).build();
 			}
 			
 			Projeto projeto = Projeto.getPorId(id);
 			
 			if (projeto == null) {
-				System.out.println("Projeto nao encontrado");
-				return Response.status(401).build();
+				response = "Projeto nao encontrado";
+				return Response.status(401).entity(response).build();
 			}
 			
 			if (!projeto.getDono().equals(usuario)) {
-				System.out.println("Usuario nao e dono");
-				return Response.status(401).build();
+				response = "Usuario nao e dono";
+				return Response.status(401).entity(response).build();
 			}
 			Gerente gerente = (Gerente) usuario;
 			
 			gerente.removerProjeto(projeto);
-			
-			return Response.status(200).build();
+			response = "Projeto removido com sucesso.";
+			return Response.status(200).entity(response).build();
 		}catch (Exception e) {
-			System.out.println(e.getMessage());
-			return Response.status(500).build();
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			response = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(response).build();
 		}
 	}
 }
