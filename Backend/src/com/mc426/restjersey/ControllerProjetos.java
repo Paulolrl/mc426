@@ -2,6 +2,7 @@ package com.mc426.restjersey;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -85,6 +86,50 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
+	
+	@GET
+	@Path("/{idProjeto}/tarefas/{idTarefa}")
+	@Produces("application/json")
+	public Response SelectTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto")int idProjeto, 
+			@PathParam("idTarefa")int idTarefa){
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+			
+			Projeto projeto = Projeto.getPorId(idProjeto);
+			
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			Tarefa tarefa = projeto.getListaTarefas().get(idTarefa);
+			
+			if (tarefa == null) {
+				resposta = "Tarefa nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			return Response.status(200).entity(tarefa.toString()).build();
+			
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
 
 	@Path("{id}")
 	@DELETE
@@ -128,4 +173,5 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
+	
 }
