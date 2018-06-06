@@ -12,7 +12,7 @@ public class Diretorio {
 	
 	public Diretorio(String nome, String caminho) throws Exception {
 		if(diretorioPorNome.containsKey(nome)) {
-			throw new Exception();
+			throw new Exception("Ja existe um diretorio com esse nome");
 		}
 		this.nome = nome;
 		this.caminho = caminho;
