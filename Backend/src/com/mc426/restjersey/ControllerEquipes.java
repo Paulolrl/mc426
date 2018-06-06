@@ -64,7 +64,6 @@ public class ControllerEquipes {
 			Equipe equipe = new Equipe(jsonBody.getString("nome"), membros, (Gerente) usuario);
 
 			return Response.status(201).entity(equipe.toString()).build();
-s
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
