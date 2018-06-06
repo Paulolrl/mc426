@@ -20,6 +20,7 @@ import com.mc426.*;
 public class ControllerProjetos {
 
 	@POST
+	@Produces("application/json")
 	public Response Create(@Context HttpHeaders httpheaders, String body) {
 		String resposta;
 		try {
@@ -51,6 +52,7 @@ public class ControllerProjetos {
 
 	@Path("{id}")
 	@GET
+	@Produces("application/json")
 	public Response Select(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
 		String resposta;
 		try {
@@ -86,6 +88,7 @@ public class ControllerProjetos {
 
 	@Path("{id}")
 	@DELETE
+	@Produces("application/json")
 	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
 		String resposta;
 		try {
