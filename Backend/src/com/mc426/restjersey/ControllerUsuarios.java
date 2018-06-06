@@ -15,8 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.mc426.*;
 
-@Path("cadastro")
-public class ControllerCadastro {
+@Path("usuarios")
+public class ControllerUsuarios {
 	@POST
 	public Response Create(@Context HttpHeaders httpheaders, String body) throws JSONException {
 		String resposta;
