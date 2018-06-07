@@ -38,6 +38,10 @@ public class Diretorio {
 		listaItems.add(novoArq);
 	}
 
+	public void adicionarDiretorio(String nome) {
+		this.listaSubdiretorios.add(new Diretorio(nome));
+	}
+	
 	public void adicionarDocGoogle(String nome, String chaveAutenticacao, String link) {
 		DocumentoGoogle novoDoc = new DocumentoGoogle(nome, chaveAutenticacao, link);
 		listaItems.add(novoDoc);
