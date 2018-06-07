@@ -364,8 +364,7 @@ public class ControllerProjetos {
 					}
 				}
 						
-				resposta = "Equipes alteradas com sucesso.";
-				return Response.status(201).entity(resposta).build();
+				return Response.status(201).entity(jArray.toString()).build();
 			}
 			
 			resposta = "Nenhuma equipe passada como parâmetro.";
