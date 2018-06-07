@@ -36,23 +36,28 @@ public class Diretorio {
 		diretorioPorNome.put(this.id, this);
 	}
 
-	public void adicionarArquivo(String nome, String caminho) {
+	public Arquivo adicionarArquivo(String nome, String caminho) {
 		Arquivo novoArq = new Arquivo(nome, caminho);
 		listaItems.add(novoArq);
+		return novoArq;
 	}
 
-	public void adicionarDiretorio(String nome) {
-		this.listaSubdiretorios.add(new Diretorio(nome, this.projeto));
+	public Diretorio adicionarDiretorio(String nome) {
+		Diretorio novo = new Diretorio(nome, this.projeto);
+		this.listaSubdiretorios.add(novo);
+		return novo;
 	}
 	
-	public void adicionarDocGoogle(String nome, String chaveAutenticacao, String link) {
+	public DocumentoGoogle adicionarDocGoogle(String nome, String chaveAutenticacao, String link) {
 		DocumentoGoogle novoDoc = new DocumentoGoogle(nome, chaveAutenticacao, link);
 		listaItems.add(novoDoc);
+		return novoDoc;
 	}
 
-	public void adicionarRepo(String nome, String chaveAutenticacao, String link) {
+	public Repositorio adicionarRepo(String nome, String chaveAutenticacao, String link) {
 		Repositorio novoRepo = new Repositorio(nome, chaveAutenticacao, link);
 		listaItems.add(novoRepo);
+		return novoRepo;
 	}
 
 	public List<ItemCompartilhado> getItems() {
