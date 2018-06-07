@@ -3,6 +3,7 @@ package com.mc426;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 
@@ -84,8 +85,8 @@ public class Diretorio {
 		JSONObject retv = new JSONObject();
 		retv.put("nome", this.nome);
 		retv.put("id", this.id);
-		retv.put("itens", this.listaItems.stream().map(x -> "/diretorios/" + this.getId() + "/itens/" + x.getId()));
-		retv.put("subdiretorios", this.listaSubdiretorios.stream().map(x -> "/diretorios/" + x.getId()));
+		retv.put("itens", this.listaItems.stream().map(x -> "/diretorios/" + this.getId() + "/itens/" + x.getId()).collect(Collectors.toList()));
+		retv.put("subdiretorios", this.listaSubdiretorios.stream().map(x -> "/diretorios/" + x.getId()).collect(Collectors.toList()));
 		retv.put("projeto", "/projetos/" + this.projeto.getId());
 		return retv;
 	}
