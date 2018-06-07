@@ -58,7 +58,7 @@ public class ControllerEquipes {
 
 			Equipe equipe = new Equipe(jsonBody.getString("nome"), membros, (Gerente) usuario);
 
-			return Response.status(201).entity(equipe.toString()).build();
+			return Response.status(201).entity(equipe.toJson().toString()).build();
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -94,9 +94,7 @@ public class ControllerEquipes {
 				return Response.status(404).entity(resposta).build();
 			}
 
-			resposta = equipe.toString();
-
-			return Response.status(200).entity(resposta).build();
+			return Response.status(200).entity(equipe.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -158,7 +156,7 @@ public class ControllerEquipes {
 			equipe.adicionarMembros(membrosNovos);
 			equipe.removerMembros(membrosRemovidos);
 			
-			return Response.status(200).entity(equipe.toString()).build();
+			return Response.status(200).entity(equipe.toJson().toString()).build();
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);

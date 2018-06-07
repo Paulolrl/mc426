@@ -20,7 +20,6 @@ import javax.ws.rs.core.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.mc426.*;
-import com.sun.jersey.api.json.JSONJAXBContext.JSONNotation;
 
 @Path("projetos")
 public class ControllerProjetos {
@@ -45,7 +44,7 @@ public class ControllerProjetos {
 
 			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null,
 					(Gerente) usuario);
-			return Response.status(201).entity(projeto.toString()).build();
+			return Response.status(201).entity(projeto.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -81,7 +80,7 @@ public class ControllerProjetos {
 				return Response.status(404).entity(resposta).build();
 			}
 
-			return Response.status(200).entity(projeto.toString()).build();
+			return Response.status(200).entity(projeto.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -124,8 +123,7 @@ public class ControllerProjetos {
 			Gerente gerente = (Gerente) usuario;
 
 			gerente.removerProjeto(projeto);
-			resposta = "Projeto removido com sucesso.";
-			return Response.status(200).entity(resposta).build();
+			return Response.status(200).entity(projeto.toJson().toString()).build();
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -209,18 +207,15 @@ public class ControllerProjetos {
 			Tarefa novaTarefa = new Tarefa(jsonBody.getString("nome"),jsonBody.getString("descricao"), jsonBody.getString("prazo"),
 					projeto, tags,dependencias,responsaveis);
 			
-			return Response.status(201).entity(novaTarefa.toString()).build();
+			return Response.status(201).entity(novaTarefa.toJson().toString()).build();
 			
-		}catch(
-
-	Exception e)
-	{
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-		e.printStackTrace(pw);
-		resposta = sw.toString(); // stack trace as a string
-		return Response.status(500).entity(resposta).build();
-	}
+		}catch(Exception e){
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
 	}
 
 	@GET
@@ -256,7 +251,7 @@ public class ControllerProjetos {
 				return Response.status(404).entity(resposta).build();
 			}
 
-			return Response.status(200).entity(tarefa.toString()).build();
+			return Response.status(200).entity(tarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -306,8 +301,7 @@ public class ControllerProjetos {
 			}
 
 			tarefa.removerTarefa();
-			resposta = "Tarefa removida com sucesso.";
-			return Response.status(200).entity(tarefa.toString()).build();
+			return Response.status(200).entity(tarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -321,7 +315,7 @@ public class ControllerProjetos {
 	@POST
 	@Path("/{idProjeto}/equipes/")
 	@Produces("application/json")
-	public Response CreateEquipe(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto, String body) {
+	public Response UpdateEquipe(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto, String body) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -344,8 +338,42 @@ public class ControllerProjetos {
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
+			
+			JSONArray jArray = jsonBody.getJSONArray("equipes");
+			List<Equipe> equipes = new ArrayList<Equipe>();
+			Equipe equipe;
+			if(jArray != null) {
+				for (int i = 0; i < jArray.length(); i++) {
+					equipe = Equipe.getPorResource(jArray.getString(i));
+					if (equipe == null) {
+						resposta = "Equipe nao encontrada.";
+						return Response.status(404).entity(resposta).build();
+					}
+					equipes.add(equipe);
+				}
+				
+				List<Equipe> equipesNovas = new ArrayList<Equipe>();
+				List<Equipe> equipesRemovidas = new ArrayList<Equipe>();
+				for (Equipe e : equipes){
+					if (!projeto.getListaEquipes().contains(e))
+						equipesNovas.add(e);
+				}
 
-			return Response.status(200).build();
+				for (Equipe e : projeto.getListaEquipes()){
+					if (!equipes.contains(e)) {
+						equipesRemovidas.add(e);
+					}
+				}
+				
+				projeto.getListaEquipes().addAll(equipesNovas);
+				projeto.getListaEquipes().removeAll(equipesRemovidas);
+				
+				resposta = "Equipes alteradas com sucesso.";
+				return Response.status(201).entity(resposta).build();
+			}
+			
+			resposta = "Nenhuma equipe passada como parâmetro.";
+			return Response.status(400).entity(resposta).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();

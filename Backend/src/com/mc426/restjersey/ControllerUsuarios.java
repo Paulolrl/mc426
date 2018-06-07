@@ -23,15 +23,14 @@ public class ControllerUsuarios {
 		String resposta;
 		try {
 			JSONObject jsonBody = new JSONObject(body);
+			Usuario usuario;
 			if (jsonBody.getBoolean("gerente")) {
-				Gerente gerente = new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
-				resposta = "Gerente criado:\n" + gerente.toString();
+				usuario = new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
 			} else {
-				Usuario usuario = new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
-				resposta = "Usuario criado:\n"+usuario.toString();
+				usuario = new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
 			}
 
-			return Response.status(201).entity(resposta).build();
+			return Response.status(201).entity(usuario.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -67,9 +66,7 @@ public class ControllerUsuarios {
 				return Response.status(404).entity(resposta).build();
 			}
 			
-			resposta = usuario.toString();
-			
-			return Response.status(200).entity(resposta).build();
+			return Response.status(200).entity(usuario.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();

@@ -1,8 +1,11 @@
 package com.mc426;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.json.JSONObject;
@@ -15,6 +18,16 @@ public class Equipe {
 
 	public static Equipe getPorId(int id) {
 		return Equipe.equipePorId.get(id);
+	}
+	
+	public static Equipe getPorResource(String resource) throws InvalidParameterException{
+		Pattern pattern = Pattern.compile("\\/equipes\\/(\\d+)");
+		Matcher matcher = pattern.matcher(resource);
+		if (matcher.find()) {
+			return Equipe.getPorId(Integer.parseInt(matcher.group(1)));
+		}else {
+			throw new InvalidParameterException();
+		}
 	}
 
 	private static int proximoId() {

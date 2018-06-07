@@ -137,7 +137,7 @@ public class Tarefa {
 		retv.put("id", this.id);
 		retv.put("descricao", this.descricao);
 		retv.put("prazo", this.prazo);
-		retv.put("progresso", this.progresso);
+		retv.put("progresso", this.progresso.toJson());
 		retv.put("feedbacks", this.feedbacks.stream().map(x -> x.toJson()).collect(Collectors.toList()));
 		retv.put("dependencias",
 				this.dependencias.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
