@@ -20,12 +20,15 @@ public class Diretorio {
 
 	private int id;
 
-	private List<ItemCompartilhado> listaItems = new ArrayList<ItemCompartilhado>();
+	private List<ItemCompartilhado> listaItems;
+	private List<Diretorio> listaSubdiretorios;
 
 	private String nome;
 
-	public Diretorio(String nome) throws Exception {
+	public Diretorio(String nome) {
 		this.nome = nome;
+		this.listaItems = new ArrayList<ItemCompartilhado>();
+		this.listaSubdiretorios = new ArrayList<Diretorio>();
 		this.id = Diretorio.proximoId();
 		diretorioPorNome.put(this.id, this);
 	}
@@ -45,12 +48,12 @@ public class Diretorio {
 		listaItems.add(novoRepo);
 	}
 
-	public String getCaminho() {
-		return this.caminho;
-	}
-
 	public List<ItemCompartilhado> getItems() {
 		return this.listaItems;
+	}
+
+	public List<Diretorio> getListaSubdiretorios() {
+		return listaSubdiretorios;
 	}
 
 	public String getNome() {
