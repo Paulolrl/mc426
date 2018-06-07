@@ -129,20 +129,15 @@ public class ControllerEquipes {
 
 			List<Usuario> membros = new ArrayList<Usuario>();
 			JSONArray arr = jsonBody.optJSONArray("membros");
+			Usuario membro;
 			if (arr != null) {
 				for (int i = 0; i < arr.length(); i++) {
-					Pattern pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
-					Matcher matcher = pattern.matcher(arr.getString(i));
-					if (matcher.find()) {
-						membros.add(Usuario.getPorUserName(matcher.group(1)));
-						if (Usuario.getPorUserName(matcher.group(1)) == null) {
-							resposta = "Usuario nao encontrado para adicionar na equipe";
-							return Response.status(404).entity(resposta).build();
-						}
-					} else {
-						resposta = "Forneca membros no formato /usuarios/{username}";
-						return Response.status(400).entity(resposta).build();
+					membro = Usuario.getPorResource(arr.getString(i));
+					if (membro == null) {
+						resposta = "Usuario nao encontrado para adicionar na equipe";
+						return Response.status(404).entity(resposta).build();
 					}
+					membros.add(membro);				
 				}
 			}
 			
