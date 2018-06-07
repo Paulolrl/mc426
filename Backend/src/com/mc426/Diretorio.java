@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONObject;
+
 public class Diretorio {
 
 	private static HashMap<Integer, Diretorio> diretorioPorNome = new HashMap<Integer, Diretorio>();
@@ -66,5 +68,14 @@ public class Diretorio {
 
 	public int getId() {
 		return this.id;
+	}
+	
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("id", this.id);
+		retv.put("itens", this.listaItems.stream().map(x -> "/diretorios/" + this.getId() + "/itens/" + x.getId()));
+		retv.put("subdiretorios", this.listaSubdiretorios.stream().map(x -> "/diretorios/" + x.getId()));
+		return retv;
 	}
 }

@@ -1,5 +1,7 @@
 package com.mc426;
 
+import org.json.JSONObject;
+
 public class Arquivo extends ItemCompartilhado{
 
 	private String caminho;
@@ -11,5 +13,15 @@ public class Arquivo extends ItemCompartilhado{
 	
 	public String getCaminho() {
 		return this.caminho;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("id", this.id);
+		retv.put("caminho", this.caminho);
+		retv.put("tipo", "arquivo");
+		return retv;
 	}
 }

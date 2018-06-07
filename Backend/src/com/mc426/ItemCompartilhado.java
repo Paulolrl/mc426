@@ -2,6 +2,8 @@ package com.mc426;
 
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 public abstract class ItemCompartilhado {
 	private static HashMap<Integer, ItemCompartilhado> itemPorId = new HashMap<Integer, ItemCompartilhado>();
 	private static int ultimoId = 1;
@@ -14,9 +16,9 @@ public abstract class ItemCompartilhado {
 		return ultimoId++;
 	}
 
-	private int id;
+	protected int id;
 
-	private String nome;
+	protected String nome;
 
 	public ItemCompartilhado(String nome) {
 		this.id = proximoId();
@@ -31,4 +33,6 @@ public abstract class ItemCompartilhado {
 	public String getNome() {
 		return this.nome;
 	}
+	
+	abstract public JSONObject toJson();
 }
