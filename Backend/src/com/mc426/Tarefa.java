@@ -1,9 +1,12 @@
 package com.mc426;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -17,6 +20,16 @@ public class Tarefa {
 
 	public static Tarefa getPorId(int id) {
 		return Tarefa.tarefaPorId.get(id);
+	}
+	
+	public static Tarefa getPorResource(String resource) throws InvalidParameterException{
+		Pattern pattern = Pattern.compile("\\/projetos\\/(\\d+)\\/tarefas\\/(\\d+)");
+		Matcher matcher = pattern.matcher(resource);
+		if (matcher.find()) {
+			return Tarefa.getPorId(Integer.parseInt(matcher.group(2)));
+		}else {
+			throw new InvalidParameterException("Forneca tarefas no formato /projeto/{idProjeto}/tarefa/{idTarefa}");
+		}
 	}
 
 	private static int proximoId() {

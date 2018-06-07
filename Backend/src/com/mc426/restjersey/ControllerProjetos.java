@@ -20,13 +20,14 @@ import javax.ws.rs.core.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.mc426.*;
+import com.sun.jersey.api.json.JSONJAXBContext.JSONNotation;
 
 @Path("projetos")
 public class ControllerProjetos {
 
 	@POST
 	@Produces("application/json")
-	public Response Create(@Context HttpHeaders httpheaders, String body) {
+	public Response CreateProjeto(@Context HttpHeaders httpheaders, String body) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -58,7 +59,7 @@ public class ControllerProjetos {
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public Response Select(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
+	public Response SelectProjeto(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -72,16 +73,16 @@ public class ControllerProjetos {
 				resposta = "Usuario nao encontrado.";
 				return Response.status(401).entity(resposta).build();
 			}
-			
+
 			Projeto projeto = Projeto.getPorId(id);
 
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
-			
+
 			return Response.status(200).entity(projeto.toString()).build();
-			
+
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -90,56 +91,11 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
-	@GET
-	@Path("/{idProjeto}/tarefas/{idTarefa}")
-	@Produces("application/json")
-	public Response SelectTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto")int idProjeto, 
-			@PathParam("idTarefa")int idTarefa){
-		String resposta;
-		try {
-			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				resposta = "Forneca um Header do tipo Authorization.";
-				return Response.status(401).entity(resposta).build();
-			}
 
-			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
-
-			if (usuario == null) {
-				resposta = "Usuario nao encontrado.";
-				return Response.status(401).entity(resposta).build();
-			}
-			
-			Projeto projeto = Projeto.getPorId(idProjeto);
-			
-			if (projeto == null) {
-				resposta = "Projeto nao encontrado";
-				return Response.status(404).entity(resposta).build();
-			}
-
-			Tarefa tarefa = Tarefa.getPorId(idTarefa);
-			
-			if (tarefa == null) {
-				resposta = "Tarefa nao encontrada";
-				return Response.status(404).entity(resposta).build();
-			}
-			
-			return Response.status(200).entity(tarefa.toString()).build();
-			
-		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			resposta = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(resposta).build();
-		}
-	}
-	
+	@Path("{id}")
 	@DELETE
-	@Path("/{idProjeto}/tarefas/{idTarefa}")
 	@Produces("application/json")
-	public Response DeleteTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto")int idProjeto, 
-			@PathParam("idTarefa")int idTarefa){
+	public Response DeleteProjeto(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -153,30 +109,23 @@ public class ControllerProjetos {
 				resposta = "Usuario nao encontrado.";
 				return Response.status(401).entity(resposta).build();
 			}
-			
-			Projeto projeto = Projeto.getPorId(idProjeto);
-			
+
+			Projeto projeto = Projeto.getPorId(id);
+
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
-			
-			if (!usuario.participaProjeto(projeto)) {
-				resposta = "Usuario nao participa do projeto";
-				return Response.status(404).entity(resposta).build();
-			}
 
-			Tarefa tarefa = Tarefa.getPorId(idTarefa);
-			
-			if (tarefa == null) {
-				resposta = "Tarefa nao encontrada";
-				return Response.status(404).entity(resposta).build();
+			if (!projeto.getDono().equals(usuario)) {
+				resposta = "Usuario nao e dono";
+				return Response.status(401).entity(resposta).build();
 			}
-						
-			tarefa.removerTarefa();
-			resposta = "Tarefa removida com sucesso.";		
-			return Response.status(200).entity(tarefa.toString()).build();
-			
+			Gerente gerente = (Gerente) usuario;
+
+			gerente.removerProjeto(projeto);
+			resposta = "Projeto removido com sucesso.";
+			return Response.status(200).entity(resposta).build();
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -230,45 +179,30 @@ public class ControllerProjetos {
 			
 			jArray = jsonBody.getJSONArray("dependencias");
 			List<Tarefa> dependencias = new ArrayList<Tarefa>();
-			Tarefa tarefa = null;
+			Tarefa tarefa;
 			if (jArray != null) {
 				for (int i = 0; i < jArray.length(); i++){
-					pattern = Pattern.compile("\\/projetos\\/(\\d+)\\/tarefas\\/(\\d+)");
-					matcher = pattern.matcher(jArray.getString(i));
-					if (matcher.find()) {
-						tarefa = Tarefa.getPorId(Integer.parseInt(matcher.group(2)));
-						if (tarefa == null) {
-							resposta = "Tarefa nao encontrado para adicionar como dependencia";
-							return Response.status(404).entity(resposta).build();
-						}
-						dependencias.add(tarefa);
+					tarefa = Tarefa.getPorResource(jArray.getString(i));
+					if (tarefa == null) {
+						resposta = "Tarefa nao encontrado para adicionar como dependencia";
+						return Response.status(404).entity(resposta).build();
 					}
-					else{
-						resposta = "Forneca dependencias no formato /projeto/{idProjeto}/tarefa/{idTarefa}";
-						return Response.status(400).entity(resposta).build();
-					}
+					dependencias.add(tarefa);
 				}
 			}
 			
 			jArray = jsonBody.getJSONArray("responsaveis");
 			List<Usuario> responsaveis = new ArrayList<Usuario>();
-			Usuario responsavel = null;
+			Usuario responsavel;
 			if (jArray != null) {
-				for (int i = 0; i < jArray.length(); i++){
-					pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
-					matcher = pattern.matcher(jArray.getString(i));
-					if (matcher.find()) {
-						responsavel = Usuario.getPorUserName(matcher.group(1));
-						if (responsavel == null) {
-							resposta = "Usuario nao encontrado para adicionar na equipe";
-							return Response.status(404).entity(resposta).build();
-						}
-						responsaveis.add(responsavel);
+				for (int i = 0; i < jArray.length(); i++) {
+					responsavel = Usuario.getPorResource(jArray.getString(i));
+					if (responsavel == null) {
+						resposta = "Usuario nao encontrado para adicionar no projeto";
+						return Response.status(404).entity(resposta).build();
 					}
-					else{
-						resposta = "Forneca membros no formato /usuarios/{username}";
-						return Response.status(400).entity(resposta).build();
-					}
+					responsaveis.add(responsavel);
+					
 				}
 			}
 			
@@ -277,19 +211,23 @@ public class ControllerProjetos {
 			
 			return Response.status(201).entity(novaTarefa.toString()).build();
 			
-		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			resposta = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(resposta).build();
-		}
+		}catch(
+
+	Exception e)
+	{
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		resposta = sw.toString(); // stack trace as a string
+		return Response.status(500).entity(resposta).build();
 	}
-	
-	@Path("{id}")
-	@DELETE
+	}
+
+	@GET
+	@Path("/{idProjeto}/tarefas/{idTarefa}")
 	@Produces("application/json")
-	public Response Delete(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
+	public Response SelectTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto,
+			@PathParam("idTarefa") int idTarefa) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -304,22 +242,22 @@ public class ControllerProjetos {
 				return Response.status(401).entity(resposta).build();
 			}
 
-			Projeto projeto = Projeto.getPorId(id);
+			Projeto projeto = Projeto.getPorId(idProjeto);
 
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
 
-			if (!projeto.getDono().equals(usuario)) {
-				resposta = "Usuario nao e dono";
-				return Response.status(401).entity(resposta).build();
-			}
-			Gerente gerente = (Gerente) usuario;
+			Tarefa tarefa = Tarefa.getPorId(idTarefa);
 
-			gerente.removerProjeto(projeto);
-			resposta = "Projeto removido com sucesso.";
-			return Response.status(200).entity(resposta).build();
+			if (tarefa == null) {
+				resposta = "Tarefa nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			return Response.status(200).entity(tarefa.toString()).build();
+
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -328,5 +266,93 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
+
+	@DELETE
+	@Path("/{idProjeto}/tarefas/{idTarefa}")
+	@Produces("application/json")
+	public Response DeleteTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto,
+			@PathParam("idTarefa") int idTarefa) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Projeto projeto = Projeto.getPorId(idProjeto);
+
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			if (!usuario.participaProjeto(projeto)) {
+				resposta = "Usuario nao participa do projeto";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			Tarefa tarefa = Tarefa.getPorId(idTarefa);
+
+			if (tarefa == null) {
+				resposta = "Tarefa nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			tarefa.removerTarefa();
+			resposta = "Tarefa removida com sucesso.";
+			return Response.status(200).entity(tarefa.toString()).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+
+	@POST
+	@Path("/{idProjeto}/equipes/")
+	@Produces("application/json")
+	public Response CreateEquipe(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto, String body) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Projeto projeto = Projeto.getPorId(idProjeto);
+
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			JSONObject jsonBody = new JSONObject(body);
+
+			return Response.status(200).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
 }

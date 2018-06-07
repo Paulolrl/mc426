@@ -1,10 +1,13 @@
 package com.mc426;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +16,16 @@ public class Usuario {
 
 	public static Usuario getPorUserName(String userName) {
 		return Usuario.usuarioPorUserName.get(userName);
+	}
+	
+	public static Usuario getPorResource(String resource) throws InvalidParameterException{
+		Pattern pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
+		Matcher matcher = pattern.matcher(resource);
+		if (matcher.find()) {
+			return Usuario.getPorUserName(matcher.group(1));
+		}else {
+			throw new InvalidParameterException();
+		}
 	}
 
 	public static Usuario verifica(String usuario, String senha) {
