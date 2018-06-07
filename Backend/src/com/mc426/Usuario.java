@@ -2,6 +2,9 @@ package com.mc426;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,5 +98,16 @@ public class Usuario {
 						.collect(Collectors.toList())
 				+ ",\n\tequipes: " + equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList())
 				+ ",\n\tuserName: \"" + userName + "\"\n}";
+	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("usuario", this.userName);
+		retv.put("tarefas", this.tarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+				.collect(Collectors.toList()));
+		retv.put("equipes", this.equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()));
+		retv.put("gerente", this instanceof Gerente);
+		return retv;
 	}
 }

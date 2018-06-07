@@ -1,5 +1,9 @@
 package com.mc426;
 
+import java.util.stream.Collectors;
+
+import org.json.JSONObject;
+
 public class Feedback {
 	private Usuario autor;
 
@@ -29,4 +33,13 @@ public class Feedback {
 		return "{\n\tautor: \"" + "/usuarios/" + autor.getUserName() + "\",\n\tcomentario: \"" + comentario
 				+ "\",\n\tnota: \"" + nota + "\"\n}";
 	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("autor", "/usuarios/" + this.autor.getUserName());
+		retv.put("comentario", this.comentario);
+		retv.put("nota", this.nota);
+		return retv;
+	}
+
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONObject;
+
 public class Projeto {
 	private static HashMap<Integer, Projeto> projetoPorId = new HashMap<Integer, Projeto>();
 
@@ -112,6 +114,21 @@ public class Projeto {
 						.collect(Collectors.toList())
 				+ ",\n\tlistaEquipes: "
 				+ listaEquipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()) + "\n}";
+	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("id", this.id);
+		retv.put("descricao", this.descricao);
+		retv.put("prazo", this.prazo);
+		retv.put("dono", "/usuarios/" + this.dono.getUserName());
+		retv.put("diretorio", "/diretorios/" + this.diretorio.getId());
+		retv.put("tarefas",
+				this.listaTarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+						.collect(Collectors.toList()));
+		retv.put("equipes", this.listaEquipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()));
+		return retv;
 	}
 
 }

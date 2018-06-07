@@ -1,5 +1,9 @@
 package com.mc426;
 
+import java.util.stream.Collectors;
+
+import org.json.JSONObject;
+
 public class Status {
 	private int porcentagem;
 	private String texto;
@@ -28,5 +32,12 @@ public class Status {
 	@Override
 	public String toString() {
 		return "{\n\tporcentagem: " + porcentagem + ",\n\ttexto: \"" + texto + "\"\n}";
+	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("porcentagem", this.porcentagem);
+		retv.put("texto", this.texto);
+		return retv;
 	}
 }

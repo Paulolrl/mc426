@@ -104,4 +104,14 @@ public class Equipe {
 				+ ",\n\tusuarios: "
 				+ usuarios.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()) + "\n}";
 	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("id", this.id);
+		retv.put("dono", "/usuarios/" + this.dono.getUserName());
+		retv.put("projetos", this.projetos.stream().map(x -> "/projetos/" + x.getId()).collect(Collectors.toList()));
+		retv.put("membros", this.usuarios.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()));
+		return retv;
+	}
 }

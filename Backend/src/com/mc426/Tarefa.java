@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Tarefa {
 
 	private static HashMap<Integer, Tarefa> tarefaPorId = new HashMap<Integer, Tarefa>();
@@ -108,10 +111,28 @@ public class Tarefa {
 		return "{\n\tdependencias: "
 				+ dependencias.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
-				+ ",\n\tdescricao: \"" + descricao + "\",\n\tfeedbacks: " + feedbacks + ",\n\tid: " + id + ",\n\tnome: \""
-				+ nome + "\",\n\tprazo: \"" + prazo + "\",\n\tprogresso: " + progresso + ",\n\tresponsaveis: "
+				+ ",\n\tdescricao: \"" + descricao + "\",\n\tfeedbacks: " + feedbacks + ",\n\tid: " + id
+				+ ",\n\tnome: \"" + nome + "\",\n\tprazo: \"" + prazo + "\",\n\tprogresso: " + progresso
+				+ ",\n\tresponsaveis: "
 				+ responsaveis.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList())
 				+ ",\n\ttags: " + tags + "\n}";
+	}
+
+	public JSONObject toJson() {
+		JSONObject retv = new JSONObject();
+		retv.put("nome", this.nome);
+		retv.put("id", this.id);
+		retv.put("descricao", this.descricao);
+		retv.put("prazo", this.prazo);
+		retv.put("progresso", this.progresso);
+		retv.put("feedbacks", this.feedbacks.stream().map(x -> x.toJson()).collect(Collectors.toList()));
+		retv.put("dependencias",
+				this.dependencias.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+						.collect(Collectors.toList()));
+		retv.put("responsaveis",
+				responsaveis.stream().map(x -> "/usuarios/" + x.getUserName()).collect(Collectors.toList()));
+		retv.put("tags", this.tags);
+		return retv;
 	}
 
 }
