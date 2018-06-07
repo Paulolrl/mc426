@@ -63,4 +63,8 @@ public class Diretorio {
 	public String getNome() {
 		return this.nome;
 	}
+
+	public int getId() {
+		return this.id;
+	}
 }
