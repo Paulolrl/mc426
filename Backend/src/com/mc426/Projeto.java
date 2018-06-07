@@ -20,13 +20,14 @@ public class Projeto {
 	}
 
 	private String descricao;
+	private Diretorio diretorio;
 	private Gerente dono;
 	private int id;
+
 	private List<Equipe> listaEquipes;
-
 	private List<Tarefa> listaTarefas;
-	private String nome;
 
+	private String nome;
 	private String prazo;
 
 	public Projeto(String nome, String descricao, String prazo, Gerente dono) {
@@ -35,6 +36,7 @@ public class Projeto {
 		this.descricao = descricao;
 		this.prazo = prazo;
 		this.dono = dono;
+		this.diretorio = new Diretorio("root");
 		this.listaTarefas = new ArrayList<Tarefa>();
 		this.listaEquipes = new ArrayList<Equipe>();
 		Projeto.projetoPorId.put(this.id, this);
@@ -59,6 +61,10 @@ public class Projeto {
 		return descricao;
 	}
 
+	public Diretorio getDiretorio() {
+		return diretorio;
+	}
+
 	public Gerente getDono() {
 		return dono;
 	}
@@ -67,20 +73,20 @@ public class Projeto {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public String getPrazo() {
-		return prazo;
-	}
-
 	public List<Equipe> getListaEquipes() {
 		return listaEquipes;
 	}
 
 	public List<Tarefa> getListaTarefas() {
 		return listaTarefas;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getPrazo() {
+		return prazo;
 	}
 
 	public void removerEquipe(Equipe equipe) {
@@ -99,7 +105,8 @@ public class Projeto {
 
 	@Override
 	public String toString() {
-		return "{\n\tid: " + id + ",\n\tnome: \"" + nome + "\",\n\tdescricao: \"" + descricao + "\",\n\tprazo: \"" + prazo
+		return "{\n\tid: " + id + ",\n\tnome: \"" + nome + "\",\n\tdiretorio: \"" + "/diretorios/"
+				+ this.diretorio.getId() + "\",\n\tdescricao: \"" + descricao + "\",\n\tprazo: \"" + prazo
 				+ "\",\n\tdono: \"" + "/usuarios/" + dono.getUserName() + "\",\n\tlistaTarefas: "
 				+ listaTarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
