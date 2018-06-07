@@ -35,6 +35,14 @@ public class Usuario {
 		this.equipes = new ArrayList<Equipe>();
 		Usuario.usuarioPorUserName.put(this.userName, this);
 	}
+	
+	public boolean participaProjeto(Projeto projeto) {
+		for (Equipe e : equipes) {
+			if (e.getProjetos().contains(projeto))
+				return true;
+		}
+		return false;
+	}
 
 	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
 		if (!tarefas.contains(tarefa)) {

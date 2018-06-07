@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONObject;
+
 public class Equipe {
 
 	private static HashMap<Integer, Equipe> equipePorId = new HashMap<Integer, Equipe>();
