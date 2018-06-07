@@ -2,7 +2,10 @@ package com.mc426.restjersey;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
-import org.json.JSONException;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import com.mc426.*;
 
@@ -112,8 +116,8 @@ public class ControllerProjetos {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
-			
-			Tarefa tarefa = projeto.getListaTarefas().get(idTarefa);
+
+			Tarefa tarefa = Tarefa.getPorId(idTarefa);
 			
 			if (tarefa == null) {
 				resposta = "Tarefa nao encontrada";
@@ -131,6 +135,106 @@ public class ControllerProjetos {
 		}
 	}
 
+	@POST
+	@Path("/{idProjeto}/tarefas/")
+	@Produces("application/json")
+	public Response CreateTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto")int idProjeto, String body){
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+			
+			Projeto projeto = Projeto.getPorId(idProjeto);
+			
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			JSONObject jsonBody = new JSONObject(body);
+			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
+			Matcher matcher = pattern.matcher(jsonBody.getString("prazo"));
+			
+			if (!matcher.find()) {
+				resposta = "Formato de prazo não aceito.";
+				return Response.status(400).entity(resposta).build();
+			}
+			
+			JSONArray jArray = jsonBody.getJSONArray("tags");
+			List<String> tags = new ArrayList<String>();
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++) {
+					tags.add(jArray.getString(i));
+				}
+			}
+			
+			jArray = jsonBody.getJSONArray("dependencias");
+			List<Tarefa> dependencias = new ArrayList<Tarefa>();
+			Tarefa tarefa = null;
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++){
+					pattern = Pattern.compile("\\/projetos\\/(\\d+)\\/tarefas\\/(\\d+)");
+					matcher = pattern.matcher(jArray.getString(i));
+					if (matcher.find()) {
+						tarefa = Tarefa.getPorId(Integer.parseInt(matcher.group(2)));
+						if (tarefa == null) {
+							resposta = "Tarefa nao encontrado para adicionar como dependencia";
+							return Response.status(404).entity(resposta).build();
+						}
+						dependencias.add(tarefa);
+					}
+					else{
+						resposta = "Forneca dependencias no formato /projeto/{idProjeto}/tarefa/{idTarefa}";
+						return Response.status(400).entity(resposta).build();
+					}
+				}
+			}
+			
+			jArray = jsonBody.getJSONArray("responsaveis");
+			List<Usuario> responsaveis = new ArrayList<Usuario>();
+			Usuario responsavel = null;
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++){
+					pattern = Pattern.compile("\\/usuarios\\/(\\w+)");
+					matcher = pattern.matcher(jArray.getString(i));
+					if (matcher.find()) {
+						responsavel = Usuario.getPorUserName(matcher.group(1));
+						if (responsavel == null) {
+							resposta = "Usuario nao encontrado para adicionar na equipe";
+							return Response.status(404).entity(resposta).build();
+						}
+						responsaveis.add(responsavel);
+					}
+					else{
+						resposta = "Forneca membros no formato /usuarios/{username}";
+						return Response.status(400).entity(resposta).build();
+					}
+				}
+			}
+			
+			Tarefa novaTarefa = new Tarefa(jsonBody.getString("nome"),jsonBody.getString("descricao"), jsonBody.getString("prazo"),
+					projeto, tags,dependencias,responsaveis);
+			
+			return Response.status(201).entity(novaTarefa.toString()).build();
+			
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+	
 	@Path("{id}")
 	@DELETE
 	@Produces("application/json")
