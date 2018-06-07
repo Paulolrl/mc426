@@ -30,8 +30,10 @@ public class Usuario {
 
 	public static Usuario verifica(String usuario, String senha) {
 		Usuario retv = usuarioPorUserName.get(usuario);
-		if (retv.senha.equals(senha))
-			return retv;
+		if(retv != null) {
+			if (retv.senha.equals(senha))
+				return retv;
+		}
 		return null;
 	}
 
