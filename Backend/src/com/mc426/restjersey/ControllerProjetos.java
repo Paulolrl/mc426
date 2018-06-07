@@ -42,7 +42,7 @@ public class ControllerProjetos {
 
 			JSONObject jsonBody = new JSONObject(body);
 
-			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), null,
+			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), jsonBody.getString("prazo"),
 					(Gerente) usuario);
 			return Response.status(201).entity(projeto.toJson().toString()).build();
 
