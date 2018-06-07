@@ -67,6 +67,10 @@ public class Diretorio {
 		return this.nome;
 	}
 
+	public Projeto getProjeto() {
+		return this.projeto;
+	}
+
 	public int getId() {
 		return this.id;
 	}

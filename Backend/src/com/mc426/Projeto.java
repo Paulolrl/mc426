@@ -90,7 +90,7 @@ public class Projeto {
 	public String getPrazo() {
 		return prazo;
 	}
-
+	
 	public void removerEquipe(Equipe equipe) {
 		this.listaEquipes.remove(equipe);
 	}
