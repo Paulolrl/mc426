@@ -360,7 +360,7 @@ public class ControllerProjetos {
 
 				for (Equipe e : projeto.getListaEquipes()){
 					if (!equipes.contains(e)) {
-						projeto.removerEquipe(e);;
+						projeto.removerEquipe(e);
 					}
 				}
 						
