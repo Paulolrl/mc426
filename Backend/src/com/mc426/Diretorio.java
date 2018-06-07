@@ -24,11 +24,12 @@ public class Diretorio {
 
 	private List<ItemCompartilhado> listaItems;
 	private List<Diretorio> listaSubdiretorios;
-
+	private Projeto projeto;
 	private String nome;
 
-	public Diretorio(String nome) {
+	public Diretorio(String nome, Projeto projeto) {
 		this.nome = nome;
+		this.projeto = projeto;
 		this.listaItems = new ArrayList<ItemCompartilhado>();
 		this.listaSubdiretorios = new ArrayList<Diretorio>();
 		this.id = Diretorio.proximoId();
@@ -41,7 +42,7 @@ public class Diretorio {
 	}
 
 	public void adicionarDiretorio(String nome) {
-		this.listaSubdiretorios.add(new Diretorio(nome));
+		this.listaSubdiretorios.add(new Diretorio(nome, this.projeto));
 	}
 	
 	public void adicionarDocGoogle(String nome, String chaveAutenticacao, String link) {
@@ -76,6 +77,7 @@ public class Diretorio {
 		retv.put("id", this.id);
 		retv.put("itens", this.listaItems.stream().map(x -> "/diretorios/" + this.getId() + "/itens/" + x.getId()));
 		retv.put("subdiretorios", this.listaSubdiretorios.stream().map(x -> "/diretorios/" + x.getId()));
+		retv.put("projeto", "/projetos/" + this.projeto.getId());
 		return retv;
 	}
 }

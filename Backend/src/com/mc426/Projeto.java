@@ -38,7 +38,7 @@ public class Projeto {
 		this.descricao = descricao;
 		this.prazo = prazo;
 		this.dono = dono;
-		this.diretorio = new Diretorio("root");
+		this.diretorio = new Diretorio("root", this);
 		this.listaTarefas = new ArrayList<Tarefa>();
 		this.listaEquipes = new ArrayList<Equipe>();
 		Projeto.projetoPorId.put(this.id, this);
