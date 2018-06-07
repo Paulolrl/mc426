@@ -352,22 +352,18 @@ public class ControllerProjetos {
 					equipes.add(equipe);
 				}
 				
-				List<Equipe> equipesNovas = new ArrayList<Equipe>();
-				List<Equipe> equipesRemovidas = new ArrayList<Equipe>();
 				for (Equipe e : equipes){
-					if (!projeto.getListaEquipes().contains(e))
-						equipesNovas.add(e);
+					if (!projeto.getListaEquipes().contains(e)) {
+						projeto.adicionarEquipe(e);
+					}
 				}
 
 				for (Equipe e : projeto.getListaEquipes()){
 					if (!equipes.contains(e)) {
-						equipesRemovidas.add(e);
+						projeto.removerEquipe(e);;
 					}
 				}
-				
-				projeto.getListaEquipes().addAll(equipesNovas);
-				projeto.getListaEquipes().removeAll(equipesRemovidas);
-				
+						
 				resposta = "Equipes alteradas com sucesso.";
 				return Response.status(201).entity(resposta).build();
 			}

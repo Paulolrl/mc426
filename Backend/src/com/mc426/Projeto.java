@@ -44,8 +44,9 @@ public class Projeto {
 		Projeto.projetoPorId.put(this.id, this);
 	}
 
-	public void adicionarEquipe(Equipe equipe) {
+	public void adicionarEquipe(Equipe equipe) throws Exception{
 		this.listaEquipes.add(equipe);
+		equipe.adicionarProjeto(this);
 	}
 
 	public void criarTarefa(String nomeTarefa, String descricao, String prazo, Date duracao, List<Usuario> responsaveis,
@@ -91,8 +92,9 @@ public class Projeto {
 		return prazo;
 	}
 	
-	public void removerEquipe(Equipe equipe) {
+	public void removerEquipe(Equipe equipe) throws Exception {
 		this.listaEquipes.remove(equipe);
+		equipe.removerProjeto(this);
 	}
 
 	public void removerProjeto() throws Exception {
