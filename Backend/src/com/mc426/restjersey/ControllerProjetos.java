@@ -250,6 +250,55 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
+	
+	@POST
+	@Path("/{idProjeto}/tarefas/{idTarefa}/feedbacks")
+	@Produces("application/json")
+	public Response CreateFeedback(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto,
+			@PathParam("idTarefa") int idTarefa, String body) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Projeto projeto = Projeto.getPorId(idProjeto);
+
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			Tarefa tarefa = Tarefa.getPorId(idTarefa);
+
+			if (tarefa == null) {
+				resposta = "Tarefa nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			JSONObject jBody = new JSONObject(body);
+			Usuario autor = Usuario.getPorResource(jBody.getString("autor"));
+			tarefa.adicionarFeedback(autor,jBody.getInt("nota")
+					,jBody.getString("comentario"));
+
+			return Response.status(201).entity(tarefa.toJson().toString()).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
 
 	@GET
 	@Path("/{idProjeto}/tarefas/{idTarefa}")
