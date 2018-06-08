@@ -61,6 +61,17 @@ public class Usuario {
 		}
 		return false;
 	}
+	
+	public List<Projeto> projetosParticipados() {
+		List<Projeto> meusProjetos = new ArrayList<Projeto> ();
+		for (Equipe e : equipes) {
+			for (Projeto p : e.getProjetos())
+				if (!meusProjetos.contains(p))
+					meusProjetos.add(p);
+		}
+		return meusProjetos;
+	}
+
 
 	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
 		if (!tarefas.contains(tarefa)) {

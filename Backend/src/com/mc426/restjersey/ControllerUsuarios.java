@@ -2,6 +2,7 @@ package com.mc426.restjersey;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -76,5 +77,4 @@ public class ControllerUsuarios {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
 }

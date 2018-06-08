@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import com.mc426.*;
 
@@ -42,9 +44,40 @@ public class ControllerProjetos {
 
 			JSONObject jsonBody = new JSONObject(body);
 
-			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"), jsonBody.getString("prazo"),
-					(Gerente) usuario);
+			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"),
+					jsonBody.getString("prazo"), (Gerente) usuario);
 			return Response.status(201).entity(projeto.toJson().toString()).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+
+	@GET
+	@Produces("application/json")
+	public Response GetUserProjects(@Context HttpHeaders httpheaders, String body) throws JSONException {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado para autorizacao.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			JSONObject retv = new JSONObject();
+			retv.put("projetos", usuario.projetosParticipados().stream().map(x -> "/projetos/" + x.getId())
+					.collect(Collectors.toList()));
+			return Response.status(200).entity(retv.toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -136,7 +169,7 @@ public class ControllerProjetos {
 	@POST
 	@Path("/{idProjeto}/tarefas/")
 	@Produces("application/json")
-	public Response CreateTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto")int idProjeto, String body){
+	public Response CreateTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto, String body) {
 		String resposta;
 		try {
 			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
@@ -150,23 +183,23 @@ public class ControllerProjetos {
 				resposta = "Usuario nao encontrado.";
 				return Response.status(401).entity(resposta).build();
 			}
-			
+
 			Projeto projeto = Projeto.getPorId(idProjeto);
-			
+
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
-			
+
 			JSONObject jsonBody = new JSONObject(body);
 			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
 			Matcher matcher = pattern.matcher(jsonBody.getString("prazo"));
-			
+
 			if (!matcher.find()) {
-				resposta = "Formato de prazo não aceito.";
+				resposta = "Formato de prazo nï¿½o aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
-			
+
 			JSONArray jArray = jsonBody.getJSONArray("tags");
 			List<String> tags = new ArrayList<String>();
 			if (jArray != null) {
@@ -174,12 +207,12 @@ public class ControllerProjetos {
 					tags.add(jArray.getString(i));
 				}
 			}
-			
+
 			jArray = jsonBody.getJSONArray("dependencias");
 			List<Tarefa> dependencias = new ArrayList<Tarefa>();
 			Tarefa tarefa;
 			if (jArray != null) {
-				for (int i = 0; i < jArray.length(); i++){
+				for (int i = 0; i < jArray.length(); i++) {
 					tarefa = Tarefa.getPorResource(jArray.getString(i));
 					if (tarefa == null) {
 						resposta = "Tarefa nao encontrado para adicionar como dependencia";
@@ -188,7 +221,7 @@ public class ControllerProjetos {
 					dependencias.add(tarefa);
 				}
 			}
-			
+
 			jArray = jsonBody.getJSONArray("responsaveis");
 			List<Usuario> responsaveis = new ArrayList<Usuario>();
 			Usuario responsavel;
@@ -200,16 +233,16 @@ public class ControllerProjetos {
 						return Response.status(404).entity(resposta).build();
 					}
 					responsaveis.add(responsavel);
-					
+
 				}
 			}
-			
-			Tarefa novaTarefa = new Tarefa(jsonBody.getString("nome"),jsonBody.getString("descricao"), jsonBody.getString("prazo"),
-					projeto, tags,dependencias,responsaveis);
-			
+
+			Tarefa novaTarefa = new Tarefa(jsonBody.getString("nome"), jsonBody.getString("descricao"),
+					jsonBody.getString("prazo"), projeto, tags, dependencias, responsaveis);
+
 			return Response.status(201).entity(novaTarefa.toJson().toString()).build();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
@@ -338,11 +371,11 @@ public class ControllerProjetos {
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
-			
+
 			JSONArray jArray = jsonBody.getJSONArray("equipes");
 			List<Equipe> equipes = new ArrayList<Equipe>();
 			Equipe equipe;
-			if(jArray != null) {
+			if (jArray != null) {
 				for (int i = 0; i < jArray.length(); i++) {
 					equipe = Equipe.getPorResource(jArray.getString(i));
 					if (equipe == null) {
@@ -351,23 +384,23 @@ public class ControllerProjetos {
 					}
 					equipes.add(equipe);
 				}
-				
-				for (Equipe e : equipes){
+
+				for (Equipe e : equipes) {
 					if (!projeto.getListaEquipes().contains(e)) {
 						projeto.adicionarEquipe(e);
 					}
 				}
 
-				for (Equipe e : projeto.getListaEquipes()){
+				for (Equipe e : projeto.getListaEquipes()) {
 					if (!equipes.contains(e)) {
 						projeto.removerEquipe(e);
 					}
 				}
-						
+
 				return Response.status(201).entity(jArray.toString()).build();
 			}
-			
-			resposta = "Nenhuma equipe passada como parâmetro.";
+
+			resposta = "Nenhuma equipe passada como parï¿½metro.";
 			return Response.status(400).entity(resposta).build();
 
 		} catch (Exception e) {
