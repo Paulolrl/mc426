@@ -147,7 +147,7 @@ public class ControllerDiretorios {
 
 			JSONObject jsonBody = new JSONObject(body);
 
-			return Response.status(200).entity(diretorio.adicionarDiretorio(jsonBody.getString("nome")).toJson().toString())
+			return Response.status(201).entity(diretorio.adicionarDiretorio(jsonBody.getString("nome")).toJson().toString())
 					.build();
 
 		} catch (Exception e) {
@@ -191,7 +191,7 @@ public class ControllerDiretorios {
 
 			JSONObject jsonBody = new JSONObject(body);
 
-			return Response.status(200).entity(diretorio.adicionarRepo(jsonBody.getString("nome"),
+			return Response.status(201).entity(diretorio.adicionarRepo(jsonBody.getString("nome"),
 					jsonBody.getString("chaveAutenticacao"), jsonBody.getString("link")).toJson().toString()).build();
 
 		} catch (Exception e) {
@@ -235,7 +235,7 @@ public class ControllerDiretorios {
 
 			JSONObject jsonBody = new JSONObject(body);
 
-			return Response.status(200).entity(diretorio.adicionarDocGoogle(jsonBody.getString("nome"),
+			return Response.status(201).entity(diretorio.adicionarDocGoogle(jsonBody.getString("nome"),
 					jsonBody.getString("chaveAutenticacao"), jsonBody.getString("link")).toJson().toString()).build();
 
 		} catch (Exception e) {
@@ -336,7 +336,7 @@ public class ControllerDiretorios {
 		// save the file to the server
 		saveFile(fileInputStream, filePath);
 
-		return Response.status(200)
+		return Response.status(201)
 				.entity(diretorio.adicionarArquivo(contentDispositionHeader.getFileName(), filePath).toJson().toString()).build();
 	}
 
