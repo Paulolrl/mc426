@@ -83,6 +83,11 @@ public class Tarefa {
 		Feedback feedback = new Feedback(autor, nota, comentario);
 		feedbacks.add(feedback);
 	}
+	
+	public void adicionarStatus(int porcentagem, String texto) {
+		this.progresso.setPorcentagem(porcentagem);
+		this.progresso.setTexto(texto);
+	}
 
 	public List<Tarefa> getDependencias() {
 		return dependencias;
