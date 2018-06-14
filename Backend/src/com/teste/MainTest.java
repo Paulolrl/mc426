@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.JerseyTest;
 
@@ -18,7 +19,7 @@ public class MainTest extends JerseyTest {
 
     @Test
     public void testCriarUsuario() {
-    	JSONObject json = new JSONObject("{\r\n" + 
+    	JSONObject jsonRequest = new JSONObject("{\r\n" + 
     			"	\"nome\": \"string\",\r\n" + 
     			"	\"usuario\": \"arthur\",\r\n" + 
     			"\"senha\": \"12345\",\r\n" + 
@@ -26,17 +27,17 @@ public class MainTest extends JerseyTest {
     			"}\r\n" + 
     			"");
     	
-       	String response = resource().path("usuarios").post(String.class,json.toString());
-       	String expected = "{\r\n" + 
+       	ClientResponse response = resource().path("usuarios").post(ClientResponse.class,jsonRequest.toString());
+       	JSONObject jsonExpected = new JSONObject("{\r\n" + 
        			"    \"equipes\": [],\r\n" + 
        			"    \"tarefas\": [],\r\n" + 
        			"    \"nome\": \"string\",\r\n" + 
        			"    \"usuario\": \"arthur\",\r\n" + 
        			"    \"gerente\": true\r\n" + 
        			"}\r\n" + 
-       			"";
-       	JSONObject jsonExpected = new JSONObject(expected);
-        assertEquals(jsonExpected.toString(), response);
+       			"");
+        assertEquals(jsonExpected.toString(), response.getEntity(String.class));
+        assertEquals(201,response.getStatus());
     }
 
 }
