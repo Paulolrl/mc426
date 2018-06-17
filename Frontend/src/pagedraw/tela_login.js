@@ -15,7 +15,7 @@ function render() {
                                     <div className="tela_login-text-3">{"Usuário:"}</div>
                                 </div>
                             </div>
-                            <input type="text" placeholder="Digite usuário" className="tela_login-text_input-8" /> 
+                            <input type="text" placeholder="Digite usuário" value={this.props.usuario} className="tela_login-text_input-8" /> 
                         </div>
                     </div>
                 </div>
@@ -27,28 +27,25 @@ function render() {
                                     <div className="tela_login-text-9">{"Senha:"}</div>
                                 </div>
                             </div>
-                            <input type="text" placeholder="Placeholder" className="tela_login-text_input-0" /> 
+                            <input type="password" placeholder="Digite sua senha" value={this.props.senha} className="tela_login-text_input-0" /> 
                         </div>
                     </div>
                 </div>
                 <div className="tela_login-0-0-2">
-                    <div className="tela_login-rectangle_3">
+                    <div onClick={this.props.handleClick} className="tela_login-rectangle_2">
                         <div className="tela_login-0-0-2-0-0">
-                            <div className="tela_login-text-36">Login</div>
-                        </div>
-                    </div>
-                    <div className="tela_login-rectangle_4">
-                        <div className="tela_login-0-0-2-1-0">
-                            <div className="tela_login-rectangle_2">
-                                <div className="tela_login-0-0-2-1-0-0-0">
-                                    <div className="tela_login-text-4">Cancelar</div>
+                            <div className="tela_login-rectangle_3">
+                                <div className="tela_login-0-0-2-0-0-0-0">
+                                    <div className="tela_login-text-36">Login</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="tela_login-rectangle_4" /> 
                 </div>
             </div>
         </div>
+        <div className="tela_login-1" /> 
     </div>;
 };
 

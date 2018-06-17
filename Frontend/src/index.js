@@ -6,6 +6,7 @@ import { Switch } from 'react-router'
 import './index.css';
 // Step 1: import the design from above
 // Pagedraw generates the JSX and CSS files you need.
+import AppLogin from './applogin'
 import AppEquipes from './appequipes'
 import AppCriarEquipe from './appcriarequipe'
 // There's no special libraries or javascript layout systems, just code written for you.
@@ -13,7 +14,7 @@ import AppCriarEquipe from './appcriarequipe'
 render((
 <Router>
   <Switch>
-      <Route exact path="/" component={AppEquipes} />
+      <Route exact path="/" component={AppLogin} />
       <Route exact path="/equipes" component={AppEquipes} />
       <Route path="/equipes/nova" component={AppCriarEquipe} />
   </Switch>
