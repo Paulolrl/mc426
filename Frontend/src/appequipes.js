@@ -12,13 +12,31 @@ export default class AppEquipes extends Component {
 
   render() {
     return (
-      <TelaEquipes/>
+      <TelaEquipes listaEquipes1={this.state.listaEquipes1} listaEquipes2={this.state.listaEquipes2} listaEquipes3={this.state.listaEquipes3}/>
     );
   }
 
   constructor() {
   super();
     this.state = {
+	    "listaEquipes1": [
+	        {
+	            "nomeEquipe": "Equipe 1"
+	        },
+	        {
+	            "nomeEquipe": "Equipe4"
+	        }
+	    ],
+	    "listaEquipes2": [
+	        {
+	            "nomeEquipe": "Equipe2"
+	        }
+	    ],
+	    "listaEquipes3": [
+	        {
+	            "nomeEquipe": "Equipe3"
+	        }
+	    ]
     };
   }
 

@@ -12,7 +12,6 @@ function render() {
                     <div className="componentebotao-text_1">
                         { this.props.textoBotao }
                     </div>
-                    <div className="componentebotao-0-1-0-1" /> 
                 </div>
             </div>
             <div className="componentebotao-0-2" /> 

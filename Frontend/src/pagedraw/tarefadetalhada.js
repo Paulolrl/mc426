@@ -72,7 +72,7 @@ function render() {
             <div className="tarefadetalhada-text_1">Feedbacks</div>
         </div>
         <div className="tarefadetalhada-8">
-            <input type="text" placeholder="Escreva aqui seu feedback" value={this.props.feedbackInput} className="tarefadetalhada-feedbackinput-6" /> 
+            <textarea placeholder="Escreva aqui seu feedback" value={this.props.feedbackInput} className="tarefadetalhada-feedbackinput-6" /> 
         </div>
         <div className="tarefadetalhada-9">
             <div className="tarefadetalhada-9-0">

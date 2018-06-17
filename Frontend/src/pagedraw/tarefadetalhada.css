@@ -378,14 +378,14 @@
     display: flex;
     margin-top: 1px;
     padding-left: 433px;
-    padding-right: 56px;
+    padding-right: 22px;
 }
 
 .tarefadetalhada-9-0 {
     display: flex;
     flex-direction: column;
     padding-top: 21px;
-    padding-bottom: 5px;
+    padding-bottom: 16px;
 }
 
 .tarefadetalhada-9-0-0 {
@@ -416,13 +416,13 @@
     margin-left: 11px;
     display: flex;
     flex-direction: column;
-    min-width: 131px;
-    min-height: 57px;
+    min-width: 165px;
+    min-height: 68px;
 }
 
 .tarefadetalhada-10 {
     display: flex;
-    margin-top: 22px;
+    margin-top: 11px;
     padding-left: 14px;
     padding-right: 12px;
 }
