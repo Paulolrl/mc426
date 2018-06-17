@@ -12,13 +12,41 @@ export default class AppLogin extends Component {
 
   render() {
     return (
-      <TelaLogin/>
+      <TelaLogin handleClick={this.handleLogin}
+                 usuario={this.state.usuario}
+                 senha={this.state.senha}
+                 setUsuario={this.setUsuario}
+                 setSenha={this.setSenha}
+                 />
     );
   }
 
+  handleLogin() {
+    window.localStorage.setItem('usuarioADA', this.state.usuario);
+    window.localStorage.setItem('senhaADA', this.state.senha);
+    window.location = '/equipes';
+  }
+
+  setUsuario(value) {
+    this.setState({
+      usuario: value
+    })
+  }
+
+  setSenha(value) {
+    this.setState({
+      senha: value
+    })
+  }
+
   constructor() {
-  super();
+    super();
+    this.handleLogin = this.handleLogin.bind(this);
+    this.setUsuario = this.setUsuario.bind(this);
+    this.setSenha = this.setSenha.bind(this);
     this.state = {
+      usuario: '',
+      senha: ''
     };
   }
 

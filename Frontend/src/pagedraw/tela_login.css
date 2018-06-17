@@ -152,7 +152,7 @@
     display: flex;
     margin-top: 155px;
     padding-left: 93px;
-    padding-right: 69px;
+    padding-right: 482px;
 }
 
 .tela_login-rectangle_2 {
@@ -193,13 +193,6 @@
     text-decoration: none;
     text-align: center;
     word-wrap: break-word;
-}
-
-.tela_login-rectangle_4 {
-    width: 103px;
-    height: 41px;
-    flex-shrink: 0;
-    margin-left: 310px;
 }
 
 .tela_login-1 {

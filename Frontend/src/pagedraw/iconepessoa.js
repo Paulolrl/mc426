@@ -11,7 +11,9 @@ function render() {
                     <div className="iconepessoa-oval_2" /> 
                     <div className="iconepessoa-0-0-0-1">
                         <div className="iconepessoa-0-0-0-1-0">
-                            <div className="iconepessoa-text_7">Ada Lovelace</div>
+                            <div className="iconepessoa-text_7">
+                                { this.props.nomeUsuario }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,7 +67,9 @@ function render() {
                 </div>
                 <div className="iconepessoa-1-0-3">
                     <div className="iconepessoa-1-0-3-0">
-                        <div className="iconepessoa-text_7-5">Ada Lovelace</div>
+                        <div className="iconepessoa-text_7-5">
+                            { this.props.nomeUsuario }
+                        </div>
                     </div>
                 </div>
             </div>

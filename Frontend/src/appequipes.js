@@ -12,13 +12,19 @@ export default class AppEquipes extends Component {
 
   render() {
     return (
-      <TelaEquipes listaEquipes1={this.state.listaEquipes1} listaEquipes2={this.state.listaEquipes2} listaEquipes3={this.state.listaEquipes3}/>
+      <TelaEquipes nomeUsuario={this.state.nomeUsuario} 
+      			   listaEquipes1={this.state.listaEquipes1} 
+      			   listaEquipes2={this.state.listaEquipes2} 
+      			   listaEquipes3={this.state.listaEquipes3}/>
     );
   }
 
-  constructor() {
-  super();
+  constructor(props) {
+  super(props);
+  	
     this.state = {
+    	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
+
 	    "listaEquipes1": [
 	        {
 	            "nomeEquipe": "Equipe 1"
@@ -41,6 +47,7 @@ export default class AppEquipes extends Component {
   }
 
   componentDidMount() {
+    console.log(window.localStorage.getItem('usuarioADA'));
   }
 };
 

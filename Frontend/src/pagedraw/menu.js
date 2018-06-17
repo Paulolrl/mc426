@@ -25,7 +25,7 @@ function render() {
             </a>
             <div className="menu-0-3" /> 
             <div className="menu-iconepessoa_instance-7">
-                <Iconepessoa /> 
+                <Iconepessoa nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
     </div>;

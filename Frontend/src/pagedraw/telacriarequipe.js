@@ -11,7 +11,7 @@ function render() {
     return <div className="telacriarequipe-telacriarequipe-9">
         <div className="telacriarequipe-0">
             <div className="telacriarequipe-menu_instance_2">
-                <Menu /> 
+                <Menu nomeUsuario={""} /> 
             </div>
         </div>
         <div className="telacriarequipe-1">

@@ -11,7 +11,7 @@ function render() {
     return <div className="telaprincipal-telaprincipal-6">
         <div className="telaprincipal-0">
             <div className="telaprincipal-menu_instance-1">
-                <Menu /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="telaprincipal-1">
