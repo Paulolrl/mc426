@@ -132,7 +132,7 @@ public class Usuario {
 		retv.put("usuario", this.userName);
 		retv.put("tarefas", this.tarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 				.collect(Collectors.toList()));
-		retv.put("equipes", this.equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()));
+		retv.put("equipes", this.equipes.stream().filter(x -> !x.getNome().equals("dummy")).map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()));
 		retv.put("gerente", this instanceof Gerente);
 		return retv;
 	}

@@ -48,6 +48,7 @@ public class Equipe {
 		this.dono = dono;
 		this.projetos = new ArrayList<Projeto>();
 		this.usuarios = new ArrayList<Usuario>();
+		usuarios.add(dono);
 		adicionarMembros(usuarios);
 		Equipe.equipePorId.put(this.id, this);
 	}

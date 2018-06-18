@@ -46,6 +46,9 @@ public class ControllerProjetos {
 
 			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"),
 					jsonBody.getString("prazo"), (Gerente) usuario);
+			List<Usuario> dummy = new ArrayList<Usuario>();
+			Equipe equipe = new Equipe("dummy",dummy, (Gerente) usuario);
+			equipe.adicionarProjeto(projeto);
 			return Response.status(201).entity(projeto.toJson().toString()).build();
 
 		} catch (Exception e) {

@@ -89,7 +89,7 @@ public class ControllerEquipes {
 
 			Equipe equipe = Equipe.getPorId(id);
 
-			if (equipe == null) {
+			if (equipe == null ||equipe.getNome().equals("dummy")) {
 				resposta = "Equipe nao encontrada";
 				return Response.status(404).entity(resposta).build();
 			}
