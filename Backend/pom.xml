@@ -72,17 +72,15 @@
   		<version>1.19.4</version>
   	</dependency>
   	 <!-- testing -->
-        <dependency>
-            <groupId>com.sun.jersey.jersey-test-framework</groupId>
-            <artifactId>jersey-test-framework-grizzly2</artifactId>
-            <version>1.19.4</version>
-            <scope>test</scope>
-        </dependency>
-  	<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
+  	 <dependency>
+  	 	<groupId>com.sun.jersey.jersey-test-framework</groupId>
+  	 	<artifactId>jersey-test-framework-grizzly2</artifactId>
+  	 	<version>1.19.4</version>
+  	 </dependency>
+  	 <dependency>
+  	 	<groupId>junit</groupId>
+  	 	<artifactId>junit</artifactId>
+  	 	<version>4.12</version>
+  	 </dependency>
   </dependencies>
 </project>
