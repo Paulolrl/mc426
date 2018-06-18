@@ -11,7 +11,7 @@ function render() {
     return <div className="telacriarequipe-telacriarequipe-9">
         <div className="telacriarequipe-0">
             <div className="telacriarequipe-menu_instance_2">
-                <Menu nomeUsuario={""} /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="telacriarequipe-1">
@@ -19,7 +19,7 @@ function render() {
                 <Barratarefas /> 
             </div>
             <div className="telacriarequipe-centroadicionarequipe_instance-1">
-                <Centroadicionarequipe nomeEquipe={this.props.nomeEquipe} membrosEquipe={this.props.membrosEquipe} handleClick={this.props.handleClick} setNome={this.props.setNome} setMembros={this.props.setNome} /> 
+                <Centroadicionarequipe nomeEquipe={this.props.nomeEquipe} membrosEquipe={this.props.membrosEquipe} handleClick={this.props.handleClick} setNome={this.props.setNome} setMembros={this.props.setMembros} /> 
             </div>
             <div className="telacriarequipe-barraagenda_instance_2">
                 <Barraagenda /> 

@@ -147,7 +147,18 @@
     display: flex;
     margin-top: 25px;
     padding-left: 461px;
-    padding-right: 62px;
+    padding-right: 46px;
+}
+
+.centroadicionarequipe-rectangle_4 {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.centroadicionarequipe-3-0-0 {
+    display: flex;
+    padding-right: 16px;
 }
 
 .centroadicionarequipe-componentebotao_instance-8 {
