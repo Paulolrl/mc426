@@ -6,19 +6,18 @@ import { Switch } from 'react-router'
 import './index.css';
 // Step 1: import the design from above
 // Pagedraw generates the JSX and CSS files you need.
-import TelaCriarEquipes from './pagedraw/telacriarequipe'
+import TelaDetalheEquipe from './pagedraw/teladetalheequipe'
 
 const apiUrl = 'http://localhost:8080/Backend/mc426';
 
-export default class AppCriarEquipe extends Component {
+export default class AppDetalheEquipe extends Component {
 
   render() {
     return (
-      <TelaCriarEquipes handleClick={this.handleSubmit}
-      					nomeEquipe={this.state.nomeEquipe}
+      <TelaDetalheEquipe handleClick={this.handleSubmit}
+          					nomeEquipe={this.state.nomeEquipe}
                			membrosEquipe={this.state.membrosEquipe}
                			setMembros={this.setMembros}
-               			setNome={this.setNome}
                			nomeUsuario={this.state.nomeUsuario}
 		/>
     );
@@ -27,26 +26,17 @@ export default class AppCriarEquipe extends Component {
   handleSubmit() {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
 
-    fetch(apiUrl + "/equipes", {
-		  method: 'POST',
-		  headers: {
-		    'Authorization': 'Basic ' + authorizationBasic
-		  },
-		  body: JSON.stringify({
-		    nome: this.state.nomeEquipe,
-		    membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length != 0}).map(x => "/usuarios/" + x),
-		  })
-  		});
+    fetch(apiUrl + "/equipes/"+this.state.idEquipe, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      },
+      body: JSON.stringify({
+        membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length != 0}).map(x => "/usuarios/" + x),
+      })
+      });
 
-    console.log("POST " + apiUrl + "/equipes");
     window.location = '/equipes';
-
-  }
-
-  setNome(value) {
-    this.setState({
-      nomeEquipe: value
-    })
   }
 
   setMembros(value) {
@@ -56,22 +46,34 @@ export default class AppCriarEquipe extends Component {
   }
 
   constructor(props) {
-	super(props);
+	  super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.setNome = this.setNome.bind(this);
     this.setMembros = this.setMembros.bind(this);
 
     this.state = {
     	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
     	nomeEquipe: "",
+      idEquipe: this.props.match.params.idEquipe,
     	membrosEquipe: "",
     	nomeUsuario: ""
     };
   }
 
   componentDidMount() {
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+
   	console.log(window.localStorage.getItem('usuarioADA'));
   	this.setState({nomeUsuario: window.localStorage.getItem('usuarioADA')});
+
+    fetch(apiUrl + /equipes/ + this.state.idEquipe, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic, 
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json())
+    .then(response => this.setState( { "nomeEquipe": response.nome + " (" + response.id + ")", "membrosEquipe": response.membros.map(x => x.substring("/usuarios/".length))}));
+
   }
 };
 

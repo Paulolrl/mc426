@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-bottom: 42px;
     background: #FFFFFF;
+    min-height: 100vh;
 }
 
 .teladetalheequipe-0 {
@@ -12,10 +12,10 @@
 }
 
 .teladetalheequipe-menu_instance_3 {
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     display: flex;
     flex-direction: column;
-    min-width: 1366px;
 }
 
 .teladetalheequipe-1 {
@@ -44,6 +44,12 @@
     margin-left: 47px;
     display: flex;
     flex-direction: column;
+}
+
+.teladetalheequipe-2 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 * {

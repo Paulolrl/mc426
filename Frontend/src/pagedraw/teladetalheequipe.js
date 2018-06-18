@@ -11,7 +11,7 @@ function render() {
     return <div className="teladetalheequipe-teladetalheequipe-2">
         <div className="teladetalheequipe-0">
             <div className="teladetalheequipe-menu_instance_3">
-                <Menu nomeUsuario={""} /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="teladetalheequipe-1">
@@ -19,12 +19,13 @@ function render() {
                 <Barratarefas /> 
             </div>
             <div className="teladetalheequipe-centordetalheequipe_instance-1">
-                <Centordetalheequipe nomeEquipe={"Equipe qualquer"} membros={"arthur, paulo, pedro"} /> 
+                <Centordetalheequipe nomeEquipe={this.props.nomeEquipe} membros={this.props.membrosEquipe} handleClick={this.props.handleClick} setMembros={this.props.setMembros} /> 
             </div>
             <div className="teladetalheequipe-barraagenda_instance_2">
                 <Barraagenda /> 
             </div>
         </div>
+        <div className="teladetalheequipe-2" /> 
     </div>;
 };
 

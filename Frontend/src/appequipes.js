@@ -51,7 +51,7 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
+					  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome + " (" + response.id + ")", "resourceEquipe": "/equipes/" + response.id}]
 					}))
 				);
 			}
@@ -65,7 +65,7 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes2: [...prevState.listaEquipes2, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
+					  listaEquipes2: [...prevState.listaEquipes2, { "nomeEquipe": response.nome + " (" + response.id + ")", "resourceEquipe": "/equipes/" + response.id }]
 					}))
 				);
 			}
@@ -79,7 +79,7 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes3: [...prevState.listaEquipes3, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
+					  listaEquipes3: [...prevState.listaEquipes3, { "nomeEquipe": response.nome + " (" + response.id + ")", "resourceEquipe": "/equipes/" + response.id }]
 					}))
 				);
 			}

@@ -89,6 +89,16 @@
     padding-right: 72px;
 }
 
+.centordetalheequipe-rectangle_1 {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.centordetalheequipe-2-0-0 {
+    display: flex;
+}
+
 .centordetalheequipe-componentebotao_instance-0 {
     flex-shrink: 0;
     display: flex;

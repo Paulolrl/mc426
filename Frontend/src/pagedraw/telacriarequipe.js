@@ -10,7 +10,7 @@ import './telacriarequipe.css';
 function render() {
     return <div className="telacriarequipe-telacriarequipe-9">
         <div className="telacriarequipe-0">
-            <div className="telacriarequipe-menu_instance_2">
+            <div className="telacriarequipe-menu_instance_7">
                 <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>

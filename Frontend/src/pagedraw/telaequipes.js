@@ -18,12 +18,8 @@ function render() {
             <div className="telaequipes-barratarefas_instance_2">
                 <Barratarefas /> 
             </div>
-            <div className="telaequipes-1-1">
-                <div className="telaequipes-1-1-0">
-                    <div className="telaequipes-centroequipes_instance-2">
-                        <Centroequipes listaEquipes1={(this.props.listaEquipes1)} listaEquipes2={(this.props.listaEquipes2)} listaEquipes3={(this.props.listaEquipes3)} /> 
-                    </div>
-                </div>
+            <div className="telaequipes-centroequipes_instance-2">
+                <Centroequipes listaEquipes1={(this.props.listaEquipes1)} listaEquipes2={(this.props.listaEquipes2)} listaEquipes3={(this.props.listaEquipes3)} /> 
             </div>
             <div className="telaequipes-barraagenda_instance_2">
                 <Barraagenda /> 

@@ -17,13 +17,17 @@ function render() {
             </div>
             <div className="centordetalheequipe-1-1">
                 <div className="centordetalheequipe-1-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.membros} className="centordetalheequipe-responsaveis-6" /> 
+                    <input type="text" placeholder="Placeholder" value={this.props.membros} onChange={(e) => this.props.setMembros(e.target.value)} className="centordetalheequipe-responsaveis-6" /> 
                 </div>
             </div>
         </div>
         <div className="centordetalheequipe-2">
-            <div className="centordetalheequipe-componentebotao_instance-0">
-                <Componentebotao textoBotao={"Salvar"} /> 
+            <div className="centordetalheequipe-rectangle_1">
+                <div className="centordetalheequipe-2-0-0">
+                    <div onClick={this.props.handleClick} className="centordetalheequipe-componentebotao_instance-0">
+                        <Componentebotao textoBotao={"Salvar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;

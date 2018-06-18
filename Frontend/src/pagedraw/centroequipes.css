@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding-bottom: 131px;
     background: #FFFFFF;
 }
 
@@ -46,31 +47,33 @@
 
 .centroequipes-1 {
     display: flex;
+    flex-grow: 1;
+    flex-basis: 0px;
+    min-height: fit-content;
     margin-top: 25px;
+    padding-left: 38px;
+    padding-right: 46px;
 }
 
-.centroequipes-rectangle_1 {
+.centroequipes-1-0 {
     display: flex;
     flex-direction: column;
 }
 
 .centroequipes-1-0-0 {
     display: flex;
-    padding-left: 38px;
-    padding-right: 46px;
 }
 
 .centroequipes-1-0-0-0 {
     display: flex;
     flex-direction: column;
-    padding-bottom: 2px;
 }
 
 .centroequipes-rectangle_8 {
     display: flex;
     flex-direction: column;
     padding-top: 21px;
-    padding-bottom: 17px;
+    padding-bottom: 18px;
     background: rgba(216, 216, 216, 0);
     flex-grow: 1;
 }
@@ -87,23 +90,37 @@
     flex-direction: column;
 }
 
-.centroequipes-1-0-0-1 {
+.centroequipes-1-0-1 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+.centroequipes-1-1 {
     display: flex;
     flex-direction: column;
     margin-left: 35px;
-    padding-bottom: 2px;
+}
+
+.centroequipes-1-1-0 {
+    display: flex;
+}
+
+.centroequipes-1-1-0-0 {
+    display: flex;
+    flex-direction: column;
 }
 
 .centroequipes-rectangle_8-6 {
     display: flex;
     flex-direction: column;
     padding-top: 21px;
-    padding-bottom: 17px;
+    padding-bottom: 18px;
     background: rgba(216, 216, 216, 0);
     flex-grow: 1;
 }
 
-.centroequipes-1-0-0-1-0-0-0 {
+.centroequipes-1-1-0-0-0-0-0 {
     display: flex;
     padding-left: 23px;
     padding-right: 23px;
@@ -115,23 +132,38 @@
     flex-direction: column;
 }
 
-.centroequipes-1-0-0-2 {
+.centroequipes-1-1-1 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+.centroequipes-1-2 {
     display: flex;
     flex-direction: column;
     margin-left: 26px;
     padding-top: 2px;
 }
 
+.centroequipes-1-2-0 {
+    display: flex;
+}
+
+.centroequipes-1-2-0-0 {
+    display: flex;
+    flex-direction: column;
+}
+
 .centroequipes-rectangle_8-2 {
     display: flex;
     flex-direction: column;
     padding-top: 21px;
-    padding-bottom: 17px;
+    padding-bottom: 18px;
     background: rgba(216, 216, 216, 0);
     flex-grow: 1;
 }
 
-.centroequipes-1-0-0-2-0-0-0 {
+.centroequipes-1-2-0-0-0-0-0 {
     display: flex;
     padding-left: 23px;
     padding-right: 23px;
@@ -143,7 +175,7 @@
     flex-direction: column;
 }
 
-.centroequipes-2 {
+.centroequipes-1-2-1 {
     width: 0px;
     flex-grow: 1;
     flex-basis: 0px;

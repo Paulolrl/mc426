@@ -6,11 +6,16 @@ import './cardequipe.css';
 function render() {
     return <div className="cardequipe-cardequipe-7">
         <div className="cardequipe-0">
-            <div className="cardequipe-rectangle_7">
+            <div onClick={() => { window.location = this.props.resourceEquipe; }} className="cardequipe-rectangle_7">
                 <div className="cardequipe-0-0-0">
                     <img src="https://ucarecdn.com/ca47ff15-a8bb-40e7-b239-818c5715b25d/" className="cardequipe-image_3" /> 
                 </div>
                 <div className="cardequipe-0-0-1">
+                    <div className="cardequipe-text_3">
+                        { this.props.resourceEquipe }
+                    </div>
+                </div>
+                <div className="cardequipe-0-0-2">
                     <div className="cardequipe-nomeequipe-4">
                         { this.props.nomeEquipe }
                     </div>

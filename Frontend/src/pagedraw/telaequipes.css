@@ -26,34 +26,26 @@
 }
 
 .telaequipes-barratarefas_instance_2 {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 41px;
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.telaequipes-1-1 {
-    display: flex;
-    flex-direction: column;
-    margin-left: 44px;
-    padding-bottom: 31px;
-}
-
-.telaequipes-1-1-0 {
-    display: flex;
 }
 
 .telaequipes-centroequipes_instance-2 {
     flex-shrink: 0;
+    margin-left: 44px;
     display: flex;
     flex-direction: column;
-    min-height: 552px;
+    min-height: 624px;
 }
 
 .telaequipes-barraagenda_instance_2 {
-    flex-shrink: 0;
-    margin-left: 47px;
     display: flex;
     flex-direction: column;
+    margin-left: 47px;
+    padding-bottom: 41px;
+    flex-shrink: 0;
 }
 
 .telaequipes-2 {
