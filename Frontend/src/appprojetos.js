@@ -41,7 +41,9 @@ export default class AppProjetos extends Component {
   handleResponse(response) {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
     for (var i = 0; i < response.projetos.length; i++) {
+        console.log(response.projetos[i]);
         if (i % 4 == 0){
+            console.log("flag")
             fetch(apiUrl + response.projetos[i], {
               method: 'GET',
               headers: {
@@ -76,6 +78,19 @@ export default class AppProjetos extends Component {
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
                   listaProjetos3: [...prevState.listaProjetos3, { "nomeProjeto": response.nome }]
+                }))
+            );
+        }
+        else{
+            fetch(apiUrl + response.projetos[i], {
+              method: 'GET',
+              headers: {
+                'Authorization': 'Basic ' + authorizationBasic,
+                'Content-Type': 'application/json',
+              },
+            }).then(response => response.json())
+            .then(response => this.setState(prevState => ({
+                  listaProjetos4: [...prevState.listaProjetos4, { "nomeProjeto": response.nome }]
                 }))
             );
         }
