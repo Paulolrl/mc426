@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Switch } from 'react-router'
 
 import './index.css';
 // Step 1: import the design from above
@@ -44,7 +41,7 @@ export default class AppEquipes extends Component {
 			console.log(response);
 			console.log(this);
 
-			if (i % 3 == 0)
+			if (i % 3 === 0)
 			{
 				fetch(apiUrl + response.equipes[i], {
 				  method: 'GET',
@@ -54,11 +51,11 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome }]
+					  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
 					}))
 				);
 			}
-			else if (i % 3 == 1)
+			else if (i % 3 === 1)
 			{
 				fetch(apiUrl + response.equipes[i], {
 				  method: 'GET',
@@ -68,7 +65,7 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes2: [...prevState.listaEquipes2, { "nomeEquipe": response.nome }]
+					  listaEquipes2: [...prevState.listaEquipes2, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
 					}))
 				);
 			}
@@ -82,7 +79,7 @@ export default class AppEquipes extends Component {
 				  },
 				}).then(response => response.json())
 				.then(response => this.setState(prevState => ({
-					  listaEquipes3: [...prevState.listaEquipes3, { "nomeEquipe": response.nome }]
+					  listaEquipes3: [...prevState.listaEquipes3, { "nomeEquipe": response.nome + " (" + response.id + ")" }]
 					}))
 				);
 			}
