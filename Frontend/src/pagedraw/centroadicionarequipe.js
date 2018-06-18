@@ -36,8 +36,12 @@ function render() {
             </div>
         </div>
         <div className="centroadicionarequipe-3">
-            <div onClick={this.props.handleClick} className="centroadicionarequipe-componentebotao_instance-8">
-                <Componentebotao textoBotao={"Adicionar"} /> 
+            <div className="centroadicionarequipe-rectangle_4">
+                <div className="centroadicionarequipe-3-0-0">
+                    <div onClick={this.props.handleClick} className="centroadicionarequipe-componentebotao_instance-8">
+                        <Componentebotao textoBotao={"Adicionar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;
