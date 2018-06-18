@@ -2,7 +2,6 @@
 import React from 'react';
 import Menu from './menu';
 import Barratarefas from './barratarefas';
-import Componentebotao from './componentebotao';
 import Barraagenda from './barraagenda';
 import './telaprincipal.css';
 
@@ -17,67 +16,6 @@ function render() {
         <div className="telaprincipal-1">
             <div className="telaprincipal-barratarefas_instance-2">
                 <Barratarefas /> 
-            </div>
-            <div className="telaprincipal-formsaddtarefa-8">
-                <div className="telaprincipal-1-1-0">
-                    <div className="telaprincipal-1-1-0-0">
-                        <div className="telaprincipal-1-1-0-0-0">
-                            <div className="telaprincipal-nome-9">{"Nome:"}</div>
-                        </div>
-                    </div>
-                    <div className="telaprincipal-1-1-0-1">
-                        <div className="telaprincipal-1-1-0-1-0">
-                            <input type="text" placeholder="Nome da tarefa" className="telaprincipal-nomeinput-8" /> 
-                        </div>
-                    </div>
-                </div>
-                <div className="telaprincipal-1-1-1">
-                    <div className="telaprincipal-1-1-1-0">
-                        <div className="telaprincipal-1-1-1-0-0">
-                            <div className="telaprincipal-tags-6">{"Tags:"}</div>
-                        </div>
-                    </div>
-                    <input type="text" placeholder="Tags da tarefa" className="telaprincipal-taginput-1" /> 
-                </div>
-                <div className="telaprincipal-1-1-2">
-                    <div className="telaprincipal-1-1-2-0">
-                        <div className="telaprincipal-1-1-2-0-0">
-                            <div className="telaprincipal-descri_o-4">
-                                {"Descrição:"}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="telaprincipal-1-1-2-1">
-                        <div className="telaprincipal-1-1-2-1-0">
-                            <input type="text" placeholder="Descrição da nova tarefa" className="telaprincipal-descinput-9" /> 
-                        </div>
-                    </div>
-                </div>
-                <div className="telaprincipal-1-1-3">
-                    <div className="telaprincipal-1-1-3-0">
-                        <div className="telaprincipal-1-1-3-0-0">
-                            <div className="telaprincipal-add-2">
-                                {"Adicionar responsável:"}
-                            </div>
-                        </div>
-                    </div>
-                    <input type="text" placeholder="Adicione pessoas responsáveis pela tarefa" className="telaprincipal-addinput-4" /> 
-                </div>
-                <div className="telaprincipal-1-1-4">
-                    <div className="telaprincipal-1-1-4-0">
-                        <div className="telaprincipal-1-1-4-0-0">
-                            <div className="telaprincipal-data-1">{"Data:"}</div>
-                        </div>
-                    </div>
-                    <div className="telaprincipal-1-1-4-1">
-                        <div className="telaprincipal-1-1-4-1-0">
-                            <input type="text" placeholder="00/00/0000" className="telaprincipal-datainput-1" /> 
-                        </div>
-                    </div>
-                    <div className="telaprincipal-bot_o-8">
-                        <Componentebotao textoBotao={"Criar"} /> 
-                    </div>
-                </div>
             </div>
             <div className="telaprincipal-barraagenda_instance-4">
                 <Barraagenda /> 

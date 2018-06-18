@@ -6,7 +6,7 @@ import './iconeprojeto.css';
 function render() {
     return <div className="iconeprojeto-iconeprojeto-5">
         <div className="iconeprojeto-0">
-            <img src={this.props.imagemProjeto} className="iconeprojeto-imagemprojeto-9" /> 
+            <img src="https://ucarecdn.com/395b48e3-ac67-417c-8e48-139d652bcd82/" className="iconeprojeto-imagemprojeto-9" /> 
         </div>
         <div className="iconeprojeto-1">
             <div className="iconeprojeto-nomeprojeto-0">

@@ -8,6 +8,8 @@ import './index.css';
 // Pagedraw generates the JSX and CSS files you need.
 import TelaEquipes from './pagedraw/telaequipes'
 
+const apiUrl = 'http://localhost:8080/Backend/mc426';
+
 export default class AppEquipes extends Component {
 
   render() {
@@ -20,7 +22,7 @@ export default class AppEquipes extends Component {
   }
 
   constructor(props) {
-  super(props);
+  	super(props);
   	
     this.state = {
     	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
@@ -44,10 +46,43 @@ export default class AppEquipes extends Component {
 	        }
 	    ]
     };
+
+    this.handleResponse = this.handleResponse.bind(this);
   }
+
+  handleResponse(response) {
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+		for (var i = 0; i < response.equipes.length; i++) {
+			console.log(response);
+			console.log(this);
+			fetch(apiUrl + response.equipes[i], {
+			  method: 'GET',
+			  headers: {
+			    'Authorization': 'Basic ' + authorizationBasic, 
+			    'Content-Type': 'application/json',
+			  },
+			}).then(response => response.json())
+			.then(response => this.setState(prevState => ({
+				  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome }]
+				}))
+			);
+		} 
+	}
 
   componentDidMount() {
     console.log(window.localStorage.getItem('usuarioADA'));
+
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+
+    console.log("GET " + apiUrl + "/usuarios/" + this.state.nomeUsuario);
+    console.log(authorizationBasic);
+    fetch(apiUrl + "/usuarios/" + this.state.nomeUsuario, {
+		  method: 'GET',
+		  headers: {
+		    'Authorization': 'Basic ' + authorizationBasic
+		  }
+		}).then(response => response.json())
+		.then(response => this.handleResponse(response));
   }
 };
 
