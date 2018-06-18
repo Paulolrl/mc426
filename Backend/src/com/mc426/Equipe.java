@@ -58,18 +58,14 @@ public class Equipe {
 			if (!usuarios.contains(membro)) {
 				usuarios.add(membro);
 				membro.incluiEquipe(this);
-			} else {
-				throw new Exception("Usuario ja esta na equipe");
-			}
+			} 
 		}
 	}
 
 	public void adicionarProjeto(Projeto projeto) throws Exception {
 		if (!projetos.contains(projeto)) {
 			projetos.add(projeto);
-		} else {
-			throw new Exception("Projeto a ser adicionado ja esta na lista de projetos");
-		}
+		} 
 	}
 
 	public Gerente getDono() {
@@ -97,17 +93,13 @@ public class Equipe {
 			if (usuarios.contains(membro)) {
 				usuarios.remove(membro);
 				membro.excluiEquipe(this);
-			} else {
-				throw new Exception("Usuario a ser removido nao esta na equipe");
-			}
+			} 
 		}
 	}
 
 	public void removerProjeto(Projeto projeto) throws Exception {
 		if (projetos.contains(projeto)) {
 			this.projetos.remove(projeto);
-		} else {
-			throw new Exception("projeto a ser removido nao esta na lista de projetos");
 		}
 	}
 

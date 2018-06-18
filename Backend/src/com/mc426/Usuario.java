@@ -76,16 +76,12 @@ public class Usuario {
 	public void atribuiResponsabilidade(Tarefa tarefa) throws Exception {
 		if (!tarefas.contains(tarefa)) {
 			tarefas.add(tarefa);
-		} else {
-			throw new Exception("Tarefa ja esta atribuida ao usuario");
 		}
 	}
 
 	public void excluiEquipe(Equipe equipe) throws Exception {
 		if (equipes.contains(equipe)) {
 			equipes.remove(equipe);
-		} else {
-			throw new Exception("Usuario nao pertence a equipe a ser removida");
 		}
 	}
 
@@ -104,16 +100,12 @@ public class Usuario {
 	public void incluiEquipe(Equipe equipe) throws Exception {
 		if (!equipes.contains(equipe)) {
 			equipes.add(equipe);
-		} else {
-			throw new Exception("Usuario ja pertence a equipe");
 		}
 	}
 
 	public void removerResponsabilidade(Tarefa tarefa) throws Exception {
 		if (tarefas.contains(tarefa)) {
 			tarefas.remove(tarefa);
-		} else {
-			throw new Exception("Usuario nao e responsavel pela tarefa a ser removida");
 		}
 	}
 
