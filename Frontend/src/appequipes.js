@@ -28,22 +28,10 @@ export default class AppEquipes extends Component {
     	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
 
 	    "listaEquipes1": [
-	        {
-	            "nomeEquipe": "Equipe 1"
-	        },
-	        {
-	            "nomeEquipe": "Equipe4"
-	        }
 	    ],
 	    "listaEquipes2": [
-	        {
-	            "nomeEquipe": "Equipe2"
-	        }
 	    ],
 	    "listaEquipes3": [
-	        {
-	            "nomeEquipe": "Equipe3"
-	        }
 	    ]
     };
 
@@ -55,17 +43,49 @@ export default class AppEquipes extends Component {
 		for (var i = 0; i < response.equipes.length; i++) {
 			console.log(response);
 			console.log(this);
-			fetch(apiUrl + response.equipes[i], {
-			  method: 'GET',
-			  headers: {
-			    'Authorization': 'Basic ' + authorizationBasic, 
-			    'Content-Type': 'application/json',
-			  },
-			}).then(response => response.json())
-			.then(response => this.setState(prevState => ({
-				  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome }]
-				}))
-			);
+
+			if (i % 3 == 0)
+			{
+				fetch(apiUrl + response.equipes[i], {
+				  method: 'GET',
+				  headers: {
+				    'Authorization': 'Basic ' + authorizationBasic, 
+				    'Content-Type': 'application/json',
+				  },
+				}).then(response => response.json())
+				.then(response => this.setState(prevState => ({
+					  listaEquipes1: [...prevState.listaEquipes1, { "nomeEquipe": response.nome }]
+					}))
+				);
+			}
+			else if (i % 3 == 1)
+			{
+				fetch(apiUrl + response.equipes[i], {
+				  method: 'GET',
+				  headers: {
+				    'Authorization': 'Basic ' + authorizationBasic, 
+				    'Content-Type': 'application/json',
+				  },
+				}).then(response => response.json())
+				.then(response => this.setState(prevState => ({
+					  listaEquipes2: [...prevState.listaEquipes2, { "nomeEquipe": response.nome }]
+					}))
+				);
+			}
+			else
+			{
+				fetch(apiUrl + response.equipes[i], {
+				  method: 'GET',
+				  headers: {
+				    'Authorization': 'Basic ' + authorizationBasic, 
+				    'Content-Type': 'application/json',
+				  },
+				}).then(response => response.json())
+				.then(response => this.setState(prevState => ({
+					  listaEquipes3: [...prevState.listaEquipes3, { "nomeEquipe": response.nome }]
+					}))
+				);
+			}
 		} 
 	}
 
