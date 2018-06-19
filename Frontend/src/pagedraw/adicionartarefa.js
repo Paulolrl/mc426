@@ -55,7 +55,7 @@ function render() {
             </div>
             <div className="adicionartarefa-5-1">
                 <div className="adicionartarefa-5-1-0">
-                    <input type="text" placeholder="dd/mm/aaaa" value={this.props.data} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionartarefa-data-6" /> 
+                    <input type="text" placeholder="aaaa-mm-dd" value={this.props.data} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionartarefa-data-6" /> 
                 </div>
             </div>
             <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
