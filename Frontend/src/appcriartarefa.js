@@ -20,11 +20,11 @@ export default class AppCriarTarefa extends Component {
             tags={this.state.tags}
             responsaveis={this.state.responsaveis}
             data={this.state.data}
-            setNomeTarefa={this.props.setNomeTarefa}
-            setTags={this.props.setTags}
-            setDescricao={this.props.setDescricao}
-            setResponsaveis={this.props.setResponsaveis}
-            setPrazo={this.props.setPrazo}
+            setNomeTarefa={this.setNomeTarefa}
+            setTags={this.setTags}
+            setDescricao={this.setDescricao}
+            setResponsaveis={this.setResponsaveis}
+            setPrazo={this.setPrazo}
             nomeUsuario={this.state.nomeUsuario}
             />
         );
@@ -39,22 +39,33 @@ export default class AppCriarTarefa extends Component {
             }
         });
         let projetosJson = await responseProjetos.json();
-        let reponsePost = await fetch(apiUrl + projetosJson[0] +'/tarefas/',{
+        let responsePost = await fetch(apiUrl + projetosJson.projetos[0] +'/tarefas/',{
             method: 'POST',
             headers: {
-                'Authorization': 'Basic ' + authorizationBasic
+                'Authorization': 'Basic ' + authorizationBasic,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 nome: this.state.nomeTarefa,
                 descricao: this.state.descricao,
-                prazo: this.state.prazo,
+                prazo: this.state.data,
                 responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function(el) {return el.length !== 0}).map(x => "/usuarios/" + x),
                 dependencias: [],
-                tags: this.state.responsaveis.split(/[ ,]/),
+                tags: this.state.tags.split(/[ ,]/).filter(function(el) {return el.length !== 0}),
                 arquivos: [],
             })
-        });
-        window.location = '/tarefas';
+        })
+        /*console.log(JSON.stringify({
+            nome: this.state.nomeTarefa,
+            descricao: this.state.descricao,
+            prazo: this.state.data,
+            responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function(el) {return el.length !== 0}).map(x => "/usuarios/" + x),
+            dependencias: [],
+            tags: this.state.tags.split(/[ ,]/).filter(function(el) {return el.length !== 0}),
+            arquivos: [],
+        }));*/
+        //window.location = '/tarefas';
     }
 
     setNomeTarefa(value) {
