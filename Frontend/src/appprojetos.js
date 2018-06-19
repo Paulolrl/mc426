@@ -52,7 +52,7 @@ export default class AppProjetos extends Component {
               },
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
-                  listaprojetos1: [...prevState.listaProjetos1, { "nomeProjeto": response.nome }]
+                  listaProjetos1: [...prevState.listaProjetos1, { "nomeProjeto": response.nome }]
                 }))
             );
         }
