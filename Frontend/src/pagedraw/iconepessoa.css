@@ -7,8 +7,8 @@
 .iconepessoa-default-4 {
     display: flex;
     flex-direction: column;
-    padding-top: 23.5px;
-    padding-bottom: 23.5px;
+    padding-top: 24px;
+    padding-bottom: 23px;
     background: rgba(255, 255, 255, 0);
     flex-grow: 1;
 }
@@ -30,8 +30,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 21px;
-    padding-top: 8.5px;
-    padding-bottom: 8.5px;
+    padding-top: 8px;
+    padding-bottom: 9px;
 }
 
 .iconepessoa-0-0-0-1-0 {
@@ -57,8 +57,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: 12.5px;
-    padding-bottom: 12.5px;
+    padding-top: 13px;
+    padding-bottom: 12px;
     background: rgba(255, 255, 255, 0);
 }
 
@@ -69,8 +69,8 @@
 .iconepessoa-rectangle_9 {
     display: flex;
     flex-direction: column;
-    padding-top: 3.5px;
-    padding-bottom: 7.5px;
+    padding-top: 3px;
+    padding-bottom: 8px;
     border-radius: 5px;
     background: rgb(255, 255, 255);
 }
@@ -186,8 +186,8 @@
 .iconepessoa-1-0-1 {
     display: flex;
     flex-direction: column;
-    padding-top: 19.5px;
-    padding-bottom: 19.5px;
+    padding-top: 19px;
+    padding-bottom: 20px;
 }
 
 .iconepessoa-1-0-1-0 {
@@ -248,8 +248,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 21px;
-    padding-top: 19.5px;
-    padding-bottom: 19.5px;
+    padding-top: 19px;
+    padding-bottom: 20px;
 }
 
 .iconepessoa-1-0-3-0 {
