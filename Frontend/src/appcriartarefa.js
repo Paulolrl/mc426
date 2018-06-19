@@ -56,16 +56,7 @@ export default class AppCriarTarefa extends Component {
                 arquivos: [],
             })
         })
-        /*console.log(JSON.stringify({
-            nome: this.state.nomeTarefa,
-            descricao: this.state.descricao,
-            prazo: this.state.data,
-            responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function(el) {return el.length !== 0}).map(x => "/usuarios/" + x),
-            dependencias: [],
-            tags: this.state.tags.split(/[ ,]/).filter(function(el) {return el.length !== 0}),
-            arquivos: [],
-        }));*/
-        //window.location = '/tarefas';
+        window.location = '/tarefas';
     }
 
     setNomeTarefa(value) {
