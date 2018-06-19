@@ -17,7 +17,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.nomeTarefa} className="adicionartarefa-nometarefa-1" /> 
+            <input type="text" placeholder="Nome" value={this.props.nomeTarefa} onChange={(e) => this.props.setNomeTarefa(e.target.value)} className="adicionartarefa-nometarefa-1" /> 
         </div>
         <div className="adicionartarefa-2">
             <div className="adicionartarefa-2-0">
@@ -25,7 +25,7 @@ function render() {
                     <div className="adicionartarefa-text_28">{"Tags:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.tags} className="adicionartarefa-tags-7" /> 
+            <input type="text" placeholder="uma, outra" value={this.props.tags} onChange={(e) => this.props.setTags(e.target.value)} className="adicionartarefa-tags-7" /> 
         </div>
         <div className="adicionartarefa-3">
             <div className="adicionartarefa-3-0">
@@ -35,7 +35,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <textarea placeholder="Placeholder" value={this.props.descricao} className="adicionartarefa-descricao-8" /> 
+            <textarea placeholder="texto" value={this.props.descricao} onChange={(e) => this.props.setDescricao(e.target.value)} className="adicionartarefa-descricao-8" /> 
         </div>
         <div className="adicionartarefa-4">
             <div className="adicionartarefa-4-0">
@@ -45,7 +45,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.responsaveis} className="adicionartarefa-responsaveis-4" /> 
+            <input type="text" placeholder="usuario1, usuario2" value={this.props.responsaveis} onChange={(e) => this.props.setResponsaveis(e.target.value)} className="adicionartarefa-responsaveis-4" /> 
         </div>
         <div className="adicionartarefa-5">
             <div className="adicionartarefa-5-0">
@@ -55,11 +55,15 @@ function render() {
             </div>
             <div className="adicionartarefa-5-1">
                 <div className="adicionartarefa-5-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.data} className="adicionartarefa-data-6" /> 
+                    <input type="text" placeholder="dd/mm/aaaa" value={this.props.data} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionartarefa-data-6" /> 
                 </div>
             </div>
-            <div className="adicionartarefa-botaosalvar-4">
-                <Componentebotao textoBotao={"Salvar"} /> 
+            <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
+                <div className="adicionartarefa-5-2-0">
+                    <div className="adicionartarefa-botaosalvar-4">
+                        <Componentebotao textoBotao={"Salvar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;
