@@ -8,21 +8,17 @@ import './menu.css';
 function render() {
     return <div className="menu-menu-7">
         <div className="menu-0">
-            <a href="/grupos" className="menu-0-0">
+            <a href="/tarefas" className="menu-0-0">
                 <div className="menu-bot_o_menu_instance-9">
                     <Botao_menu item={"Tarefas"} /> 
                 </div>
             </a>
-            <a href="/partidas" className="menu-0-1">
-                <div className="menu-bot_o_menu_instance_2">
-                    <Botao_menu item={"Arquivos"} /> 
-                </div>
-            </a>
-            <a href="/estatisticas" className="menu-0-2">
-                <div className="menu-bot_o_menu_instance_2-3">
-                    <Botao_menu item={"Agenda"} /> 
-                </div>
-            </a>
+            <div className="menu-bot_o_menu_instance_2">
+                <Botao_menu item={"Arquivos"} /> 
+            </div>
+            <div className="menu-bot_o_menu_instance_2-3">
+                <Botao_menu item={"Agenda"} /> 
+            </div>
             <div className="menu-0-3" /> 
             <div className="menu-iconepessoa_instance-7">
                 <Iconepessoa nomeUsuario={this.props.nomeUsuario} /> 

@@ -9,35 +9,39 @@ function render() {
             <div className="tarefareduzida-0-0">
                 <div className="tarefareduzida-0-0-0">
                     <div className="tarefareduzida-titulotarefa-1">
-                        { this.props.tituloTarefa }
+                        { this.props.nomeTarefa }
                     </div>
                 </div>
             </div>
             <div className="tarefareduzida-0-1">
                 <div className="tarefareduzida-0-1-0">
-                    <div className="tarefareduzida-statusprogresso-2" style={{"background": this.props.color}} /> 
+                    <div className="tarefareduzida-statusprogresso-2" style={{"background": this.props.progresso}} /> 
                 </div>
             </div>
         </div>
         <div className="tarefareduzida-1">
-            <div className="tarefareduzida-1-0">
-                <div className="tarefareduzida-1-0-0">
-                    <div className="tarefareduzida-tituloprazo-9">
-                        {"Prazo:"}
+            <div className="tarefareduzida-tituloprazo-9">
+                {"Prazo:"}
+            </div>
+            <div className="tarefareduzida-1-1">
+                <div className="tarefareduzida-1-1-0">
+                    <div className="tarefareduzida-prazo-6">
+                        { this.props.prazo }
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.prazo} className="tarefareduzida-prazo-6" /> 
         </div>
         <div className="tarefareduzida-2">
-            <div className="tarefareduzida-2-0">
-                <div className="tarefareduzida-2-0-0">
-                    <div className="tarefareduzida-tituloresponsavel-6">
-                        {"Responsáveis:"}
+            <div className="tarefareduzida-tituloresponsavel-6">
+                {"Responsáveis:"}
+            </div>
+            <div className="tarefareduzida-2-1">
+                <div className="tarefareduzida-2-1-0">
+                    <div className="tarefareduzida-responsaveis-2">
+                        { this.props.responsaveis }
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.responsaveis} className="tarefareduzida-responsaveis-2" /> 
         </div>
     </div>;
 };

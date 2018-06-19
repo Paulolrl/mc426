@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-bottom: 47px;
     background: #FFFFFF;
+    min-height: 100vh;
 }
 
 .telaprojetos-0 {
@@ -12,10 +12,10 @@
 }
 
 .telaprojetos-menu_instance_4 {
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     display: flex;
     flex-direction: column;
-    min-width: 1366px;
 }
 
 .telaprojetos-1 {
@@ -46,6 +46,12 @@
     margin-left: 47px;
     padding-bottom: 5px;
     flex-shrink: 0;
+}
+
+.telaprojetos-2 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 * {

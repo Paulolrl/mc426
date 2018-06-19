@@ -40,13 +40,18 @@
     word-wrap: break-word;
 }
 
-.projetos-botaoadicionarprojeto-0 {
+.projetos-0-1 {
     flex-shrink: 0;
     margin-left: 278px;
+    display: flex;
+}
+
+.projetos-botaoadicionarprojeto-0 {
     display: flex;
     flex-direction: column;
     min-width: 192px;
     min-height: 58px;
+    flex-grow: 1;
 }
 
 .projetos-1 {

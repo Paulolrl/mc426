@@ -25,6 +25,7 @@ function render() {
                 <Barraagenda /> 
             </div>
         </div>
+        <div className="telaprojetos-2" /> 
     </div>;
 };
 

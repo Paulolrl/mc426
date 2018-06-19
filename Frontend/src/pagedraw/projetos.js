@@ -13,9 +13,11 @@ function render() {
                     <div className="projetos-text_2">Projetos</div>
                 </div>
             </div>
-            <div className="projetos-botaoadicionarprojeto-0">
-                <Componentebotao textoBotao={"Adicionar Projeto"} /> 
-            </div>
+            <a href="/projetos/novo" className="projetos-0-1">
+                <div className="projetos-botaoadicionarprojeto-0">
+                    <Componentebotao textoBotao={"Adicionar Projeto"} /> 
+                </div>
+            </a>
         </div>
         <div className="projetos-1">
             <div className="projetos-1-0">

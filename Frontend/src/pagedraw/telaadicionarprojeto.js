@@ -11,7 +11,7 @@ function render() {
     return <div className="telaadicionarprojeto-telaadicionarprojeto-8">
         <div className="telaadicionarprojeto-0">
             <div className="telaadicionarprojeto-menu_instance_5">
-                <Menu nomeUsuario={""} /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="telaadicionarprojeto-1">
@@ -19,12 +19,13 @@ function render() {
                 <Barratarefas /> 
             </div>
             <div className="telaadicionarprojeto-adicionarprojeto_instance-6">
-                <Adicionarprojeto nomeProjeto={""} descricao={""} idEquipes={""} prazo={""} /> 
+                <Adicionarprojeto nomeProjeto={this.props.nomeProjeto} descricao={this.props.descricao} idEquipes={this.props.idEquipes} prazo={this.props.prazo} handleClick={this.props.handleClick} setNomeProjeto={this.props.setNomeProjeto} setDescricao={this.props.setDescricao} setIdEquipes={this.props.setIdEquipes} setPrazo={this.props.setPrazo} /> 
             </div>
             <div className="telaadicionarprojeto-barraagenda_instance_2">
                 <Barraagenda /> 
             </div>
         </div>
+        <div className="telaadicionarprojeto-2" /> 
     </div>;
 };
 

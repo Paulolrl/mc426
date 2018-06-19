@@ -4,7 +4,7 @@
     flex-direction: column;
     flex-grow: 1;
     padding-top: 16px;
-    padding-bottom: 25px;
+    padding-bottom: 29px;
     background: #FFFFFF;
 }
 
@@ -59,20 +59,9 @@
 
 .tarefareduzida-1 {
     display: flex;
-    margin-top: 1px;
+    margin-top: 7px;
     padding-left: 29px;
-    padding-right: 481px;
-}
-
-.tarefareduzida-1-0 {
-    display: flex;
-    flex-direction: column;
-    padding-top: 6px;
-    padding-bottom: 6px;
-}
-
-.tarefareduzida-1-0-0 {
-    display: flex;
+    padding-right: 479px;
 }
 
 .tarefareduzida-tituloprazo-9 {
@@ -90,41 +79,37 @@
     word-wrap: break-word;
 }
 
+.tarefareduzida-1-1 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    padding-bottom: 1px;
+}
+
+.tarefareduzida-1-1-0 {
+    display: flex;
+}
+
 .tarefareduzida-prazo-6 {
     width: 111px;
-    height: 33px;
     flex-shrink: 0;
-    border-radius: 4px;
-    background: #FFFFFF;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 17px;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0px;
     font-weight: normal;
     font-style: normal;
+    text-decoration: none;
     text-align: left;
-    letter-spacing: 0px;
-    line-height: normal;
-    word-wrap: normal;
-    padding: 6px 12px;
-    border: 1px solid #cccccc;
+    word-wrap: break-word;
 }
 
 .tarefareduzida-2 {
     display: flex;
-    margin-top: 17px;
+    margin-top: 31px;
     padding-left: 29px;
     padding-right: 78px;
-}
-
-.tarefareduzida-2-0 {
-    display: flex;
-    flex-direction: column;
-    padding-top: 8px;
-    padding-bottom: 4px;
-}
-
-.tarefareduzida-2-0-0 {
-    display: flex;
 }
 
 .tarefareduzida-tituloresponsavel-6 {
@@ -142,23 +127,29 @@
     word-wrap: break-word;
 }
 
+.tarefareduzida-2-1 {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1px;
+}
+
+.tarefareduzida-2-1-0 {
+    display: flex;
+}
+
 .tarefareduzida-responsaveis-2 {
     width: 444px;
-    height: 33px;
     flex-shrink: 0;
-    border-radius: 4px;
-    background: #FFFFFF;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 17px;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0px;
     font-weight: normal;
     font-style: normal;
+    text-decoration: none;
     text-align: left;
-    letter-spacing: 0px;
-    line-height: normal;
-    word-wrap: normal;
-    padding: 6px 12px;
-    border: 1px solid #cccccc;
+    word-wrap: break-word;
 }
 
 * {

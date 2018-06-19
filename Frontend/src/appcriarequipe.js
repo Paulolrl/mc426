@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Switch } from 'react-router'
 
 import './index.css';
 // Step 1: import the design from above
@@ -34,7 +31,7 @@ export default class AppCriarEquipe extends Component {
 		  },
 		  body: JSON.stringify({
 		    nome: this.state.nomeEquipe,
-		    membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length != 0}).map(x => "/usuarios/" + x),
+		    membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length !== 0}).map(x => "/usuarios/" + x),
 		  })
   		});
 
@@ -65,13 +62,10 @@ export default class AppCriarEquipe extends Component {
     	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
     	nomeEquipe: "",
     	membrosEquipe: "",
-    	nomeUsuario: ""
     };
   }
 
   componentDidMount() {
-  	console.log(window.localStorage.getItem('usuarioADA'));
-  	this.setState({nomeUsuario: window.localStorage.getItem('usuarioADA')});
   }
 };
 

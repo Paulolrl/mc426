@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-bottom: 47px;
     background: #FFFFFF;
+    min-height: 100vh;
 }
 
 .teladetalhesprojeto-0 {
@@ -12,10 +12,10 @@
 }
 
 .teladetalhesprojeto-menu_instance_6 {
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
     display: flex;
     flex-direction: column;
-    min-width: 1366px;
 }
 
 .teladetalhesprojeto-1 {
@@ -44,6 +44,12 @@
     margin-left: 56px;
     display: flex;
     flex-direction: column;
+}
+
+.teladetalhesprojeto-2 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 * {

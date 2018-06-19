@@ -17,7 +17,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.nomeProjeto} className="adicionarprojeto-nomeprojeto-3" /> 
+            <input type="text" value={this.props.nomeProjeto} onChange={(e) => this.props.setNomeProjeto(e.target.value)} className="adicionarprojeto-nomeprojeto-3" /> 
         </div>
         <div className="adicionarprojeto-2">
             <div className="adicionarprojeto-2-0">
@@ -27,7 +27,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <textarea placeholder="Placeholder" value={this.props.descricao} className="adicionarprojeto-descricao-3" /> 
+            <textarea value={this.props.descricao} onChange={(e) => this.props.setDescricao(e.target.value)} className="adicionarprojeto-descricao-3" /> 
         </div>
         <div className="adicionarprojeto-3">
             <div className="adicionarprojeto-3-0">
@@ -37,7 +37,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.idEquipes} className="adicionarprojeto-idequipes-2" /> 
+            <input type="text" value={this.props.idEquipes} onChange={(e) => this.props.setIdEquipes(e.target.value)} className="adicionarprojeto-idequipes-2" /> 
         </div>
         <div className="adicionarprojeto-4">
             <div className="adicionarprojeto-4-0">
@@ -47,11 +47,15 @@ function render() {
             </div>
             <div className="adicionarprojeto-4-1">
                 <div className="adicionarprojeto-4-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.prazo} className="adicionarprojeto-prazo-4" /> 
+                    <input type="text" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionarprojeto-prazo-4" /> 
                 </div>
             </div>
-            <div className="adicionarprojeto-botaosalvar-4">
-                <Componentebotao textoBotao={"Salvar"} /> 
+            <div className="adicionarprojeto-rectangle_1">
+                <div className="adicionarprojeto-4-2-0">
+                    <div onClick={this.props.handleClick} className="adicionarprojeto-botaosalvar-4">
+                        <Componentebotao textoBotao={"Salvar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;

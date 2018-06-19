@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Switch } from 'react-router'
 
 import './index.css';
 // Step 1: import the design from above
@@ -32,7 +29,7 @@ export default class AppDetalheEquipe extends Component {
         'Authorization': 'Basic ' + authorizationBasic
       },
       body: JSON.stringify({
-        membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length != 0}).map(x => "/usuarios/" + x),
+        membros: this.state.membrosEquipe.split(/[ ,]/).filter(function(el) {return el.length !== 0}).map(x => "/usuarios/" + x),
       })
       });
 
@@ -55,7 +52,6 @@ export default class AppDetalheEquipe extends Component {
     	nomeEquipe: "",
       idEquipe: this.props.match.params.idEquipe,
     	membrosEquipe: "",
-    	nomeUsuario: ""
     };
   }
 
@@ -63,7 +59,6 @@ export default class AppDetalheEquipe extends Component {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
 
   	console.log(window.localStorage.getItem('usuarioADA'));
-  	this.setState({nomeUsuario: window.localStorage.getItem('usuarioADA')});
 
     fetch(apiUrl + /equipes/ + this.state.idEquipe, {
       method: 'GET',

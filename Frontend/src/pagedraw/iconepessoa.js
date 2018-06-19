@@ -39,8 +39,8 @@ function render() {
                         <div className="iconepessoa-line_4" /> 
                     </div>
                     <div className="iconepessoa-1-0-0-4">
-                        <a href="/perfil" className="iconepessoa-1-0-0-4-0">
-                            <div className="iconepessoa-text_11-5">Perfil</div>
+                        <a href="/" className="iconepessoa-1-0-0-4-0">
+                            <div className="iconepessoa-text_11-5">Logout</div>
                         </a>
                     </div>
                 </div>
