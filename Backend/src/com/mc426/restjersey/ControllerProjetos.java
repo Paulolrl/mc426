@@ -240,8 +240,7 @@ public class ControllerProjetos {
 				}
 			}
 
-			Tarefa novaTarefa = new Tarefa(jsonBody.getString("nome"), jsonBody.getString("descricao"),
-					jsonBody.getString("prazo"), projeto, tags, dependencias, responsaveis);
+			Tarefa novaTarefa = projeto.criarTarefa(jsonBody.getString("nome"), jsonBody.getString("descricao"), jsonBody.getString("prazo"), null, responsaveis, dependencias, tags);
 
 			return Response.status(201).entity(novaTarefa.toJson().toString()).build();
 
