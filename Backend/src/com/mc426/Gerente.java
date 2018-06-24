@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Gerente extends Usuario {
 
-	public Gerente(String userName, String senha, String nome) {
+	public Gerente(String userName, String senha, String nome) throws Exception {
 		super(userName, senha, nome);
 	}
 
