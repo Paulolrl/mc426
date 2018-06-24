@@ -52,7 +52,7 @@ export default class AppProjetos extends Component {
               },
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
-                  listaProjetos1: [...prevState.listaProjetos1, { "nomeProjeto": response.nome }]
+                  listaProjetos1: [...prevState.listaProjetos1, { "nomeProjeto": response.nome, "resourceProjeto": "/projetos/" + response.id }]
                 }))
             );
         }
@@ -65,7 +65,7 @@ export default class AppProjetos extends Component {
               },
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
-                  listaProjetos2: [...prevState.listaProjetos2, { "nomeProjeto": response.nome }]
+                  listaProjetos2: [...prevState.listaProjetos2, { "nomeProjeto": response.nome, "resourceProjeto": "/projetos/" + response.id  }]
                 }))
             );
         }else if (i % 4 == 2){
@@ -77,7 +77,7 @@ export default class AppProjetos extends Component {
               },
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
-                  listaProjetos3: [...prevState.listaProjetos3, { "nomeProjeto": response.nome }]
+                  listaProjetos3: [...prevState.listaProjetos3, { "nomeProjeto": response.nome, "resourceProjeto": "/projetos/" + response.id  }]
                 }))
             );
         }
@@ -90,7 +90,7 @@ export default class AppProjetos extends Component {
               },
             }).then(response => response.json())
             .then(response => this.setState(prevState => ({
-                  listaProjetos4: [...prevState.listaProjetos4, { "nomeProjeto": response.nome }]
+                  listaProjetos4: [...prevState.listaProjetos4, { "nomeProjeto": response.nome, "resourceProjeto": "/projetos/" + response.id  }]
                 }))
             );
         }
