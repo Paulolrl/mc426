@@ -45,7 +45,10 @@ public class Usuario {
 	private List<Tarefa> tarefas;
 	private String userName;
 
-	public Usuario(String userName, String senha, String nome) {
+	public Usuario(String userName, String senha, String nome) throws Exception {
+		if(Usuario.usuarioPorUserName.containsKey(userName)) {
+			throw new Exception();
+		}
 		this.userName = userName;
 		this.nome = nome;
 		this.senha = senha;

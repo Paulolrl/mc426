@@ -24,13 +24,22 @@ public class ControllerUsuarios {
 		String resposta;
 		try {
 			JSONObject jsonBody = new JSONObject(body);
-			Usuario usuario;
-			if (jsonBody.getBoolean("gerente")) {
-				usuario = new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
-			} else {
-				usuario = new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
+			Usuario usuario = null;
+			
+			try {
+				if (jsonBody.getBoolean("gerente")) {
+					usuario = new Gerente(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
+				} else {
+					usuario = new Usuario(jsonBody.getString("usuario"), jsonBody.getString("senha"), jsonBody.getString("nome"));
+				}
+			}catch(Exception e) {
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+				resposta = sw.toString(); // stack trace as a string
+				return Response.status(403).entity(resposta).build();
 			}
-
+			
 			return Response.status(201).entity(usuario.toJson().toString()).build();
 
 		} catch (Exception e) {
