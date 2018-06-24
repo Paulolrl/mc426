@@ -17,7 +17,6 @@ export default class AppTarefas extends Component {
     return (
     	<MuiThemeProvider>
       <TelaTarefas nomeUsuario={this.state.nomeUsuario}
-      				nomeProjeto={this.state.nomeProjeto} 
       			   listaTarefas={this.state.listaTarefas}
       			   listaOpcoes={this.state.listaOpcoes}
       			   onChangeDropdown={this.onChangeDropdown}
@@ -32,12 +31,9 @@ export default class AppTarefas extends Component {
   	
     this.state = {
     	"nomeUsuario": window.localStorage.getItem('usuarioADA'),
-    	"nomeProjeto": "",
-
-	    "listaTarefas": [
-	    ],
-	    valueDropdown: "",
-	    listaOpcoes: []
+	    "listaTarefas": [],
+	    valueDropdown: "" + this.props.match.params.idProjeto,
+	    listaOpcoes: [],
     };
 
     this.handleResponse = this.handleResponse.bind(this);
@@ -47,39 +43,16 @@ export default class AppTarefas extends Component {
   async onChangeDropdown(evt, data) {
 		let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
 
-  	await this.setState({valueDropdown: data.value});
-
-		let responseProjeto;
-		await fetch(apiUrl + "/projetos/" + data.value, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Basic ' + authorizationBasic
-      }
-    })
-		.then(response => response.json())
-		.then(response => responseProjeto = response);
-
-		await this.setState({listaTarefas: []});
-
-		for (var i = 0; i < responseProjeto.tarefas.length; i++) {
-			fetch(apiUrl + responseProjeto.tarefas[i], {
-			  method: 'GET',
-			  headers: {
-			    'Authorization': 'Basic ' + authorizationBasic, 
-			    'Content-Type': 'application/json',
-			  },
-			}).then(response => response.json())
-			.then(response => this.setState(prevState => ({
-				  listaTarefas: [...prevState.listaTarefas, { "nomeTarefa": response.nome + " (" + response.id + ")", "prazo": response.prazo, "corProgresso": "#FF0000", "responsaveis": response.responsaveis.map(x => x.substring("/usuarios/".length)).join(', ')}]
-				}))
-			);
-		}
-
+  	if (data.value != this.state.valueDropdown)
+  	{
+	  	window.location = "/projetos/" + data.value + "/tarefas";
+  	}
   }
 
   async handleResponse(response) {
 		let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
 
+		// Preenche a lista de opcoes do dropdown com os projetos do usuario
 		for (var i = 0; i < response.projetos.length; i++) {
 			fetch(apiUrl + response.projetos[i], {
       method: 'GET',
@@ -88,12 +61,14 @@ export default class AppTarefas extends Component {
       	}
 	    }).then(response => response.json())
 	    .then(response => this.setState(prevState => ({
-				  listaOpcoes: [...prevState.listaOpcoes, { "text": response.nome + " (" + response.id + ")", "value": response.id}]
+				  listaOpcoes: [...prevState.listaOpcoes, { "text": response.nome + " (" + response.id + ")", "value": "" + response.id}]
 				})));
+	    // IMPORTANTE: "value": "" + response.id Isso eh pra converter o id para string
 		}
 
+		// Pega os detalhes do projeto atual
 		let responseProjeto;
-		await fetch(apiUrl + response.projetos[0], {
+		await fetch(apiUrl + /projetos/ + this.state.valueDropdown, {
       method: 'GET',
       headers: {
         'Authorization': 'Basic ' + authorizationBasic
@@ -102,9 +77,9 @@ export default class AppTarefas extends Component {
 		.then(response => response.json())
 		.then(response => responseProjeto = response);
 
-		this.setState({valueDropdown: responseProjeto.id});
 
 		for (var i = 0; i < responseProjeto.tarefas.length; i++) {
+			// Pega os detalhes de cada tarefa e mostra na tela
 			fetch(apiUrl + responseProjeto.tarefas[i], {
 			  method: 'GET',
 			  headers: {
@@ -123,7 +98,6 @@ export default class AppTarefas extends Component {
     console.log(window.localStorage.getItem('usuarioADA'));
 		var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
 
-
     console.log("GET " + apiUrl + "/projetos");
     console.log(authorizationBasic);
     fetch(apiUrl + "/projetos", {
@@ -133,7 +107,6 @@ export default class AppTarefas extends Component {
 		  }
 		}).then(response => response.json())
 		.then(response => this.handleResponse(response));
-
   }
 };
 

@@ -7,15 +7,15 @@ import './detalhesprojeto.css';
 function render() {
     return <div className="detalhesprojeto-detalhesprojeto-9">
         <div className="detalhesprojeto-0">
-            <div className="detalhesprojeto-text_2">Projeto X</div>
+            <div className="detalhesprojeto-text_2">
+                { this.props.nomeProjeto }
+            </div>
         </div>
         <div className="detalhesprojeto-1">
             <div className="detalhesprojeto-text_22">
                 {"Descrição:"}
             </div>
-            <div className="detalhesprojeto-type_something-7">
-                Type something
-            </div>
+            <input type="text" placeholder="Placeholder" value={this.props.descricao} onChange={(e) => this.props.setDescricao(e.target.value)} className="detalhesprojeto-descricao-7" /> 
         </div>
         <div className="detalhesprojeto-2">
             <div className="detalhesprojeto-2-0">
@@ -23,7 +23,7 @@ function render() {
                     <div className="detalhesprojeto-text_23">{"Equipes:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.idEquipes} className="detalhesprojeto-idequipes-7" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.idEquipes} onChange={(e) => this.props.setIdEquipes(e.target.value)} className="detalhesprojeto-idequipes-7" /> 
         </div>
         <div className="detalhesprojeto-3">
             <div className="detalhesprojeto-3-0">
@@ -31,10 +31,10 @@ function render() {
                     <div className="detalhesprojeto-text_24">{"Prazo:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.prazo} className="detalhesprojeto-prazo-6" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="detalhesprojeto-prazo-6" /> 
         </div>
         <div className="detalhesprojeto-4">
-            <div className="detalhesprojeto-botaosalvar-2">
+            <div onClick={this.props.handleClick} className="detalhesprojeto-botaosalvar-2">
                 <Componentebotao textoBotao={"Salvar"} /> 
             </div>
         </div>

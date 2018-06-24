@@ -31,18 +31,23 @@
     min-width: 187px;
 }
 
-.centrotarefas-0-1 {
-    flex-shrink: 0;
+.centrotarefas-rectangle_1 {
+    display: flex;
+    flex-direction: column;
     margin-left: 284px;
+    cursor: pointer;
+}
+
+.centrotarefas-0-1-0 {
     display: flex;
 }
 
 .centrotarefas-botaoadicionarprojeto-3 {
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     min-width: 192px;
     min-height: 58px;
-    flex-grow: 1;
 }
 
 .centrotarefas-1 {
@@ -57,7 +62,7 @@
     flex-direction: column;
 }
 
-.centrotarefas-rectangle_1 {
+.centrotarefas-rectangle_15 {
     display: flex;
     flex-direction: column;
     padding-bottom: 10px;
