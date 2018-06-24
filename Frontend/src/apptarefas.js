@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-import './index.css';
 // Step 1: import the design from above
 // Pagedraw generates the JSX and CSS files you need.
 import TelaTarefas from './pagedraw/telatarefas'
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import 'semantic-ui-css/semantic.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+
 
 const apiUrl = 'http://localhost:8080/Backend/mc426';
 
@@ -11,9 +15,15 @@ export default class AppTarefas extends Component {
 
   render() {
     return (
+    	<MuiThemeProvider>
       <TelaTarefas nomeUsuario={this.state.nomeUsuario}
       				nomeProjeto={this.state.nomeProjeto} 
-      			   listaTarefas={this.state.listaTarefas}/>
+      			   listaTarefas={this.state.listaTarefas}
+      			   listaOpcoes={this.state.listaOpcoes}
+      			   onChangeDropdown={this.onChangeDropdown}
+      			   valueDropdown={this.state.valueDropdown}
+      			   />
+      </MuiThemeProvider>
     );
   }
 
@@ -25,14 +35,62 @@ export default class AppTarefas extends Component {
     	"nomeProjeto": "",
 
 	    "listaTarefas": [
-	    ]
+	    ],
+	    valueDropdown: "",
+	    listaOpcoes: []
     };
 
     this.handleResponse = this.handleResponse.bind(this);
+    this.onChangeDropdown = this.onChangeDropdown.bind(this);
+  }
+
+  async onChangeDropdown(evt, data) {
+		let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+
+  	await this.setState({valueDropdown: data.value});
+
+		let responseProjeto;
+		await fetch(apiUrl + "/projetos/" + data.value, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    })
+		.then(response => response.json())
+		.then(response => responseProjeto = response);
+
+		await this.setState({listaTarefas: []});
+
+		for (var i = 0; i < responseProjeto.tarefas.length; i++) {
+			fetch(apiUrl + responseProjeto.tarefas[i], {
+			  method: 'GET',
+			  headers: {
+			    'Authorization': 'Basic ' + authorizationBasic, 
+			    'Content-Type': 'application/json',
+			  },
+			}).then(response => response.json())
+			.then(response => this.setState(prevState => ({
+				  listaTarefas: [...prevState.listaTarefas, { "nomeTarefa": response.nome + " (" + response.id + ")", "prazo": response.prazo, "corProgresso": "#FF0000", "responsaveis": response.responsaveis.map(x => x.substring("/usuarios/".length)).join(', ')}]
+				}))
+			);
+		}
+
   }
 
   async handleResponse(response) {
 		let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+
+		for (var i = 0; i < response.projetos.length; i++) {
+			fetch(apiUrl + response.projetos[i], {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      	}
+	    }).then(response => response.json())
+	    .then(response => this.setState(prevState => ({
+				  listaOpcoes: [...prevState.listaOpcoes, { "text": response.nome + " (" + response.id + ")", "value": response.id}]
+				})));
+		}
 
 		let responseProjeto;
 		await fetch(apiUrl + response.projetos[0], {
@@ -44,7 +102,7 @@ export default class AppTarefas extends Component {
 		.then(response => response.json())
 		.then(response => responseProjeto = response);
 
-		this.setState({nomeProjeto: responseProjeto.nome})
+		this.setState({valueDropdown: responseProjeto.id});
 
 		for (var i = 0; i < responseProjeto.tarefas.length; i++) {
 			fetch(apiUrl + responseProjeto.tarefas[i], {

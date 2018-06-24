@@ -4,6 +4,7 @@
     flex-direction: column;
     flex-grow: 1;
     padding-bottom: 6px;
+    cursor: pointer;
     background: #FFFFFF;
 }
 
@@ -22,7 +23,28 @@
 
 .iconeprojeto-1 {
     display: flex;
-    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 45px;
+}
+
+.iconeprojeto-resourceprojeto-0 {
+    width: 31px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000000;
+    font-size: 0px;
+    line-height: 0px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.iconeprojeto-2 {
+    display: flex;
+    margin-top: 9px;
     padding-left: 9px;
     padding-right: 8px;
 }

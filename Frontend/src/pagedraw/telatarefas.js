@@ -19,7 +19,7 @@ function render() {
                 <Barratarefas /> 
             </div>
             <div className="telatarefas-centrotarefas_instance-6">
-                <Centrotarefas listaTarefas={this.props.listaTarefas} nomeProjeto={this.props.nomeProjeto} /> 
+                <Centrotarefas listaTarefas={this.props.listaTarefas} nomeProjeto={this.props.nomeProjeto} listaOpcoes={this.props.listaOpcoes} onChangeDropdown={this.props.onChangeDropdown} valueDropdown={this.props.valueDropdown} /> 
             </div>
             <div className="telatarefas-barraagenda_instance_2">
                 <Barraagenda /> 

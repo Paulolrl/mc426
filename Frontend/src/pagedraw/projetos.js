@@ -25,7 +25,7 @@ function render() {
                     return <div key={i} className="projetos-rectangle_1">
                         <div className="projetos-1-0-0-0-0">
                             <div className="projetos-iconeprojeto_instance-5">
-                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} /> 
+                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} resourceProjeto={elem.resourceProjeto} /> 
                             </div>
                         </div>
                     </div>;
@@ -36,7 +36,7 @@ function render() {
                     return <div key={i} className="projetos-rectangle_13">
                         <div className="projetos-1-1-0-0-0">
                             <div className="projetos-iconeprojeto_instance-6">
-                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} /> 
+                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} resourceProjeto={elem.resourceProjeto} /> 
                             </div>
                         </div>
                     </div>;
@@ -47,7 +47,7 @@ function render() {
                     return <div key={i} className="projetos-rectangle_13-9">
                         <div className="projetos-1-2-0-0-0">
                             <div className="projetos-iconeprojeto_instance-2">
-                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} /> 
+                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} resourceProjeto={elem.resourceProjeto} /> 
                             </div>
                         </div>
                     </div>;
@@ -58,7 +58,7 @@ function render() {
                     return <div key={i} className="projetos-rectangle_13-8">
                         <div className="projetos-1-3-0-0-0">
                             <div className="projetos-iconeprojeto_instance-0">
-                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} /> 
+                                <Iconeprojeto nomeProjeto={elem.nomeProjeto} resourceProjeto={elem.resourceProjeto} /> 
                             </div>
                         </div>
                     </div>;

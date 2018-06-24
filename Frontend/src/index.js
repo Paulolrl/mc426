@@ -14,6 +14,7 @@ import AppCriarProjeto from './appcriarprojeto'
 import AppDetalheEquipe from './appdetalheequipe'
 import AppTarefas from './apptarefas'
 import AppCriarTarefa from './appcriartarefa'
+import AppDecideProjeto from './appdecideprojeto'
 // There's no special libraries or javascript layout systems, just code written for you.
 
 render((
@@ -21,11 +22,12 @@ render((
   <Switch>
       <Route exact path="/" component={AppLogin} />
       <Route exact path="/equipes" component={AppEquipes} />
-      <Route exact path="/tarefas" component={AppTarefas} />
+      <Route exact path="/tarefas" component={AppDecideProjeto} />
       <Route exact path="/projetos" component={AppProjetos} />
       <Route path="/equipes/nova" component={AppCriarEquipe} />
       <Route path="/projetos/novo" component={AppCriarProjeto} />
-      <Route path="/tarefas/nova" component={AppCriarTarefa} />
       <Route exact path="/equipes/:idEquipe([0-9]{1,40})" component={AppDetalheEquipe} />
+      <Route exact path="/projetos/:idProjeto([0-9]{1,40})/tarefas" component={AppTarefas} />
+      <Route exact path="/projetos/:idProjeto([0-9]{1,40})/tarefas/nova" component={AppCriarTarefa} />
   </Switch>
 </Router>    ), document.getElementById('root'));
