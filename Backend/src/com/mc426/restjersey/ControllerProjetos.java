@@ -199,7 +199,7 @@ public class ControllerProjetos {
 			Matcher matcher = pattern.matcher(jsonBody.getString("prazo"));
 
 			if (!matcher.find()) {
-				resposta = "Formato de prazo nï¿½o aceito.";
+				resposta = "Formato de prazo não aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 
@@ -301,53 +301,6 @@ public class ControllerProjetos {
 			return Response.status(500).entity(resposta).build();
 		}
 	}
-	
-	@POST
-	@Path("/{idProjeto}/tarefas/{idTarefa}/status")
-	@Produces("application/json")
-	public Response UpdateStatus(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto,
-			@PathParam("idTarefa") int idTarefa, String body) {
-		String resposta;
-		try {
-			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				resposta = "Forneca um Header do tipo Authorization.";
-				return Response.status(401).entity(resposta).build();
-			}
-
-			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
-
-			if (usuario == null) {
-				resposta = "Usuario nao encontrado.";
-				return Response.status(401).entity(resposta).build();
-			}
-
-			Projeto projeto = Projeto.getPorId(idProjeto);
-
-			if (projeto == null) {
-				resposta = "Projeto nao encontrado";
-				return Response.status(404).entity(resposta).build();
-			}
-
-			Tarefa tarefa = Tarefa.getPorId(idTarefa);
-
-			if (tarefa == null) {
-				resposta = "Tarefa nao encontrada";
-				return Response.status(404).entity(resposta).build();
-			}
-			
-			JSONObject jBody = new JSONObject(body);
-			tarefa.adicionarStatus(jBody.getInt("porcentagem"), jBody.getString("texto"));
-
-			return Response.status(201).entity(tarefa.toJson().toString()).build();
-
-		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			resposta = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(resposta).build();
-		}
-	}
 
 	@GET
 	@Path("/{idProjeto}/tarefas/{idTarefa}")
@@ -383,6 +336,106 @@ public class ControllerProjetos {
 			}
 
 			return Response.status(200).entity(tarefa.toJson().toString()).build();
+
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+	
+	@POST
+	@Path("/{idProjeto}/tarefas/{idTarefa}")
+	@Produces("application/json")
+	public Response UpdateTarefa(@Context HttpHeaders httpheaders, @PathParam("idProjeto") int idProjeto,
+			@PathParam("idTarefa") int idTarefa, String body) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Projeto projeto = Projeto.getPorId(idProjeto);
+
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			Tarefa tarefa = Tarefa.getPorId(idTarefa);
+
+			if (tarefa == null) {
+				resposta = "Tarefa nao encontrada";
+				return Response.status(404).entity(resposta).build();
+			}
+			
+			JSONObject jsonBody = new JSONObject(body);
+			String nome = jsonBody.getString("nome");
+			String descricao = jsonBody.getString("descricao");
+			
+			String prazo = jsonBody.getString("prazo");
+			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
+			Matcher matcher = pattern.matcher(prazo);
+
+			if (!matcher.find()) {
+				resposta = "Formato de prazo não aceito.";
+				return Response.status(400).entity(resposta).build();
+			}
+			
+			JSONArray jArray = jsonBody.getJSONArray("tags");
+			List<String> tags = new ArrayList<String>();
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++) {
+					tags.add(jArray.getString(i));
+				}
+			}
+			
+			jArray = jsonBody.getJSONArray("dependencias");
+			List<Tarefa> dependencias = new ArrayList<Tarefa>();
+			Tarefa dependencia;
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++) {
+					dependencia = Tarefa.getPorResource(jArray.getString(i));
+					if (tarefa == null) {
+						resposta = "Tarefa nao encontrado para adicionar como dependencia";
+						return Response.status(404).entity(resposta).build();
+					}
+					dependencias.add(dependencia);
+				}
+			}
+			
+			jArray = jsonBody.getJSONArray("responsaveis");
+			List<Usuario> responsaveis = new ArrayList<Usuario>();
+			Usuario responsavel;
+			if (jArray != null) {
+				for (int i = 0; i < jArray.length(); i++) {
+					responsavel = Usuario.getPorResource(jArray.getString(i));
+					if (responsavel == null) {
+						resposta = "Usuario nao encontrado para adicionar na tarefa";
+						return Response.status(404).entity(resposta).build();
+					}
+					responsaveis.add(responsavel);
+
+				}
+			}
+			tarefa.setNome(nome);
+			tarefa.setDescricao(descricao);
+			tarefa.setPrazo(prazo);
+			tarefa.setTags(tags);
+			tarefa.alteraResponsaveis(responsaveis);
+			tarefa.alteraDependencias(dependencias);		
+			
+			return Response.status(201).entity(tarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
