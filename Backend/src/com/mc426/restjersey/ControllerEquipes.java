@@ -41,7 +41,8 @@ public class ControllerEquipes {
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
-
+			String nome = jsonBody.getString("nome");
+			Gerente gerente = (Gerente) usuario;
 			List<Usuario> membros = new ArrayList<Usuario>();
 			JSONArray arr = jsonBody.optJSONArray("membros");
 			Usuario membro;
@@ -55,9 +56,8 @@ public class ControllerEquipes {
 					membros.add(membro);				
 				}
 			}
-
-			// TODO Gerente tem um metodo criar equipe que deveria ser usado em vez do construtor
-			Equipe equipe = new Equipe(jsonBody.getString("nome"), membros, (Gerente) usuario);
+			
+			Equipe equipe = gerente.criarNovaEquipe(nome, membros, gerente);
 
 			return Response.status(201).entity(equipe.toJson().toString()).build();
 		} catch (Exception e) {
@@ -89,13 +89,16 @@ public class ControllerEquipes {
 			}
 
 			Equipe equipe = Equipe.getPorId(id);
-
+			
 			if (equipe == null ||equipe.getNome().equals("dummy")) {
 				resposta = "Equipe nao encontrada";
 				return Response.status(404).entity(resposta).build();
 			}
-
-			// TODO Verificar se o usuario esta na equipe antes de fazer isso
+			
+			if (!usuario.getEquipes().contains(equipe)) {
+				resposta = "Usuario nao faz parte da equipe";
+				return Response.status(401).entity(resposta).build();
+			}
 
 			return Response.status(200).entity(equipe.toJson().toString()).build();
 
@@ -154,6 +157,11 @@ public class ControllerEquipes {
 				if (!membros.contains(u)) {
 					membrosRemovidos.add(u);
 				}
+			}
+			
+			if (membrosRemovidos.contains(usuario)) {
+				resposta = "Dono da equipe nao pode ser removido";
+				return Response.status(401).entity(resposta).build();
 			}
 			
 			equipe.adicionarMembros(membrosNovos);

@@ -9,8 +9,8 @@ public class Gerente extends Usuario {
 		super(userName, senha, nome);
 	}
 
-	public void criarNovaEquipe(String nome, List<Usuario> integrantes, Gerente dono) throws Exception {
-		new Equipe(nome, integrantes, dono);
+	public Equipe criarNovaEquipe(String nome, List<Usuario> integrantes, Gerente dono) throws Exception {
+		return new Equipe(nome, integrantes, dono);
 	}
 
 	public Projeto criarNovoProjeto(String nome, String descricao, String prazo, Gerente dono, List<Equipe> equipes)

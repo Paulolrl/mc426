@@ -99,6 +99,10 @@ public class Usuario {
 	public String getUserName() {
 		return this.userName;
 	}
+	
+	public List<Equipe> getEquipes(){
+		return this.equipes;
+	}
 
 	public void incluiEquipe(Equipe equipe) throws Exception {
 		if (!equipes.contains(equipe)) {
