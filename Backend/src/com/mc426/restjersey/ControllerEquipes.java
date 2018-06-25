@@ -56,6 +56,7 @@ public class ControllerEquipes {
 				}
 			}
 
+			// TODO Gerente tem um metodo criar equipe que deveria ser usado em vez do construtor
 			Equipe equipe = new Equipe(jsonBody.getString("nome"), membros, (Gerente) usuario);
 
 			return Response.status(201).entity(equipe.toJson().toString()).build();
@@ -93,6 +94,8 @@ public class ControllerEquipes {
 				resposta = "Equipe nao encontrada";
 				return Response.status(404).entity(resposta).build();
 			}
+
+			// TODO Verificar se o usuario esta na equipe antes de fazer isso
 
 			return Response.status(200).entity(equipe.toJson().toString()).build();
 

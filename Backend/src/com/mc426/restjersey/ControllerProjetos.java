@@ -44,8 +44,10 @@ public class ControllerProjetos {
 
 			JSONObject jsonBody = new JSONObject(body);
 
+			// TODO Gerente tem um metodo criar projeto que deveria ser usado em vez do construtor
 			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"),
 					jsonBody.getString("prazo"), (Gerente) usuario);
+			// TODO Gerente tem um metodo criar equipe que deveria ser usado em vez do construtor
 			List<Usuario> dummy = new ArrayList<Usuario>();
 			Equipe equipe = new Equipe("dummy",dummy, (Gerente) usuario);
 			equipe.adicionarProjeto(projeto);
@@ -104,6 +106,7 @@ public class ControllerProjetos {
 
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 
+			// TODO verificar se o usuario faz parte do projeto antes de fazer
 			if (usuario == null) {
 				resposta = "Usuario nao encontrado.";
 				return Response.status(401).entity(resposta).build();
@@ -194,12 +197,14 @@ public class ControllerProjetos {
 				return Response.status(404).entity(resposta).build();
 			}
 
+			// TODO verificar se o usuario faz parte do projeto antes de fazer
+
 			JSONObject jsonBody = new JSONObject(body);
 			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
 			Matcher matcher = pattern.matcher(jsonBody.getString("prazo"));
 
 			if (!matcher.find()) {
-				resposta = "Formato de prazo não aceito.";
+				resposta = "Formato de prazo nï¿½o aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 
@@ -235,7 +240,7 @@ public class ControllerProjetos {
 						resposta = "Usuario nao encontrado para adicionar no projeto";
 						return Response.status(404).entity(resposta).build();
 					}else if (!responsavel.participaProjeto(projeto)){
-						resposta = "Usuario nao está no projeto";
+						resposta = "Usuario nao estï¿½ no projeto";
 						return Response.status(400).entity(resposta).build();
 					}
 					responsaveis.add(responsavel);
@@ -281,6 +286,7 @@ public class ControllerProjetos {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
+			// TODO verificar se o usuario faz parte do projeto antes de fazer
 
 			Tarefa tarefa = Tarefa.getPorId(idTarefa);
 
@@ -330,6 +336,7 @@ public class ControllerProjetos {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
+			// TODO verificar se o usuario faz parte do projeto antes de fazer
 
 			Tarefa tarefa = Tarefa.getPorId(idTarefa);
 
@@ -381,6 +388,8 @@ public class ControllerProjetos {
 				resposta = "Tarefa nao encontrada";
 				return Response.status(404).entity(resposta).build();
 			}
+
+			// TODO verificar se o usuario faz parte do projeto antes de fazer
 			
 			JSONObject jsonBody = new JSONObject(body);
 			String nome = jsonBody.getString("nome");
@@ -391,7 +400,7 @@ public class ControllerProjetos {
 			Matcher matcher = pattern.matcher(prazo);
 
 			if (!matcher.find()) {
-				resposta = "Formato de prazo não aceito.";
+				resposta = "Formato de prazo nï¿½o aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 			
@@ -518,6 +527,8 @@ public class ControllerProjetos {
 			}
 
 			Projeto projeto = Projeto.getPorId(idProjeto);
+
+			// TODO verificar se o usuario eh o dono da equipe antes de fazer
 
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
