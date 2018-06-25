@@ -23,7 +23,7 @@ function render() {
                     <div className="tarefadetalhada-text_3">{"Prazo:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.prazo} className="tarefadetalhada-prazo-0" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="tarefadetalhada-prazo-0" /> 
         </div>
         <div className="tarefadetalhada-2">
             <div className="tarefadetalhada-2-0">
