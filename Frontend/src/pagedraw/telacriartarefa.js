@@ -19,7 +19,7 @@ function render() {
                 <Barratarefas listaTarefas={[]} /> 
             </div>
             <div className="telacriartarefa-adicionartarefa_instance-9">
-                <Adicionartarefa nomeTarefa={this.props.nomeTarefa} tags={this.props.tags} descricao={this.props.descricao} responsaveis={this.props.responsaveis} data={this.props.data} handleClick={this.props.handleClick} setNomeTarefa={this.props.setNomeTarefa} setTags={this.props.setTags} setDescricao={this.props.setDescricao} setResponsaveis={this.props.setResponsaveis} setPrazo={this.props.setPrazo} /> 
+                <Adicionartarefa nomeTarefa={this.props.nomeTarefa} tags={this.props.tags} descricao={this.props.descricao} responsaveis={this.props.responsaveis} data={this.props.data} handleClick={this.props.handleClick} setNomeTarefa={this.props.setNomeTarefa} setTags={this.props.setTags} setDescricao={this.props.setDescricao} setResponsaveis={this.props.setResponsaveis} setPrazo={this.props.setPrazo} dependencias={this.props.dependencias} setDependencias={this.props.setDependencias} /> 
             </div>
             <div className="telacriartarefa-barraagenda_instance_2">
                 <Barraagenda /> 

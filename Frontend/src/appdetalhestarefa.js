@@ -17,6 +17,7 @@ export default class AppDetalhesTarefa extends Component {
         prazo={this.state.prazo}
         responsaveis={this.state.responsaveis}
         descricaoProgresso={this.state.descricaoProgresso}
+        descricaoTarefa={this.state.descricaoTarefa}
         numeroProgresso={this.state.numeroProgresso}
         nomeTarefa={this.state.nomeTarefa}
         feedbackInput={this.state.feedbackInput}
@@ -33,6 +34,7 @@ export default class AppDetalhesTarefa extends Component {
         setDescricao={this.setDescricao}
         setNovoFeedback={this.setNovoFeedback}
         setNovoRating={this.setNovoRating}
+        setDescricaoTarefa={this.setDescricaoTarefa}
         handleClickSalvar={this.handleClickSalvar}
         handleClickEnviar={this.handleClickEnviar}
       />
@@ -79,6 +81,12 @@ export default class AppDetalhesTarefa extends Component {
     })
   }
 
+  setDescricaoTarefa (value) {
+    this.setState({
+      descricaoTarefa: value
+    })
+  }
+
   setNovoRating (value) {
     this.setState({
       ratingInput: value
@@ -101,13 +109,13 @@ export default class AppDetalhesTarefa extends Component {
       },
       body: JSON.stringify({
         nome: this.state.nomeTarefa,
-        descricao: this.state.descricaoTarefa, // TODO
+        descricao: this.state.descricaoTarefa,
         prazo: this.state.prazo,
         tags: this.state.tags.split(/[ ,]/).filter(function (el) { return el.length !== 0 }),
         responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x),
-        dependencias: [], // TODO
+        dependencias: this.state.dependencias.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/projetos/' + this.state.idProjeto + '/tarefas/' + x),
         progresso: {
-          texto: this.state.descricaoProgresso, // TODO back
+          texto: this.state.descricaoProgresso,
           porcentagem: this.state.numeroProgresso
         }
       })
@@ -158,6 +166,7 @@ export default class AppDetalhesTarefa extends Component {
     this.setDescricao = this.setDescricao.bind(this)
     this.setNovoFeedback = this.setNovoFeedback.bind(this)
     this.setNovoRating = this.setNovoRating.bind(this)
+    this.setDescricaoTarefa = this.setDescricaoTarefa.bind(this)
     this.handleClickSalvar = this.handleClickSalvar.bind(this)
     this.handleClickEnviar = this.handleClickEnviar.bind(this)
     this.state = {
@@ -211,7 +220,7 @@ export default class AppDetalhesTarefa extends Component {
         listaFeedbacks: response.feedbacks.map(x => ({ autor: x.autor.substring('/usuarios/'.length), comentario: x.comentario, nota: x.nota })),
         numeroProgresso: response.progresso.porcentagem,
         descricaoProgresso: response.progresso.texto,
-        dependencias: response.dependencias,
+        dependencias: response.dependencias.map(x => x.substring(('/projetos/' + this.state.idProjeto + '/tarefas/').length)).join(', '),
         tags: response.tags.join(', '),
         'corProgresso': this.toColor(response.progresso.porcentagem),
         'responsaveis': response.responsaveis.map(x => x.substring('/usuarios/'.length)).join(', ')

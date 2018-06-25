@@ -66,6 +66,6 @@ export default class AppDetalheEquipe extends Component {
         'Content-Type': 'application/json'
       }
     }).then(response => response.json())
-      .then(response => this.setState({ 'nomeEquipe': response.nome + ' (' + response.id + ')', 'membrosEquipe': response.membros.map(x => x.substring('/usuarios/'.length)) }))
+      .then(response => this.setState({ 'nomeEquipe': response.nome + ' (' + response.id + ')', 'membrosEquipe': response.membros.map(x => x.substring('/usuarios/'.length)).join(', ') }))
   }
 };

@@ -23,7 +23,7 @@ function render() {
                     <div className="tarefadetalhada-text_3">{"Prazo:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="tarefadetalhada-prazo-0" /> 
+            <input type="text" placeholder="aaaa-mm-dd" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="tarefadetalhada-prazo-0" /> 
         </div>
         <div className="tarefadetalhada-2">
             <div className="tarefadetalhada-2-0">
@@ -33,17 +33,17 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.responsaveis} onChange={(e) => this.props.setResponsaveis(e.target.value)} className="tarefadetalhada-responsaveis-1" /> 
+            <input type="text" placeholder="usuario1, usuario2" value={this.props.responsaveis} onChange={(e) => this.props.setResponsaveis(e.target.value)} className="tarefadetalhada-responsaveis-1" /> 
         </div>
         <div className="tarefadetalhada-3">
             <div className="tarefadetalhada-3-0">
                 <div className="tarefadetalhada-3-0-0">
                     <div className="tarefadetalhada-text_2">
-                        {"Duração Esperada:"}
+                        {"Descrição:"}
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.duracao} onChange={(e) => this.props.setDuracao(e.target.value)} className="tarefadetalhada-duracao-5" /> 
+            <textarea placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia dui leo, lobortis pulvinar est hendrerit at." value={this.props.descricaoTarefa} onChange={(e) => this.props.setDescricaoTarefa(e.target.value)} className="tarefadetalhada-duracao-5" /> 
         </div>
         <div className="tarefadetalhada-4">
             <div className="tarefadetalhada-4-0">
@@ -51,7 +51,7 @@ function render() {
                     <div className="tarefadetalhada-text_6">{"Tags:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.tags} onChange={(e) => this.props.setTags(e.target.value)} className="tarefadetalhada-text_input_5" /> 
+            <input type="text" placeholder="tag1, tag2" value={this.props.tags} onChange={(e) => this.props.setTags(e.target.value)} className="tarefadetalhada-text_input_5" /> 
         </div>
         <div className="tarefadetalhada-5">
             <div className="tarefadetalhada-5-0">
@@ -61,7 +61,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.dependencias} onChange={(e) => this.props.setDependencias(e.target.value)} className="tarefadetalhada-dependencias-9" /> 
+            <input type="text" placeholder="13, 47, 58" value={this.props.dependencias} onChange={(e) => this.props.setDependencias(e.target.value)} className="tarefadetalhada-dependencias-9" /> 
         </div>
         <div className="tarefadetalhada-6">
             <div className="tarefadetalhada-6-0">
@@ -83,7 +83,7 @@ function render() {
             </div>
             <div className="tarefadetalhada-7-1">
                 <div className="tarefadetalhada-7-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.descricaoProgresso} onChange={(e) => this.props.setDescricao(e.target.value)} className="tarefadetalhada-dependencias-0" /> 
+                    <input type="text" placeholder="Em espera" value={this.props.descricaoProgresso} onChange={(e) => this.props.setDescricao(e.target.value)} className="tarefadetalhada-dependencias-0" /> 
                 </div>
             </div>
         </div>
@@ -105,11 +105,16 @@ function render() {
         <div className="tarefadetalhada-11">
             <div className="tarefadetalhada-11-0">
                 <div className="tarefadetalhada-11-0-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.ratingInput} onChange={(e) => this.props.setNovoRating(e.target.value)} className="tarefadetalhada-ratinginput-4" /> 
+                    <div className="tarefadetalhada-text_15">{"Nota:"}</div>
+                </div>
+            </div>
+            <div className="tarefadetalhada-11-1">
+                <div className="tarefadetalhada-11-1-0">
+                    <input type="text" placeholder="0-10" value={this.props.ratingInput} onChange={(e) => this.props.setNovoRating(e.target.value)} className="tarefadetalhada-ratinginput-4" /> 
                 </div>
             </div>
             <div className="tarefadetalhada-rectangle_20">
-                <div className="tarefadetalhada-11-1-0">
+                <div className="tarefadetalhada-11-2-0">
                     <div onClick={this.props.handleClickEnviar} className="tarefadetalhada-botaoenviar-3">
                         <Componentebotao textoBotao={"Enviar"} /> 
                     </div>

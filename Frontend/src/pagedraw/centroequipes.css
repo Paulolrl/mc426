@@ -9,31 +9,31 @@
 
 .centroequipes-0 {
     display: flex;
-    padding-left: 27px;
+    padding-left: 62px;
 }
 
 .centroequipes-text_1 {
     display: flex;
     flex-direction: column;
-    padding-top: 17px;
-    padding-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     flex-shrink: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 32px;
-    line-height: 36px;
+    font-size: 24px;
+    line-height: 27px;
     letter-spacing: 0px;
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
     text-decoration: none;
     text-align: left;
     word-wrap: break-word;
-    padding-right: 0.357635498046875px;
+    padding-right: 0.6458358764648438px;
 }
 
 .centroequipes-0-1 {
     flex-shrink: 0;
-    margin-left: 318px;
+    margin-left: 305px;
     display: flex;
 }
 
@@ -51,7 +51,7 @@
     flex-basis: 0px;
     min-height: fit-content;
     margin-top: 25px;
-    padding-left: 38px;
+    padding-left: 39px;
     padding-right: 46px;
 }
 
@@ -99,7 +99,7 @@
 .centroequipes-1-1 {
     display: flex;
     flex-direction: column;
-    margin-left: 35px;
+    margin-left: 34px;
 }
 
 .centroequipes-1-1-0 {

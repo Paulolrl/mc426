@@ -12,10 +12,14 @@ function render() {
             </div>
         </div>
         <div className="detalhesprojeto-1">
-            <div className="detalhesprojeto-text_22">
-                {"Descrição:"}
+            <div className="detalhesprojeto-1-0">
+                <div className="detalhesprojeto-1-0-0">
+                    <div className="detalhesprojeto-text_22">
+                        {"Descrição:"}
+                    </div>
+                </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.descricao} onChange={(e) => this.props.setDescricao(e.target.value)} className="detalhesprojeto-descricao-7" /> 
+            <textarea placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia dui leo, lobortis pulvinar est hendrerit at." value={this.props.descricao} onChange={(e) => this.props.setDescricao(e.target.value)} className="detalhesprojeto-descricao-7" /> 
         </div>
         <div className="detalhesprojeto-2">
             <div className="detalhesprojeto-2-0">
@@ -23,7 +27,7 @@ function render() {
                     <div className="detalhesprojeto-text_23">{"Equipes:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.idEquipes} onChange={(e) => this.props.setIdEquipes(e.target.value)} className="detalhesprojeto-idequipes-7" /> 
+            <input type="text" placeholder="1, 32, 41" value={this.props.idEquipes} onChange={(e) => this.props.setIdEquipes(e.target.value)} className="detalhesprojeto-idequipes-7" /> 
         </div>
         <div className="detalhesprojeto-3">
             <div className="detalhesprojeto-3-0">
@@ -31,11 +35,15 @@ function render() {
                     <div className="detalhesprojeto-text_24">{"Prazo:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="detalhesprojeto-prazo-6" /> 
+            <input type="text" placeholder="aaaa-mm-dd" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="detalhesprojeto-prazo-6" /> 
         </div>
         <div className="detalhesprojeto-4">
-            <div onClick={this.props.handleClick} className="detalhesprojeto-botaosalvar-2">
-                <Componentebotao textoBotao={"Salvar"} /> 
+            <div className="detalhesprojeto-rectangle_2">
+                <div className="detalhesprojeto-4-0-0">
+                    <div onClick={this.props.handleClick} className="detalhesprojeto-botaosalvar-2">
+                        <Componentebotao textoBotao={"Salvar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;

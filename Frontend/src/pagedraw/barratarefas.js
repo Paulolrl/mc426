@@ -10,10 +10,16 @@ function render() {
             <div className="barratarefas-rectangle_19">
                 <div className="barratarefas-0-0-0">
                     <div className="barratarefas-0-0-0-0">
-                        <div className="barratarefas-0-0-0-0-0">
+                        <div className="barratarefas-text_1">Minhas Tarefas</div>
+                    </div>
+                    <div className="barratarefas-0-0-0-1">
+                        <div className="barratarefas-line_7" /> 
+                    </div>
+                    <div className="barratarefas-0-0-0-2">
+                        <div className="barratarefas-0-0-0-2-0">
                             { this.props.listaTarefas.map((elem, i) => {
                                 return <div key={i} className="barratarefas-rectangle_1">
-                                    <div className="barratarefas-0-0-0-0-0-0-0-0">
+                                    <div className="barratarefas-0-0-0-2-0-0-0-0">
                                         <div className="barratarefas-tarefabarratarefas_instance-4">
                                             <Tarefabarratarefas nomeTarefa={elem.nomeTarefa} progresso={elem.progresso} descricao={elem.descricao} prazo={elem.prazo} resourceTarefa={elem.resourceTarefa} /> 
                                         </div>
@@ -22,7 +28,7 @@ function render() {
                             }) }
                         </div>
                     </div>
-                    <div className="barratarefas-0-0-0-1" /> 
+                    <div className="barratarefas-0-0-0-3" /> 
                 </div>
             </div>
         </div>

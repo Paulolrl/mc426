@@ -19,7 +19,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" className="adicionarrepositorio-barranome-7" /> 
+            <input type="text" value={this.props.nome} className="adicionarrepositorio-nome-7" /> 
         </div>
         <div className="adicionarrepositorio-2">
             <div className="adicionarrepositorio-2-0">
@@ -29,7 +29,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" className="adicionarrepositorio-barralink-4" /> 
+            <input type="text" value={this.props.link} className="adicionarrepositorio-link-4" /> 
         </div>
         <div className="adicionarrepositorio-3">
             <div className="adicionarrepositorio-componentebotao_instance-3">

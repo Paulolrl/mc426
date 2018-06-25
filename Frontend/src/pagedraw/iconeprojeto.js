@@ -6,16 +6,20 @@ import './iconeprojeto.css';
 function render() {
     return <div onClick={() => { window.location = this.props.resourceProjeto; }} className="iconeprojeto-iconeprojeto-5">
         <div className="iconeprojeto-0">
-            <img src="https://ucarecdn.com/395b48e3-ac67-417c-8e48-139d652bcd82/" className="iconeprojeto-imagemprojeto-9" /> 
-        </div>
-        <div className="iconeprojeto-1">
-            <div className="iconeprojeto-resourceprojeto-0">
-                { this.props.resourceProjeto }
-            </div>
-        </div>
-        <div className="iconeprojeto-2">
-            <div className="iconeprojeto-nomeprojeto-0">
-                { this.props.nomeProjeto }
+            <div className="iconeprojeto-rectangle_2">
+                <div className="iconeprojeto-0-0-0">
+                    <img src="https://ucarecdn.com/395b48e3-ac67-417c-8e48-139d652bcd82/" className="iconeprojeto-imagemprojeto-9" /> 
+                </div>
+                <div className="iconeprojeto-0-0-1">
+                    <div className="iconeprojeto-nomeprojeto-0">
+                        { this.props.nomeProjeto }
+                    </div>
+                </div>
+                <div className="iconeprojeto-0-0-2">
+                    <div className="iconeprojeto-resourceprojeto-0">
+                        { this.props.resourceProjeto }
+                    </div>
+                </div>
             </div>
         </div>
     </div>;

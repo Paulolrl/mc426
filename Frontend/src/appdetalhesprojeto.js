@@ -37,18 +37,18 @@ export default class AppDetalhesProjeto extends Component {
         prazo: this.state.prazo
       })
     })
-    if (this.state.idEquipes !== '') {
-      let responseJson = await response1.json()
-      await window.fetch(apiUrl + '/projetos/' + responseJson.id + '/equipes/', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Basic ' + authorizationBasic
-        },
-        body: JSON.stringify({
-          equipes: this.state.idEquipes.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/equipes/' + x)
-        })
+
+    console.log(this.state.idEquipes)
+    let responseJson = await response1.json()
+    await window.fetch(apiUrl + '/projetos/' + responseJson.id + '/equipes/', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      },
+      body: JSON.stringify({
+        equipes: this.state.idEquipes.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/equipes/' + x)
       })
-    }
+    })
     window.location = '/projetos'
   }
 
@@ -109,6 +109,6 @@ export default class AppDetalhesProjeto extends Component {
       .then(response => this.setState({ 'nomeProjeto': response.nome,
         'descricao': response.descricao,
         'prazo': response.prazo,
-        'idEquipes': response.equipes.map(x => x.substring('/equipes/'.length))}))
+        'idEquipes': response.equipes.map(x => x.substring('/equipes/'.length)).join(', ')}))
   }
 };

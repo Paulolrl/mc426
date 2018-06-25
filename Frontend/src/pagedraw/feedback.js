@@ -9,18 +9,29 @@ function render() {
             <div className="feedback-line_2" /> 
         </div>
         <div className="feedback-1">
-            <div className="feedback-autor-3">
-                { this.props.autor }
+            <div className="feedback-1-0">
+                <div className="feedback-1-0-0">
+                    <div className="feedback-autor-3">
+                        { this.props.autor }
+                    </div>
+                </div>
+            </div>
+            <div className="feedback-1-1">
+                <div className="feedback-1-1-0">
+                    <div className="feedback-text_1">{"Nota:"}</div>
+                </div>
+            </div>
+            <div className="feedback-1-2">
+                <div className="feedback-1-2-0">
+                    <div className="feedback-ratingfeedback-4">
+                        { this.props.ratingFeedback }
+                    </div>
+                </div>
             </div>
         </div>
         <div className="feedback-2">
             <div className="feedback-textofeedback-8">
                 { this.props.textoFeedback }
-            </div>
-        </div>
-        <div className="feedback-3">
-            <div className="feedback-ratingfeedback-4">
-                { this.props.ratingFeedback }
             </div>
         </div>
     </div>;

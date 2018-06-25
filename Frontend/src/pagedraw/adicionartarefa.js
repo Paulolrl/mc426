@@ -53,13 +53,21 @@ function render() {
                     <div className="adicionartarefa-text_31">{"Prazo:"}</div>
                 </div>
             </div>
-            <div className="adicionartarefa-5-1">
-                <div className="adicionartarefa-5-1-0">
-                    <input type="text" placeholder="aaaa-mm-dd" value={this.props.data} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionartarefa-data-6" /> 
+            <input type="text" placeholder="aaaa-mm-dd" value={this.props.data} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionartarefa-data-6" /> 
+        </div>
+        <div className="adicionartarefa-6">
+            <div className="adicionartarefa-6-0">
+                <div className="adicionartarefa-6-0-0">
+                    <div className="adicionartarefa-text_30">
+                        {"Dependências:"}
+                    </div>
                 </div>
             </div>
+            <input type="text" placeholder="32, 47, 58" value={this.props.dependencias} onChange={(e) => this.props.setDependencias(e.target.value)} className="adicionartarefa-responsaveis-8" /> 
+        </div>
+        <div className="adicionartarefa-7">
             <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
-                <div className="adicionartarefa-5-2-0">
+                <div className="adicionartarefa-7-0-0">
                     <div className="adicionartarefa-botaosalvar-4">
                         <Componentebotao textoBotao={"Salvar"} /> 
                     </div>

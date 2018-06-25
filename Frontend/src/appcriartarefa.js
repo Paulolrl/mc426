@@ -22,6 +22,7 @@ export default class AppCriarTarefa extends Component {
         setResponsaveis={this.setResponsaveis}
         setPrazo={this.setPrazo}
         nomeUsuario={this.state.nomeUsuario}
+        setDependencias={this.setDependencias}
       />
     )
   }
@@ -41,7 +42,7 @@ export default class AppCriarTarefa extends Component {
         descricao: this.state.descricao,
         prazo: this.state.data,
         responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x),
-        dependencias: [],
+        dependencias: this.state.dependencias.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/projetos/' + this.state.idProjeto + '/tarefas/' + x),
         tags: this.state.tags.split(/[ ,]/).filter(function (el) { return el.length !== 0 }),
         arquivos: []
       })
@@ -79,6 +80,12 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
+  setDependencias (value) {
+    this.setState({
+      dependencias: value
+    })
+  }
+
   constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -87,6 +94,7 @@ export default class AppCriarTarefa extends Component {
     this.setTags = this.setTags.bind(this)
     this.setResponsaveis = this.setResponsaveis.bind(this)
     this.setPrazo = this.setPrazo.bind(this)
+    this.setDependencias = this.setDependencias.bind(this)
 
     this.state = {
       nomeUsuario: window.localStorage.getItem('usuarioADA'),
@@ -95,6 +103,7 @@ export default class AppCriarTarefa extends Component {
       tags: '',
       responsaveis: '',
       data: '',
+      dependencias: '',
       idProjeto: '' + this.props.match.params.idProjeto
     }
   }

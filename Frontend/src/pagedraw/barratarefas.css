@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: 8px;
+    padding-top: 20px;
     position: absolute;
     width: 100%;
     min-height: 100%;
@@ -31,9 +31,45 @@
 
 .barratarefas-0-0-0-0 {
     display: flex;
+    padding-left: 11px;
+    padding-right: 95px;
 }
 
-.barratarefas-0-0-0-0-0 {
+.barratarefas-text_1 {
+    width: 180px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    line-height: 27px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.barratarefas-0-0-0-1 {
+    display: flex;
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+.barratarefas-line_7 {
+    width: 266px;
+    height: 1px;
+    flex-shrink: 0;
+    background: #D8D8D8;
+}
+
+.barratarefas-0-0-0-2 {
+    display: flex;
+    margin-top: 14px;
+}
+
+.barratarefas-0-0-0-2-0 {
     display: flex;
     flex-direction: column;
 }
@@ -44,7 +80,7 @@
     flex-grow: 1;
 }
 
-.barratarefas-0-0-0-0-0-0-0-0 {
+.barratarefas-0-0-0-2-0-0-0-0 {
     display: flex;
     padding-right: 22px;
 }
@@ -56,7 +92,7 @@
     min-height: 143px;
 }
 
-.barratarefas-0-0-0-1 {
+.barratarefas-0-0-0-3 {
     flex-grow: 1;
     flex-basis: 0px;
 }
