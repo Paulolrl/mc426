@@ -16,16 +16,18 @@ function render() {
                     </div>
                 </div>
             </div>
-            <a href="/tarefas/nova" className="centrotarefas-0-1">
-                <div className="centrotarefas-botaoadicionarprojeto-3">
-                    <Componentebotao textoBotao={"Adicionar Tarefa"} /> 
+            <div onClick={() => { window.location += "/nova" }} className="centrotarefas-rectangle_1">
+                <div className="centrotarefas-0-1-0">
+                    <div className="centrotarefas-botaoadicionarprojeto-3">
+                        <Componentebotao textoBotao={"Adicionar Tarefa"} /> 
+                    </div>
                 </div>
-            </a>
+            </div>
         </div>
         <div className="centrotarefas-1">
             <div className="centrotarefas-1-0">
                 { this.props.listaTarefas.map((elem, i) => {
-                    return <div key={i} className="centrotarefas-rectangle_1">
+                    return <div key={i} className="centrotarefas-rectangle_15">
                         <div className="centrotarefas-1-0-0-0-0">
                             <div className="centrotarefas-tarefareduzida_instance-4">
                                 <Tarefareduzida nomeTarefa={elem.nomeTarefa} progresso={elem.corProgresso} prazo={elem.prazo} responsaveis={elem.responsaveis} /> 

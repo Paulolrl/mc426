@@ -19,7 +19,7 @@ function render() {
                 <Barratarefas /> 
             </div>
             <div className="teladetalhesprojeto-detalhesprojeto_instance-5">
-                <Detalhesprojeto /> 
+                <Detalhesprojeto descricao={""} idEquipes={""} prazo={""} text={""} handleClick={""} /> 
             </div>
             <div className="teladetalhesprojeto-barraagenda_instance_2">
                 <Barraagenda /> 

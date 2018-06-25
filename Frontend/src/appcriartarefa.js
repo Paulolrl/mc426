@@ -32,14 +32,8 @@ export default class AppCriarTarefa extends Component {
 
     async handleSubmit() {
         var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
-        let responseProjetos = await fetch(apiUrl + '/projetos/',{
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + authorizationBasic
-            }
-        });
-        let projetosJson = await responseProjetos.json();
-        let responsePost = await fetch(apiUrl + projetosJson.projetos[0] +'/tarefas/',{
+
+        let responsePost = await fetch(apiUrl + "/projetos/" + this.state.idProjeto +'/tarefas/',{
             method: 'POST',
             headers: {
                 'Authorization': 'Basic ' + authorizationBasic,
@@ -106,7 +100,8 @@ export default class AppCriarTarefa extends Component {
             tags: "",
             responsaveis: "",
             data: "",
-            nomeUsuario: ""
+            nomeUsuario: "",
+            idProjeto: "" + this.props.match.params.idProjeto
         };
     }
 
