@@ -533,12 +533,14 @@ public class ControllerProjetos {
 			}
 
 			Projeto projeto = Projeto.getPorId(idProjeto);
-
-			// TODO verificar se o usuario eh o dono da equipe antes de fazer
-
 			if (projeto == null) {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
+			}
+			
+			if (!usuario.participaProjeto(projeto)) {
+				resposta = "Usuario nao faz parte do projeto";
+				return Response.status(401).entity(resposta).build();
 			}
 
 			JSONObject jsonBody = new JSONObject(body);
