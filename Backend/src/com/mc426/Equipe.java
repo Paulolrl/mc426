@@ -90,7 +90,6 @@ public class Equipe {
 
 	public void removerMembros(List<Usuario> membros) throws Exception {
 		
-		// TODO nunca remover dono da equipe
 		for (Usuario membro : membros) {
 			if (usuarios.contains(membro)) {
 				usuarios.remove(membro);

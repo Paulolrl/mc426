@@ -1,6 +1,5 @@
 package com.mc426;
 
-import java.util.Date;
 import java.util.List;
 
 public class Gerente extends Usuario {
