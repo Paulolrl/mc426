@@ -116,7 +116,57 @@ public class Tarefa {
 	public List<String> getTags() {
 		return tags;
 	}
+	
+	public List<Usuario> getResponsaveis() {
+		return responsaveis;
+	}
 
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPrazo(String prazo) {
+		this.prazo = prazo;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+	
+	public void alteraResponsaveis(List<Usuario> novosResponsaveis) throws Exception{
+		for (Usuario u : novosResponsaveis){
+			if (!u.getTarefas().contains(this)) {
+				u.atribuiResponsabilidade(this);
+				responsaveis.add(u);
+			}
+		}
+
+		for (Usuario u : responsaveis){
+			if (!novosResponsaveis.contains(u)) {
+				u.removerResponsabilidade(this);
+				responsaveis.remove(u);
+			}
+		}
+	}
+	
+	public void alteraDependencias(List<Tarefa> novasDependencias) {
+		for (Tarefa t : novasDependencias) {
+			if(!dependencias.contains(t)) {
+				dependencias.add(t);
+			}
+		}
+		
+		for (Tarefa t: dependencias) {
+			if (!novasDependencias.contains(t)) {
+				dependencias.remove(t);
+			}
+		}
+	}
+	
 	public void removerTarefa() throws Exception {
 		for (Usuario responsavel : responsaveis) {
 			responsavel.removerResponsabilidade(this);
