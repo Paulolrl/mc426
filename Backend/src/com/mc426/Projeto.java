@@ -89,6 +89,18 @@ public class Projeto {
 		return prazo;
 	}
 	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPrazo(String prazo) {
+		this.prazo = prazo;
+	}
+
 	public void removerEquipe(Equipe equipe) throws Exception {
 		this.listaEquipes.remove(equipe);
 		equipe.removerProjeto(this);
