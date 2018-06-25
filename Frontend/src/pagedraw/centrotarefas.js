@@ -30,7 +30,7 @@ function render() {
                     return <div key={i} className="centrotarefas-rectangle_15">
                         <div className="centrotarefas-1-0-0-0-0">
                             <div className="centrotarefas-tarefareduzida_instance-4">
-                                <Tarefareduzida nomeTarefa={elem.nomeTarefa} progresso={elem.corProgresso} prazo={elem.prazo} responsaveis={elem.responsaveis} /> 
+                                <Tarefareduzida nomeTarefa={elem.nomeTarefa} progresso={elem.corProgresso} prazo={elem.prazo} responsaveis={elem.responsaveis} idTarefa={elem.idTarefa} /> 
                             </div>
                         </div>
                         <div className="centrotarefas-1-0-0-0-1">

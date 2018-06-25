@@ -38,6 +38,8 @@ export default class AppEquipes extends Component {
   }
 
   toColor (progresso) {
+    progresso = parseInt(progresso)
+    progresso = (30 + progresso) * (70 / 130.0)
     let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16)
     if (r.length === 1) { r = '0' + r }
     let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16)

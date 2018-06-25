@@ -33,7 +33,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.responsaveis} className="tarefadetalhada-responsaveis-1" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.responsaveis} onChange={(e) => this.props.setResponsaveis(e.target.value)} className="tarefadetalhada-responsaveis-1" /> 
         </div>
         <div className="tarefadetalhada-3">
             <div className="tarefadetalhada-3-0">
@@ -43,7 +43,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.duracao} className="tarefadetalhada-duracao-5" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.duracao} onChange={(e) => this.props.setDuracao(e.target.value)} className="tarefadetalhada-duracao-5" /> 
         </div>
         <div className="tarefadetalhada-4">
             <div className="tarefadetalhada-4-0">
@@ -51,7 +51,7 @@ function render() {
                     <div className="tarefadetalhada-text_6">{"Tags:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.tags} className="tarefadetalhada-text_input_5" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.tags} onChange={(e) => this.props.setTags(e.target.value)} className="tarefadetalhada-text_input_5" /> 
         </div>
         <div className="tarefadetalhada-5">
             <div className="tarefadetalhada-5-0">
@@ -61,7 +61,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Placeholder" value={this.props.dependencias} className="tarefadetalhada-dependencias-9" /> 
+            <input type="text" placeholder="Placeholder" value={this.props.dependencias} onChange={(e) => this.props.setDependencias(e.target.value)} className="tarefadetalhada-dependencias-9" /> 
         </div>
         <div className="tarefadetalhada-6">
             <div className="tarefadetalhada-6-0">
@@ -71,7 +71,7 @@ function render() {
                     </div>
                 </div>
             </div>
-            <input type="range" min="0" max="100" value={String(this.props.numeroProgresso)} className="tarefadetalhada-slider-8" /> 
+            <input type="range" min="0" max="100" value={String(this.props.numeroProgresso)} onChange={(e) => this.props.setProgresso(e.target.value)} className="tarefadetalhada-slider-8" /> 
         </div>
         <div className="tarefadetalhada-7">
             <div className="tarefadetalhada-7-0">
@@ -83,29 +83,37 @@ function render() {
             </div>
             <div className="tarefadetalhada-7-1">
                 <div className="tarefadetalhada-7-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.descricaoProgresso} className="tarefadetalhada-dependencias-0" /> 
+                    <input type="text" placeholder="Placeholder" value={this.props.descricaoProgresso} onChange={(e) => this.props.setDescricao(e.target.value)} className="tarefadetalhada-dependencias-0" /> 
                 </div>
             </div>
         </div>
         <div className="tarefadetalhada-8">
-            <div className="tarefadetalhada-botaosalvar-2">
-                <Componentebotao textoBotao={"Salvar"} /> 
+            <div className="tarefadetalhada-rectangle_2">
+                <div className="tarefadetalhada-8-0-0">
+                    <div onClick={this.props.handleClickSalvar} className="tarefadetalhada-botaosalvar-2">
+                        <Componentebotao textoBotao={"Salvar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
         <div className="tarefadetalhada-9">
             <div className="tarefadetalhada-text_1">Feedbacks</div>
         </div>
         <div className="tarefadetalhada-10">
-            <textarea placeholder="Escreva aqui seu feedback" value={this.props.feedbackInput} className="tarefadetalhada-feedbackinput-6" /> 
+            <textarea placeholder="Escreva aqui seu feedback" value={this.props.feedbackInput} onChange={(e) => this.props.setNovoFeedback(e.target.value)} className="tarefadetalhada-feedbackinput-6" /> 
         </div>
         <div className="tarefadetalhada-11">
             <div className="tarefadetalhada-11-0">
                 <div className="tarefadetalhada-11-0-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.ratingInput} className="tarefadetalhada-ratinginput-4" /> 
+                    <input type="text" placeholder="Placeholder" value={this.props.ratingInput} onChange={(e) => this.props.setNovoRating(e.target.value)} className="tarefadetalhada-ratinginput-4" /> 
                 </div>
             </div>
-            <div className="tarefadetalhada-botaoenviar-3">
-                <Componentebotao textoBotao={"Enviar"} /> 
+            <div className="tarefadetalhada-rectangle_20">
+                <div className="tarefadetalhada-11-1-0">
+                    <div onClick={this.props.handleClickEnviar} className="tarefadetalhada-botaoenviar-3">
+                        <Componentebotao textoBotao={"Enviar"} /> 
+                    </div>
+                </div>
             </div>
         </div>
         <div className="tarefadetalhada-12">
@@ -114,7 +122,7 @@ function render() {
                     return <div key={i} className="tarefadetalhada-rectangle_1">
                         <div className="tarefadetalhada-12-0-0-0-0">
                             <div className="tarefadetalhada-feedback_instance-9">
-                                <Feedback autor={elem.autor} textoFeedback={elem.textoFeedback} ratingFeedback={elem.ratingFeedback} /> 
+                                <Feedback autor={elem.autor} textoFeedback={elem.comentario} ratingFeedback={elem.nota} /> 
                             </div>
                         </div>
                     </div>;

@@ -8,7 +8,7 @@ function render() {
         <div className="tarefareduzida-0">
             <div className="tarefareduzida-0-0">
                 <div className="tarefareduzida-0-0-0">
-                    <div className="tarefareduzida-titulotarefa-1">
+                    <div onClick={() => { window.location += "/" + this.props.idTarefa; }} className="tarefareduzida-titulotarefa-1">
                         { this.props.nomeTarefa }
                     </div>
                 </div>
@@ -27,6 +27,13 @@ function render() {
                 <div className="tarefareduzida-1-1-0">
                     <div className="tarefareduzida-prazo-6">
                         { this.props.prazo }
+                    </div>
+                </div>
+            </div>
+            <div className="tarefareduzida-1-2">
+                <div className="tarefareduzida-1-2-0">
+                    <div className="tarefareduzida-text_3">
+                        { this.props.resourceTarefa }
                     </div>
                 </div>
             </div>

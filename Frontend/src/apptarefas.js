@@ -35,6 +35,7 @@ export default class AppTarefas extends Component {
     }
 
     this.handleResponse = this.handleResponse.bind(this)
+    this.toColor = this.toColor.bind(this)
     this.onChangeDropdown = this.onChangeDropdown.bind(this)
   }
 
@@ -42,6 +43,19 @@ export default class AppTarefas extends Component {
     if (data.value !== this.state.valueDropdown) {
       window.location = '/projetos/' + data.value + '/tarefas'
     }
+  }
+
+  toColor (progresso) {
+    progresso = parseInt(progresso)
+    progresso = (30 + progresso) * (70 / 130.0)
+    let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16)
+    if (r.length === 1) { r = '0' + r }
+    let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16)
+    if (g.length === 1) { g = '0' + g }
+    let rgb = '#' + r + g + '00'
+
+    console.log(rgb)
+    return rgb
   }
 
   async handleResponse (response) {
@@ -80,7 +94,13 @@ export default class AppTarefas extends Component {
         }
       }).then(response => response.json())
         .then(response => this.setState(prevState => ({
-          listaTarefas: [...prevState.listaTarefas, { 'nomeTarefa': response.nome + ' (' + response.id + ')', 'prazo': response.prazo, 'corProgresso': '#FF0000', 'responsaveis': response.responsaveis.map(x => x.substring('/usuarios/'.length)).join(', ') }]
+          listaTarefas: [...prevState.listaTarefas, {
+            'nomeTarefa': response.nome + ' (' + response.id + ')',
+            'prazo': response.prazo,
+            idTarefa: response.id,
+            'corProgresso': this.toColor(response.progresso.porcentagem),
+            'responsaveis': response.responsaveis.map(x => x.substring('/usuarios/'.length)).join(', ')
+          }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
         }))
         )
     }
