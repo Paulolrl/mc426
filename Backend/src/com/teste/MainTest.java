@@ -24,7 +24,7 @@ public class MainTest extends JerseyTest {
     }
 
     @Test
-    public void test1CriarUsuario() {
+    public void test11CriarUsuario() {
     	JSONObject jsonRequest = new JSONObject("{\r\n" + 
     			"	\"nome\": \"Paulo Lucas\",\r\n" + 
     			"	\"usuario\": \"paulo\",\r\n" + 
@@ -44,6 +44,20 @@ public class MainTest extends JerseyTest {
        			"");
         assertEquals(jsonExpected.toString(), response.getEntity(String.class));
         assertEquals(201,response.getStatus());
+    }
+    
+    @Test
+    public void test1CriarUsuarioErro() {
+    	JSONObject jsonRequest = new JSONObject("{\r\n" + 
+    			"	\"nome\": \"Joaozinho\",\r\n" + 
+    			"	\"usuario\": \"paulo\",\r\n" + 
+    			"\"senha\": \"123456\",\r\n" + 
+    			"\"gerente\": \"true\"\r\n" + 
+    			"}\r\n" + 
+    			"");
+    	
+       	ClientResponse response = resource().path("usuarios").post(ClientResponse.class,jsonRequest.toString());
+        assertEquals(403,response.getStatus());
     }
     
     @Test
