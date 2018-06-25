@@ -138,33 +138,44 @@ public class Tarefa {
 	}
 	
 	public void alteraResponsaveis(List<Usuario> novosResponsaveis) throws Exception{
+		List<Usuario> usuariosAdicionados = new ArrayList<>();
+		List<Usuario> usuariosRemovidos = new ArrayList<>();
+		
 		for (Usuario u : novosResponsaveis){
 			if (!u.getTarefas().contains(this)) {
 				u.atribuiResponsabilidade(this);
-				responsaveis.add(u);
+				usuariosAdicionados.add(u);
 			}
 		}
 
 		for (Usuario u : responsaveis){
 			if (!novosResponsaveis.contains(u)) {
 				u.removerResponsabilidade(this);
-				responsaveis.remove(u);
+				usuariosRemovidos.add(u);
 			}
 		}
+		
+		responsaveis.addAll(usuariosAdicionados);
+		responsaveis.removeAll(usuariosRemovidos);
 	}
 	
 	public void alteraDependencias(List<Tarefa> novasDependencias) {
+		List<Tarefa> dependenciasAdicionadas = new ArrayList<>();
+		List<Tarefa> dependenciasRemovidas = new ArrayList<>();
 		for (Tarefa t : novasDependencias) {
 			if(!dependencias.contains(t)) {
-				dependencias.add(t);
+				dependenciasAdicionadas.add(t);
 			}
 		}
 		
 		for (Tarefa t: dependencias) {
 			if (!novasDependencias.contains(t)) {
-				dependencias.remove(t);
+				dependenciasRemovidas.add(t);
 			}
 		}
+		
+		dependencias.addAll(dependenciasAdicionadas);
+		dependencias.removeAll(dependenciasRemovidas);
 	}
 	
 	public void removerTarefa() throws Exception {

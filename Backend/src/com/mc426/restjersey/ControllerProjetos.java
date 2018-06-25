@@ -112,7 +112,6 @@ public class ControllerProjetos {
 
 			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
 
-			// TODO verificar se o usuario faz parte do projeto antes de fazer
 			if (usuario == null) {
 				resposta = "Usuario nao encontrado.";
 				return Response.status(401).entity(resposta).build();
@@ -270,6 +269,7 @@ public class ControllerProjetos {
 				}
 			}
 
+			// Responsaveis no formato /usuarios/{usuario}
 			jArray = jsonBody.getJSONArray("responsaveis");
 			List<Usuario> responsaveis = new ArrayList<Usuario>();
 			Usuario responsavel;
@@ -286,13 +286,9 @@ public class ControllerProjetos {
 					responsaveis.add(responsavel);
 
 				}
-			}
+			}	
 			
-			
-
-			Tarefa novaTarefa = projeto.criarTarefa(nome, descricao, prazo, responsaveis, dependencias, tags);
-			
-			
+			Tarefa novaTarefa = projeto.criarTarefa(nome, descricao, prazo, responsaveis, dependencias, tags);	
 			
 			return Response.status(201).entity(novaTarefa.toJson().toString()).build();
 
@@ -330,8 +326,12 @@ public class ControllerProjetos {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
-			// TODO verificar se o usuario faz parte do projeto antes de fazer
-
+			
+			if (!usuario.participaProjeto(projeto)) {
+				resposta = "Usuario nao faz parte do projeto";
+				return Response.status(401).entity(resposta).build();
+			}
+			
 			Tarefa tarefa = Tarefa.getPorId(idTarefa);
 
 			if (tarefa == null) {
@@ -489,11 +489,13 @@ public class ControllerProjetos {
 			tarefa.setPrazo(prazo);
 			tarefa.setTags(tags);
 			tarefa.alteraResponsaveis(responsaveis);
-			tarefa.alteraDependencias(dependencias);		
+			tarefa.alteraDependencias(dependencias);
+			
 			JSONObject progresso = jsonBody.getJSONObject("progresso");
 			int porcentagem = progresso.getInt("porcentagem");
 			String texto = progresso.getString("texto");
 			tarefa.adicionarStatus(porcentagem, texto);
+			
 			return Response.status(201).entity(tarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
