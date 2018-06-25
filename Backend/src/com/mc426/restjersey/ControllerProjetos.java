@@ -547,8 +547,7 @@ public class ControllerProjetos {
 						projeto.removerEquipe(e);
 					}
 				}
-
-				return Response.status(201).entity(jArray.toString()).build();
+				return Response.status(201).entity(projeto.toJson().toString()).build();
 			}
 
 			resposta = "Nenhuma equipe passada como par�metro.";

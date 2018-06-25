@@ -79,11 +79,18 @@ public class MainTest extends JerseyTest {
         
         response = resource().path("projetos/1/equipes").header("Authorization", "Basic cGF1bG86MTIzNDU2").post(ClientResponse.class, jsonRequest.toString());
         jsonExpected = new JSONObject("{\r\n" + 
-        		"    \"equipes\":[\"/equipes/1\"]\r\n" + 
-        		"}\r\n" + 
-        		"");
-        assertEquals(jsonExpected.toString(), response.getEntity(String.class));
+       			"    \"dono\": \"/usuarios/paulo\",\r\n" + 
+       			"    \"equipes\": [\"/equipes/1\"],\r\n" + 
+       			"    \"tarefas\": [],\r\n" + 
+       			"    \"diretorio\": \"/diretorios/1\",\r\n" + 
+       			"    \"nome\": \"Projeto X\",\r\n" + 
+       			"    \"id\": 1,\r\n" + 
+       			"    \"prazo\": \"2018-09-15\",\r\n" + 
+       			"    \"descricao\": \"Projeto para dominacao mundial\"\r\n" + 
+       			"}\r\n" + 
+       			"");
         assertEquals(201,response.getStatus());
+        assertEquals(jsonExpected.toString(), response.getEntity(String.class));
     }
     
     @Test
