@@ -49,7 +49,7 @@ public class ControllerProjetos {
 			String prazo = jsonBody.getString("prazo");
 			Gerente gerente = (Gerente) usuario;
 			
-			// Cria equipe dummy para que o gerente automaticamente fa�a parte do projeto
+			// Cria equipe dummy para que o gerente automaticamente faça parte do projeto
 			List<Usuario> dummy = new ArrayList<Usuario>();
 			Equipe equipeDummy = new Equipe("dummy",dummy, (Gerente) usuario);
 			List<Equipe> listaEquipes = new ArrayList<Equipe>();
@@ -181,11 +181,11 @@ public class ControllerProjetos {
 			String descricao = jsonBody.getString("descricao");
 			String prazo = jsonBody.getString("prazo");
 			
-			// Verifica se prazo est� no formato YYYY-MM-DD
+			// Verifica se prazo está no formato YYYY-MM-DD
 			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
 			Matcher matcher = pattern.matcher(prazo);
 			if (!matcher.find()) {
-				resposta = "Formato de prazo n�o aceito.";
+				resposta = "Formato de prazo não aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 			
@@ -229,14 +229,21 @@ public class ControllerProjetos {
 				return Response.status(404).entity(resposta).build();
 			}
 
-			// TODO verificar se o usuario faz parte do projeto antes de fazer
-
+			if (!usuario.participaProjeto(projeto)) {
+				resposta = "Usuario nao faz parte do projeto";
+				return Response.status(401).entity(resposta).build();
+			}
+			
 			JSONObject jsonBody = new JSONObject(body);
+			String nome = jsonBody.getString("nome");
+			String descricao = jsonBody.getString("descricao");
+			String prazo = jsonBody.getString("prazo");
+			
+			// Verifica se prazo está no formato YYYY-MM-DD
 			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
-			Matcher matcher = pattern.matcher(jsonBody.getString("prazo"));
-
+			Matcher matcher = pattern.matcher(prazo);
 			if (!matcher.find()) {
-				resposta = "Formato de prazo n�o aceito.";
+				resposta = "Formato de prazo não aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 
@@ -248,6 +255,7 @@ public class ControllerProjetos {
 				}
 			}
 
+			// Dependencias no formato projetos/{idProjeto}/tarefas/{idTarefa}
 			jArray = jsonBody.getJSONArray("dependencias");
 			List<Tarefa> dependencias = new ArrayList<Tarefa>();
 			Tarefa tarefa;
@@ -269,19 +277,23 @@ public class ControllerProjetos {
 				for (int i = 0; i < jArray.length(); i++) {
 					responsavel = Usuario.getPorResource(jArray.getString(i));
 					if (responsavel == null) {
-						resposta = "Usuario nao encontrado para adicionar no projeto";
+						resposta = "Usuário não encontrado para adicionar no projeto";
 						return Response.status(404).entity(resposta).build();
 					}else if (!responsavel.participaProjeto(projeto)){
-						resposta = "Usuario nao est� no projeto";
+						resposta = "Usuário não está no projeto";
 						return Response.status(400).entity(resposta).build();
 					}
 					responsaveis.add(responsavel);
 
 				}
 			}
+			
+			
 
-			Tarefa novaTarefa = projeto.criarTarefa(jsonBody.getString("nome"), jsonBody.getString("descricao"), jsonBody.getString("prazo"), null, responsaveis, dependencias, tags);
-
+			Tarefa novaTarefa = projeto.criarTarefa(nome, descricao, prazo, responsaveis, dependencias, tags);
+			
+			
+			
 			return Response.status(201).entity(novaTarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
@@ -432,7 +444,7 @@ public class ControllerProjetos {
 			Matcher matcher = pattern.matcher(prazo);
 
 			if (!matcher.find()) {
-				resposta = "Formato de prazo n�o aceito.";
+				resposta = "Formato de prazo nï¿½o aceito.";
 				return Response.status(400).entity(resposta).build();
 			}
 			
@@ -478,7 +490,10 @@ public class ControllerProjetos {
 			tarefa.setTags(tags);
 			tarefa.alteraResponsaveis(responsaveis);
 			tarefa.alteraDependencias(dependencias);		
-			
+			JSONObject progresso = jsonBody.getJSONObject("progresso");
+			int porcentagem = progresso.getInt("porcentagem");
+			String texto = progresso.getString("texto");
+			tarefa.adicionarStatus(porcentagem, texto);
 			return Response.status(201).entity(tarefa.toJson().toString()).build();
 
 		} catch (Exception e) {
@@ -596,7 +611,7 @@ public class ControllerProjetos {
 				return Response.status(201).entity(projeto.toJson().toString()).build();
 			}
 
-			resposta = "Nenhuma equipe passada como par�metro.";
+			resposta = "Nenhuma equipe passada como parï¿½metro.";
 			return Response.status(400).entity(resposta).build();
 
 		} catch (Exception e) {
