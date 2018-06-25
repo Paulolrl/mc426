@@ -234,6 +234,9 @@ public class ControllerProjetos {
 					if (responsavel == null) {
 						resposta = "Usuario nao encontrado para adicionar no projeto";
 						return Response.status(404).entity(resposta).build();
+					}else if (!responsavel.participaProjeto(projeto)){
+						resposta = "Usuario nao está no projeto";
+						return Response.status(400).entity(resposta).build();
 					}
 					responsaveis.add(responsavel);
 
@@ -547,8 +550,7 @@ public class ControllerProjetos {
 						projeto.removerEquipe(e);
 					}
 				}
-
-				return Response.status(201).entity(jArray.toString()).build();
+				return Response.status(201).entity(projeto.toJson().toString()).build();
 			}
 
 			resposta = "Nenhuma equipe passada como parï¿½metro.";

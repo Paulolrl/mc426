@@ -24,7 +24,7 @@ public class MainTest extends JerseyTest {
     }
 
     @Test
-    public void test1CriarUsuario() {
+    public void test11CriarUsuario() {
     	JSONObject jsonRequest = new JSONObject("{\r\n" + 
     			"	\"nome\": \"Paulo Lucas\",\r\n" + 
     			"	\"usuario\": \"paulo\",\r\n" + 
@@ -44,6 +44,20 @@ public class MainTest extends JerseyTest {
        			"");
         assertEquals(jsonExpected.toString(), response.getEntity(String.class));
         assertEquals(201,response.getStatus());
+    }
+    
+    @Test
+    public void test1CriarUsuarioErro() {
+    	JSONObject jsonRequest = new JSONObject("{\r\n" + 
+    			"	\"nome\": \"Joaozinho\",\r\n" + 
+    			"	\"usuario\": \"paulo\",\r\n" + 
+    			"\"senha\": \"123456\",\r\n" + 
+    			"\"gerente\": \"true\"\r\n" + 
+    			"}\r\n" + 
+    			"");
+    	
+       	ClientResponse response = resource().path("usuarios").post(ClientResponse.class,jsonRequest.toString());
+        assertEquals(403,response.getStatus());
     }
     
     @Test
@@ -79,11 +93,18 @@ public class MainTest extends JerseyTest {
         
         response = resource().path("projetos/1/equipes").header("Authorization", "Basic cGF1bG86MTIzNDU2").post(ClientResponse.class, jsonRequest.toString());
         jsonExpected = new JSONObject("{\r\n" + 
-        		"    \"equipes\":[\"/equipes/1\"]\r\n" + 
-        		"}\r\n" + 
-        		"");
-        assertEquals(jsonExpected.toString(), response.getEntity(String.class));
+       			"    \"dono\": \"/usuarios/paulo\",\r\n" + 
+       			"    \"equipes\": [\"/equipes/1\"],\r\n" + 
+       			"    \"tarefas\": [],\r\n" + 
+       			"    \"diretorio\": \"/diretorios/1\",\r\n" + 
+       			"    \"nome\": \"Projeto X\",\r\n" + 
+       			"    \"id\": 1,\r\n" + 
+       			"    \"prazo\": \"2018-09-15\",\r\n" + 
+       			"    \"descricao\": \"Projeto para dominacao mundial\"\r\n" + 
+       			"}\r\n" + 
+       			"");
         assertEquals(201,response.getStatus());
+        assertEquals(jsonExpected.toString(), response.getEntity(String.class));
     }
     
     @Test

@@ -141,16 +141,16 @@ public class ControllerEquipes {
 			
 			List<Usuario> membrosNovos = new ArrayList<Usuario>();
 			List<Usuario> membrosRemovidos = new ArrayList<Usuario>();
-			for (Usuario u : membros)
-			{
-				if (!equipe.getMembros().contains(u))
+			for (Usuario u : membros){
+				if (!equipe.getMembros().contains(u)) {
 					membrosNovos.add(u);
+				}
 			}
 
-			for (Usuario u : equipe.getMembros())
-			{
-				if (!membros.contains(u))
+			for (Usuario u : equipe.getMembros()){
+				if (!membros.contains(u)) {
 					membrosRemovidos.add(u);
+				}
 			}
 			
 			equipe.adicionarMembros(membrosNovos);
