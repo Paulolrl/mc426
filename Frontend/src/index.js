@@ -12,6 +12,7 @@ import AppCriarEquipe from './appcriarequipe'
 import AppProjetos from './appprojetos'
 import AppCriarProjeto from './appcriarprojeto'
 import AppDetalheEquipe from './appdetalheequipe'
+import AppDetalhesProjeto from './appdetalhesprojeto'
 import AppTarefas from './apptarefas'
 import AppCriarTarefa from './appcriartarefa'
 import AppDecideProjeto from './appdecideprojeto'
@@ -27,6 +28,7 @@ render((
       <Route path="/equipes/nova" component={AppCriarEquipe} />
       <Route path="/projetos/novo" component={AppCriarProjeto} />
       <Route exact path="/equipes/:idEquipe([0-9]{1,40})" component={AppDetalheEquipe} />
+      <Route exact path="/projetos/:idProjeto([0-9]{1,40})" component={AppDetalhesProjeto} />
       <Route exact path="/projetos/:idProjeto([0-9]{1,40})/tarefas" component={AppTarefas} />
       <Route exact path="/projetos/:idProjeto([0-9]{1,40})/tarefas/nova" component={AppCriarTarefa} />
   </Switch>
