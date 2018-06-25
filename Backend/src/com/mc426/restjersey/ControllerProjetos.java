@@ -124,6 +124,11 @@ public class ControllerProjetos {
 				resposta = "Projeto nao encontrado";
 				return Response.status(404).entity(resposta).build();
 			}
+			
+			if (!usuario.participaProjeto(projeto)) {
+				resposta = "Usuario nao faz parte do projeto";
+				return Response.status(401).entity(resposta).build();
+			}
 
 			return Response.status(200).entity(projeto.toJson().toString()).build();
 
@@ -170,11 +175,13 @@ public class ControllerProjetos {
 				return Response.status(401).entity(resposta).build();
 			}
 			
+			//Constroi argumentos dos sets
 			JSONObject jsonBody = new JSONObject(body);
 			String nomeProjeto = jsonBody.getString("nome");
 			String descricao = jsonBody.getString("descricao");
 			String prazo = jsonBody.getString("prazo");
 			
+			// Verifica se prazo está no formato YYYY-MM-DD
 			Pattern pattern = Pattern.compile("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])");
 			Matcher matcher = pattern.matcher(prazo);
 			if (!matcher.find()) {
@@ -188,48 +195,6 @@ public class ControllerProjetos {
 			
 			return Response.status(201).entity(projeto.toJson().toString()).build();
 
-		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			resposta = sw.toString(); // stack trace as a string
-			return Response.status(500).entity(resposta).build();
-		}
-	}
-
-	@Path("{id}")
-	@DELETE
-	@Produces("application/json")
-	public Response DeleteProjeto(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
-		String resposta;
-		try {
-			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
-				resposta = "Forneca um Header do tipo Authorization.";
-				return Response.status(401).entity(resposta).build();
-			}
-
-			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
-
-			if (usuario == null) {
-				resposta = "Usuario nao encontrado.";
-				return Response.status(401).entity(resposta).build();
-			}
-
-			Projeto projeto = Projeto.getPorId(id);
-
-			if (projeto == null) {
-				resposta = "Projeto nao encontrado";
-				return Response.status(404).entity(resposta).build();
-			}
-
-			if (!projeto.getDono().equals(usuario)) {
-				resposta = "Usuario nao e dono";
-				return Response.status(401).entity(resposta).build();
-			}
-			Gerente gerente = (Gerente) usuario;
-
-			gerente.removerProjeto(projeto);
-			return Response.status(200).entity(projeto.toJson().toString()).build();
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
