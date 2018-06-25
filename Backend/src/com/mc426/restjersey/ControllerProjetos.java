@@ -41,16 +41,22 @@ public class ControllerProjetos {
 				resposta = "Usuario nao encontrado ou nao tem permissao de gerente.";
 				return Response.status(401).entity(resposta).build();
 			}
-
+			
+			// Constroi argumentos para criarNovoProjeto
 			JSONObject jsonBody = new JSONObject(body);
-
-			// TODO Gerente tem um metodo criar projeto que deveria ser usado em vez do construtor
-			Projeto projeto = new Projeto(jsonBody.getString("nome"), jsonBody.getString("descricao"),
-					jsonBody.getString("prazo"), (Gerente) usuario);
-			// TODO Gerente tem um metodo criar equipe que deveria ser usado em vez do construtor
+			String nome = jsonBody.getString("nome");
+			String descricao = jsonBody.getString("descricao");
+			String prazo = jsonBody.getString("prazo");
+			Gerente gerente = (Gerente) usuario;
+			
+			// Cria equipe dummy para que o gerente automaticamente faça parte do projeto
 			List<Usuario> dummy = new ArrayList<Usuario>();
-			Equipe equipe = new Equipe("dummy",dummy, (Gerente) usuario);
-			equipe.adicionarProjeto(projeto);
+			Equipe equipeDummy = new Equipe("dummy",dummy, (Gerente) usuario);
+			List<Equipe> listaEquipes = new ArrayList<Equipe>();
+			listaEquipes.add(equipeDummy);
+			
+			Projeto projeto = gerente.criarNovoProjeto(nome, descricao, prazo, gerente, listaEquipes);
+			
 			return Response.status(201).entity(projeto.toJson().toString()).build();
 
 		} catch (Exception e) {
