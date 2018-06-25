@@ -170,6 +170,7 @@ public class MainTest extends JerseyTest {
     	assertEquals(404,response.getStatus());
     }
     
+    
     @Test
     public void test7CriarTarefa() {
     	//Testa criar Tarefa
@@ -317,6 +318,23 @@ public class MainTest extends JerseyTest {
     	assertEquals(jsonExpected.toString(), response.getEntity(String.class));
        	assertEquals(200,response.getStatus());
        	
+    }
+    
+    @Test 
+    public void test94RemoverDonoEquipe() {
+    	JSONObject jsonRequest = new JSONObject("{\r\n" + 
+    			"	\"nome\": \"Minha Equipe\",\r\n" + 
+    			"	\"membros\": []\r\n" + 
+    			"}\r\n" + 
+    			"");
+    	ClientResponse response = resource().path("equipes/1").header("Authorization", "Basic cGF1bG86MTIzNDU2").post(ClientResponse.class, jsonRequest.toString());
+    	assertEquals(401,response.getStatus());
+    }
+    
+    @Test
+    public void test95VisualizarEquipeErro2() {
+    	ClientResponse response = resource().path("equipes/1").header("Authorization", "Basic cGVkcm86MTIzNDU2DQo=").get(ClientResponse.class);
+    	assertEquals(401,response.getStatus());
     }
     
     public void criaUsuarios() {
