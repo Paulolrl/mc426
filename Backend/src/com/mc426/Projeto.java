@@ -49,7 +49,7 @@ public class Projeto {
 		equipe.adicionarProjeto(this);
 	}
 
-	public Tarefa criarTarefa(String nomeTarefa, String descricao, String prazo, Date duracao, List<Usuario> responsaveis,
+	public Tarefa criarTarefa(String nomeTarefa, String descricao, String prazo, List<Usuario> responsaveis,
 			List<Tarefa> dependencias, List<String> tags) throws Exception {
 		Tarefa novaTarefa = new Tarefa(nomeTarefa, descricao, prazo, this, tags, dependencias, responsaveis);
 
