@@ -234,6 +234,9 @@ public class ControllerProjetos {
 					if (responsavel == null) {
 						resposta = "Usuario nao encontrado para adicionar no projeto";
 						return Response.status(404).entity(resposta).build();
+					}else if (!responsavel.participaProjeto(projeto)){
+						resposta = "Usuario nao está no projeto";
+						return Response.status(400).entity(resposta).build();
 					}
 					responsaveis.add(responsavel);
 
