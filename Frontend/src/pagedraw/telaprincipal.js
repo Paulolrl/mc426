@@ -15,7 +15,7 @@ function render() {
         </div>
         <div className="telaprincipal-1">
             <div className="telaprincipal-barratarefas_instance-2">
-                <Barratarefas /> 
+                <Barratarefas listaTarefas={[]} /> 
             </div>
             <div className="telaprincipal-barraagenda_instance-4">
                 <Barraagenda /> 

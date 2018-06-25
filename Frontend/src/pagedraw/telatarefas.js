@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telatarefas-1">
             <div className="telatarefas-barratarefas_instance_2">
-                <Barratarefas /> 
+                <Barratarefas listaTarefas={[]} /> 
             </div>
             <div className="telatarefas-centrotarefas_instance-6">
                 <Centrotarefas listaTarefas={this.props.listaTarefas} nomeProjeto={this.props.nomeProjeto} listaOpcoes={this.props.listaOpcoes} onChangeDropdown={this.props.onChangeDropdown} valueDropdown={this.props.valueDropdown} /> 

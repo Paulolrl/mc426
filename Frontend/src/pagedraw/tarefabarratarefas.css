@@ -3,70 +3,68 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding-bottom: 10px;
     background: #FFFFFF;
 }
 
 .tarefabarratarefas-0 {
     display: flex;
+    padding-left: 152px;
+    padding-right: 12px;
 }
 
-.tarefabarratarefas-rectangle_1 {
-    display: flex;
-    flex-direction: column;
-    padding-top: 16px;
-    padding-bottom: 15px;
-    background: rgb(255, 255, 255);
+.tarefabarratarefas-text_3 {
+    width: 100px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000000;
+    font-size: 0px;
+    line-height: 0px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
 }
 
-.tarefabarratarefas-0-0-0 {
+.tarefabarratarefas-1 {
     display: flex;
-    padding-left: 39px;
-    padding-right: 65px;
+    margin-top: 17px;
+    padding-left: 10px;
+    padding-right: 94px;
 }
 
 .tarefabarratarefas-text_1 {
     width: 160px;
     flex-shrink: 0;
+    cursor: pointer;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
     font-size: 22px;
     line-height: 25px;
     letter-spacing: 0px;
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
     text-decoration: none;
     text-align: left;
     word-wrap: break-word;
 }
 
-.tarefabarratarefas-0-0-1 {
+.tarefabarratarefas-2 {
     display: flex;
-    margin-top: 13px;
-    padding-left: 26px;
-    padding-right: 54px;
-}
-
-.tarefabarratarefas-line_3 {
-    width: 184px;
-    height: 1px;
-    flex-shrink: 0;
-    background: #D8D8D8;
-}
-
-.tarefabarratarefas-0-0-2 {
-    display: flex;
-    margin-top: 42px;
+    margin-top: 20px;
     padding-left: 10px;
-    padding-right: 44px;
+    padding-right: 17px;
 }
 
 .tarefabarratarefas-text_19 {
-    width: 210px;
+    width: 237px;
     flex-shrink: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 21px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 21px;
     letter-spacing: 0px;
     font-weight: normal;
     font-style: normal;
@@ -75,21 +73,36 @@
     word-wrap: break-word;
 }
 
-.tarefabarratarefas-0-0-3 {
-    display: flex;
-    margin-top: 39px;
-    padding-left: 10px;
-    padding-right: 20px;
+.tarefabarratarefas-3 {
+    width: 0px;
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
-.tarefabarratarefas-0-0-3-0 {
+.tarefabarratarefas-4 {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 12px;
+}
+
+.tarefabarratarefas-rectangle_1 {
     display: flex;
     flex-direction: column;
-    padding-top: 9px;
-    padding-bottom: 8px;
 }
 
-.tarefabarratarefas-0-0-3-0-0 {
+.tarefabarratarefas-4-0-0 {
+    display: flex;
+    padding-right: 8px;
+}
+
+.tarefabarratarefas-4-0-0-0 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 7px;
+}
+
+.tarefabarratarefas-4-0-0-0-0 {
     display: flex;
 }
 
@@ -108,42 +121,50 @@
     word-wrap: break-word;
 }
 
-.tarefabarratarefas-0-0-3-1 {
+.tarefabarratarefas-4-0-0-1 {
     display: flex;
     flex-direction: column;
-    margin-left: 8px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 8px;
 }
 
-.tarefabarratarefas-0-0-3-1-0 {
+.tarefabarratarefas-4-0-0-1-0 {
     display: flex;
 }
 
-.tarefabarratarefas-prazo-0 {
+.tarefabarratarefas-12 {
     width: 111px;
-    height: 33px;
     flex-shrink: 0;
-    border-radius: 4px;
-    background: #FFFFFF;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 17px;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0px;
     font-weight: normal;
     font-style: normal;
+    text-decoration: none;
     text-align: left;
-    letter-spacing: 0px;
-    line-height: normal;
-    word-wrap: normal;
-    padding: 6px 12px;
-    border: 1px solid #cccccc;
+    word-wrap: break-word;
 }
 
 .tarefabarratarefas-statusprogresso-3 {
     width: 34px;
     height: 38px;
     flex-shrink: 0;
-    margin-left: 18px;
+    margin-left: 26px;
     border-radius: 100%;
+}
+
+.tarefabarratarefas-4-0-1 {
+    display: flex;
+    margin-top: 5px;
+}
+
+.tarefabarratarefas-line_3 {
+    width: 242px;
+    height: 1px;
+    flex-shrink: 0;
+    background: #D8D8D8;
 }
 
 * {

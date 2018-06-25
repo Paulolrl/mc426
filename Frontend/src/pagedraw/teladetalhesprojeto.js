@@ -16,10 +16,10 @@ function render() {
         </div>
         <div className="teladetalhesprojeto-1">
             <div className="teladetalhesprojeto-barratarefas_instance_2">
-                <Barratarefas /> 
+                <Barratarefas listaTarefas={[]} /> 
             </div>
             <div className="teladetalhesprojeto-detalhesprojeto_instance-5">
-                <Detalhesprojeto descricao={""} idEquipes={""} prazo={""} text={""} handleClick={""} /> 
+                <Detalhesprojeto descricao={this.props.descricao} idEquipes={this.props.idEquipes} prazo={this.props.prazo} nomeProjeto={this.props.nomeProjeto} handleClick={this.props.handleClick} setDescricao={this.props.setDescricao} setIdEquipes={this.props.setIdEquipes} setPrazo={this.props.setPrazo} /> 
             </div>
             <div className="teladetalhesprojeto-barraagenda_instance_2">
                 <Barraagenda /> 

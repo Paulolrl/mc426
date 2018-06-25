@@ -8,15 +8,57 @@
 
 .barratarefas-0 {
     display: flex;
-    padding-right: 4px;
 }
 
-.barratarefas-barratarefa-5 {
-    width: 264px;
+.barratarefas-rectangle_19 {
+    width: 286px;
     height: 583px;
     flex-shrink: 0;
+    overflow: scroll;
+    position: relative;
     box-shadow: 0px 2px 4px 0px #000;
-    background: rgb(255, 255, 255);
+}
+
+.barratarefas-0-0-0 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 8px;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+
+.barratarefas-0-0-0-0 {
+    display: flex;
+}
+
+.barratarefas-0-0-0-0-0 {
+    display: flex;
+    flex-direction: column;
+}
+
+.barratarefas-rectangle_1 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.barratarefas-0-0-0-0-0-0-0-0 {
+    display: flex;
+    padding-right: 22px;
+}
+
+.barratarefas-tarefabarratarefas_instance-4 {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 143px;
+}
+
+.barratarefas-0-0-0-1 {
+    flex-grow: 1;
+    flex-basis: 0px;
 }
 
 * {

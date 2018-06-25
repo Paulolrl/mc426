@@ -11,7 +11,7 @@ function render() {
             <div className="tarefadetalhada-0-0">
                 <div className="tarefadetalhada-0-0-0">
                     <div className="tarefadetalhada-titulotarefa-2">
-                        { this.props.tituloTarefa }
+                        { this.props.nomeTarefa }
                     </div>
                 </div>
             </div>
@@ -64,19 +64,43 @@ function render() {
             <input type="text" placeholder="Placeholder" value={this.props.dependencias} className="tarefadetalhada-dependencias-9" /> 
         </div>
         <div className="tarefadetalhada-6">
+            <div className="tarefadetalhada-6-0">
+                <div className="tarefadetalhada-6-0-0">
+                    <div className="tarefadetalhada-text_8-4">
+                        {"Progresso:"}
+                    </div>
+                </div>
+            </div>
+            <input type="range" min="0" max="100" value={String(this.props.numeroProgresso)} className="tarefadetalhada-slider-8" /> 
+        </div>
+        <div className="tarefadetalhada-7">
+            <div className="tarefadetalhada-7-0">
+                <div className="tarefadetalhada-7-0-0">
+                    <div className="tarefadetalhada-text_8-1">
+                        {"Descrição Progresso:"}
+                    </div>
+                </div>
+            </div>
+            <div className="tarefadetalhada-7-1">
+                <div className="tarefadetalhada-7-1-0">
+                    <input type="text" placeholder="Placeholder" value={this.props.descricaoProgresso} className="tarefadetalhada-dependencias-0" /> 
+                </div>
+            </div>
+        </div>
+        <div className="tarefadetalhada-8">
             <div className="tarefadetalhada-botaosalvar-2">
                 <Componentebotao textoBotao={"Salvar"} /> 
             </div>
         </div>
-        <div className="tarefadetalhada-7">
+        <div className="tarefadetalhada-9">
             <div className="tarefadetalhada-text_1">Feedbacks</div>
         </div>
-        <div className="tarefadetalhada-8">
+        <div className="tarefadetalhada-10">
             <textarea placeholder="Escreva aqui seu feedback" value={this.props.feedbackInput} className="tarefadetalhada-feedbackinput-6" /> 
         </div>
-        <div className="tarefadetalhada-9">
-            <div className="tarefadetalhada-9-0">
-                <div className="tarefadetalhada-9-0-0">
+        <div className="tarefadetalhada-11">
+            <div className="tarefadetalhada-11-0">
+                <div className="tarefadetalhada-11-0-0">
                     <input type="text" placeholder="Placeholder" value={this.props.ratingInput} className="tarefadetalhada-ratinginput-4" /> 
                 </div>
             </div>
@@ -84,11 +108,11 @@ function render() {
                 <Componentebotao textoBotao={"Enviar"} /> 
             </div>
         </div>
-        <div className="tarefadetalhada-10">
-            <div className="tarefadetalhada-10-0">
+        <div className="tarefadetalhada-12">
+            <div className="tarefadetalhada-12-0">
                 { this.props.listaFeedbacks.map((elem, i) => {
                     return <div key={i} className="tarefadetalhada-rectangle_1">
-                        <div className="tarefadetalhada-10-0-0-0-0">
+                        <div className="tarefadetalhada-12-0-0-0-0">
                             <div className="tarefadetalhada-feedback_instance-9">
                                 <Feedback autor={elem.autor} textoFeedback={elem.textoFeedback} ratingFeedback={elem.ratingFeedback} /> 
                             </div>

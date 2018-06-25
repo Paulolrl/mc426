@@ -14,7 +14,8 @@ export default class AppEquipes extends Component {
       <TelaEquipes nomeUsuario={this.state.nomeUsuario} 
       			   listaEquipes1={this.state.listaEquipes1} 
       			   listaEquipes2={this.state.listaEquipes2} 
-      			   listaEquipes3={this.state.listaEquipes3}/>
+      			   listaEquipes3={this.state.listaEquipes3}
+      			   listaTarefas={this.state.listaTarefas}/>
     );
   }
 
@@ -29,14 +30,46 @@ export default class AppEquipes extends Component {
 	    "listaEquipes2": [
 	    ],
 	    "listaEquipes3": [
-	    ]
+	    ],
+	    listaTarefas: []
     };
 
     this.handleResponse = this.handleResponse.bind(this);
+    this.toColor = this.toColor.bind(this);
   }
 
-  handleResponse(response) {
+  toColor(progresso) {
+  	let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16);
+  	if (r.length == 1)
+  		r = "0" + r;
+  	let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16);
+  	if (g.length == 1)
+  		g = "0" + g;
+  	let rgb = "#" + r + g + "00";
+
+  	console.log(rgb);
+  	return rgb;
+  }
+
+  async handleResponse(response) {
+
+  	// CODIGO BARRA DE TAREFAS
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'));
+    for (var i = 0; i < response.tarefas.length; i++) {
+			await fetch(apiUrl + response.tarefas[i], {
+			  method: 'GET',
+			  headers: {
+			    'Authorization': 'Basic ' + authorizationBasic, 
+			    'Content-Type': 'application/json',
+			  },
+			}).then(resp => resp.json())
+			.then(resp => this.setState(prevState => ({
+				  listaTarefas: [...prevState.listaTarefas, { "nomeTarefa": resp.nome + " (" + resp.id + ")", "resourceTarefa": response.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem)}].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+				}))
+			);
+    }
+
+
 		for (var i = 0; i < response.equipes.length; i++) {
 			console.log(response);
 			console.log(this);

@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telaequipes-1">
             <div className="telaequipes-barratarefas_instance_2">
-                <Barratarefas /> 
+                <Barratarefas listaTarefas={this.props.listaTarefas} /> 
             </div>
             <div className="telaequipes-centroequipes_instance-2">
                 <Centroequipes listaEquipes1={(this.props.listaEquipes1)} listaEquipes2={(this.props.listaEquipes2)} listaEquipes3={(this.props.listaEquipes3)} /> 

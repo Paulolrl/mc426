@@ -6,34 +6,42 @@ import './tarefabarratarefas.css';
 function render() {
     return <div className="tarefabarratarefas-tarefabarratarefas-2">
         <div className="tarefabarratarefas-0">
+            <div className="tarefabarratarefas-text_3">
+                { this.props.resourceTarefa }
+            </div>
+        </div>
+        <div className="tarefabarratarefas-1">
+            <div onClick={() => { window.location = this.props.resourceTarefa; }} className="tarefabarratarefas-text_1">
+                { this.props.nomeTarefa }
+            </div>
+        </div>
+        <div className="tarefabarratarefas-2">
+            <div className="tarefabarratarefas-text_19">
+                { this.props.descricao }
+            </div>
+        </div>
+        <div className="tarefabarratarefas-3" /> 
+        <div className="tarefabarratarefas-4">
             <div className="tarefabarratarefas-rectangle_1">
-                <div className="tarefabarratarefas-0-0-0">
-                    <div className="tarefabarratarefas-text_1">
-                        Titulo da tarefa
-                    </div>
-                </div>
-                <div className="tarefabarratarefas-0-0-1">
-                    <div className="tarefabarratarefas-line_3" /> 
-                </div>
-                <div className="tarefabarratarefas-0-0-2">
-                    <div className="tarefabarratarefas-text_19">
-                        {"Descrição tarefa"}
-                    </div>
-                </div>
-                <div className="tarefabarratarefas-0-0-3">
-                    <div className="tarefabarratarefas-0-0-3-0">
-                        <div className="tarefabarratarefas-0-0-3-0-0">
+                <div className="tarefabarratarefas-4-0-0">
+                    <div className="tarefabarratarefas-4-0-0-0">
+                        <div className="tarefabarratarefas-4-0-0-0-0">
                             <div className="tarefabarratarefas-tituloprazo-6">
                                 {"Prazo:"}
                             </div>
                         </div>
                     </div>
-                    <div className="tarefabarratarefas-0-0-3-1">
-                        <div className="tarefabarratarefas-0-0-3-1-0">
-                            <input type="text" placeholder="Placeholder" value={this.props.prazo} className="tarefabarratarefas-prazo-0" /> 
+                    <div className="tarefabarratarefas-4-0-0-1">
+                        <div className="tarefabarratarefas-4-0-0-1-0">
+                            <div className="tarefabarratarefas-12">
+                                { this.props.prazo }
+                            </div>
                         </div>
                     </div>
-                    <div className="tarefabarratarefas-statusprogresso-3" style={{"background": this.props.color}} /> 
+                    <div className="tarefabarratarefas-statusprogresso-3" style={{"background": this.props.progresso}} /> 
+                </div>
+                <div className="tarefabarratarefas-4-0-1">
+                    <div className="tarefabarratarefas-line_3" /> 
                 </div>
             </div>
         </div>
