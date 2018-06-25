@@ -301,16 +301,16 @@ public class MainTest extends JerseyTest {
     public void test93RemoverUsuarioEquipe() {
     	JSONObject jsonRequest = new JSONObject("{\r\n" + 
     			"	\"nome\": \"Minha Equipe\",\r\n" + 
-    			"	\"membros\": [\"/usuarios/pedro\"]\r\n" + 
+    			"	\"membros\": [\"/usuarios/paulo\"]\r\n" + 
     			"}\r\n" + 
     			"");
     	resource().path("equipes/1").header("Authorization", "Basic cGF1bG86MTIzNDU2").post(ClientResponse.class, jsonRequest.toString());
-    	ClientResponse response = resource().path("usuarios/paulo").header("Authorization", "Basic cGF1bG86MTIzNDU2").get(ClientResponse.class);
+    	ClientResponse response = resource().path("usuarios/pedro").header("Authorization", "Basic cGF1bG86MTIzNDU2").get(ClientResponse.class);
     	JSONObject jsonExpected = new JSONObject("{\r\n" + 
     			"    \"equipes\": [],\r\n" + 
     			"    \"tarefas\": [],\r\n" + 
-    			"    \"nome\": \"Paulo Lucas\",\r\n" + 
-    			"    \"usuario\": \"paulo\",\r\n" + 
+    			"    \"nome\": \"Pedro Alan\",\r\n" + 
+    			"    \"usuario\": \"pedro\",\r\n" + 
     			"    \"gerente\": true\r\n" + 
     			"}\r\n" + 
     			"");

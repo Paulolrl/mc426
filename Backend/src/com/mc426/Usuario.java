@@ -115,7 +115,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "{\n\tnome: \"" + nome + "\",\n\ttarefas: "
-				+ tarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+				+ tarefas.stream().filter(x -> projetosParticipados().contains(x.getProjeto())).map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 						.collect(Collectors.toList())
 				+ ",\n\tequipes: " + equipes.stream().map(x -> "/equipes/" + x.getId()).collect(Collectors.toList())
 				+ ",\n\tuserName: \"" + userName + "\"\n}";
@@ -125,9 +125,14 @@ public class Usuario {
 		JSONObject retv = new JSONObject();
 		retv.put("nome", this.nome);
 		retv.put("usuario", this.userName);
-		retv.put("tarefas", this.tarefas.stream().map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
+		retv.put("tarefas", this.tarefas.stream()
+				.filter(x -> projetosParticipados().contains(x.getProjeto()))
+				.map(x -> "/projetos/" + x.getProjeto().getId() + "/tarefas/" + x.getId())
 				.collect(Collectors.toList()));
-		retv.put("equipes", this.equipes.stream().filter(x -> !x.getNome().equals("dummy")).map(x -> "/equipes/" + x.getId()).collect(Collectors.toList()));
+		retv.put("equipes", this.equipes.stream()
+				.filter(x -> !x.getNome().equals("dummy"))
+				.map(x -> "/equipes/" + x.getId())
+				.collect(Collectors.toList()));
 		retv.put("gerente", this instanceof Gerente);
 		return retv;
 	}
