@@ -22,6 +22,7 @@ import AppCriarDiretorio from './appcriardiretorio'
 import AppCriarRepositorio from './appcriarrepositorio'
 import AppCriarDoc from './appcriardoc'
 import AppDiretorio from './appdiretorio'
+import AppDownloadArquivo from './appdownloadarquivo'
 // There's no special libraries or javascript layout systems, just code written for you.
 
 render((
@@ -43,5 +44,6 @@ render((
       <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/subdiretorio' component={AppCriarDiretorio} />
       <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/repositorio' component={AppCriarRepositorio} />
       <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/doc' component={AppCriarDoc} />
+      <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/itens/:idItem([0-9]{1,40})/download' component={AppDownloadArquivo} />
     </Switch>
   </Router>), document.getElementById('root'))
