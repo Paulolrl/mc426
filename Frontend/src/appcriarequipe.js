@@ -8,7 +8,7 @@ import TelaCriarEquipes from './pagedraw/telacriarequipe'
 const apiUrl = 'http://localhost:8080/Backend/mc426'
 
 export default class AppCriarEquipe extends Component {
-  render () {
+  render() {
     return (
       <TelaCriarEquipes handleClick={this.handleSubmit}
         nomeEquipe={this.state.nomeEquipe}
@@ -16,41 +16,70 @@ export default class AppCriarEquipe extends Component {
         setMembros={this.setMembros}
         setNome={this.setNome}
         nomeUsuario={this.state.nomeUsuario}
+        corBotao={this.state.corBotao}
+        mensagemErro={this.state.mensagemErro}
       />
     )
   }
 
-  handleSubmit () {
+  async handleSubmit() {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
-
-    window.fetch(apiUrl + '/equipes', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + authorizationBasic
-      },
-      body: JSON.stringify({
-        nome: this.state.nomeEquipe,
-        membros: this.state.membrosEquipe.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x)
+    if (this.state.corBotao === "rgba(17, 39, 73, 1)") {
+      let response = await window.fetch(apiUrl + '/equipes', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic
+        },
+        body: JSON.stringify({
+          nome: this.state.nomeEquipe,
+          membros: this.state.membrosEquipe.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x)
+        })
       })
-    })
 
-    console.log('POST ' + apiUrl + '/equipes')
-    window.location = '/equipes'
+      if(response.ok){
+        console.log('POST ' + apiUrl + '/equipes')
+        window.location = '/equipes';
+      }else{
+        let response2 = await response.text();
+        this.setState({
+          mensagemErro: response2
+        })
+        setTimeout(() => this.setState({ mensagemErro: '' }), 5000)
+      }
+    }
   }
 
-  setNome (value) {
+  setNome(value) {
+    if (value === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       nomeEquipe: value
     })
   }
 
-  setMembros (value) {
+  setMembros(value) {
+    if (this.state.nomeEquipe === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       membrosEquipe: value
     })
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.setNome = this.setNome.bind(this)
@@ -59,10 +88,11 @@ export default class AppCriarEquipe extends Component {
     this.state = {
       'nomeUsuario': window.localStorage.getItem('usuarioADA'),
       nomeEquipe: '',
-      membrosEquipe: ''
+      membrosEquipe: '',
+      corBotao: 'rgba(17, 39, 73, 0.15)'
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
   }
 };
