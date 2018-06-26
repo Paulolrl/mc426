@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telauploadarquivo-1">
             <div className="telauploadarquivo-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="telauploadarquivo-uploadarquivo_instance-4">
                 <Uploadarquivo handleChange={this.props.handleChange} handleClick={this.props.handleClick} /> 

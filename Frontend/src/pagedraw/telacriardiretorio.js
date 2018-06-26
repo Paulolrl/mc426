@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telacriardiretorio-1">
             <div className="telacriardiretorio-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="telacriardiretorio-novapasta_instance-2">
                 <Novapasta nome={this.props.nome} setNome={this.props.setNome} handleClick={this.props.handleClick} /> 

@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="teladiretorio-1">
             <div className="teladiretorio-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="teladiretorio-telaarquivo_instance-6">
                 <Telaarquivo dados={this.props.dados} /> 

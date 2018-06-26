@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="teladetalheequipe-1">
             <div className="teladetalheequipe-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="teladetalheequipe-centordetalheequipe_instance-1">
                 <Centordetalheequipe nomeEquipe={this.props.nomeEquipe} membros={this.props.membrosEquipe} handleClick={this.props.handleClick} setMembros={this.props.setMembros} mensagemErro={this.props.mensagemErro} corBotao={this.props.corBotao} /> 
