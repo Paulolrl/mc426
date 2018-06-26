@@ -8,7 +8,7 @@ import TelaCriarTarefa from './pagedraw/telacriartarefa'
 const apiUrl = 'http://localhost:8080/Backend/mc426'
 
 export default class AppCriarTarefa extends Component {
-  render () {
+  render() {
     return (
       <TelaCriarTarefa handleClick={this.handleSubmit}
         nomeTarefa={this.state.nomeTarefa}
@@ -23,70 +23,135 @@ export default class AppCriarTarefa extends Component {
         setPrazo={this.setPrazo}
         nomeUsuario={this.state.nomeUsuario}
         setDependencias={this.setDependencias}
+        corBotao={this.state.corBotao}
+        mensagemErro={this.state.mensagemErro}
       />
     )
   }
 
-  async handleSubmit () {
+  async handleSubmit() {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
-
-    await window.fetch(apiUrl + '/projetos/' + this.state.idProjeto + '/tarefas/', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + authorizationBasic,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        nome: this.state.nomeTarefa,
-        descricao: this.state.descricao,
-        prazo: this.state.data,
-        responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x),
-        dependencias: this.state.dependencias.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/projetos/' + this.state.idProjeto + '/tarefas/' + x),
-        tags: this.state.tags.split(/[ ,]/).filter(function (el) { return el.length !== 0 }),
-        arquivos: []
+    if (this.state.corBotao === "rgba(17, 39, 73, 1)") {
+      let response = await window.fetch(apiUrl + '/projetos/' + this.state.idProjeto + '/tarefas/', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nome: this.state.nomeTarefa,
+          descricao: this.state.descricao,
+          prazo: this.state.data,
+          responsaveis: this.state.responsaveis.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/usuarios/' + x),
+          dependencias: this.state.dependencias.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/projetos/' + this.state.idProjeto + '/tarefas/' + x),
+          tags: this.state.tags.split(/[ ,]/).filter(function (el) { return el.length !== 0 }),
+          arquivos: []
+        })
       })
-    })
-    window.location = '/tarefas'
+      if (response.ok) {
+        window.location = '/tarefas'
+      }else{
+        let response2 = await response.text();
+        this.setState({
+          mensagemErro: response2
+        })
+        setTimeout(() => this.setState({ mensagemErro: '' }), 5000)
+      }
+    }
   }
 
-  setNomeTarefa (value) {
+  setNomeTarefa(value) {
+    if (value === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       nomeTarefa: value
     })
   }
 
-  setDescricao (value) {
+  setDescricao(value) {
+    if (this.state.nomeTarefa === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       descricao: value
     })
   }
 
-  setTags (value) {
+  setTags(value) {
+    if (this.state.nomeTarefa === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       tags: value
     })
   }
 
-  setResponsaveis (value) {
+  setResponsaveis(value) {
+    if (this.state.nomeTarefa === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       responsaveis: value
     })
   }
 
-  setPrazo (value) {
+  setPrazo(value) {
+    if (this.state.nomeTarefa === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       data: value
     })
   }
 
-  setDependencias (value) {
+  setDependencias(value) {
+    if (this.state.nomeTarefa === '') {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    } else {
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       dependencias: value
     })
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.setNomeTarefa = this.setNomeTarefa.bind(this)
@@ -104,10 +169,11 @@ export default class AppCriarTarefa extends Component {
       responsaveis: '',
       data: '',
       dependencias: '',
-      idProjeto: '' + this.props.match.params.idProjeto
+      idProjeto: '' + this.props.match.params.idProjeto,
+      corBotao: 'rgba(17, 39, 73, 0.15)'
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
   }
 };
