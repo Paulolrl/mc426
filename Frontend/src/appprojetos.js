@@ -14,7 +14,7 @@ export default class AppProjetos extends Component {
         listaProjetos3={this.state.listaProjetos3}
         listaProjetos4={this.state.listaProjetos4}
         listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
-        />
+      />
     )
   }
 

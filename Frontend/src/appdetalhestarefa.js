@@ -39,6 +39,7 @@ export default class AppDetalhesTarefa extends Component {
         handleClickEnviar={this.handleClickEnviar}
         corBotao={this.state.corBotao}
         mensagemErro={this.state.mensagemErro}
+        listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
       />
     )
   }
@@ -295,6 +296,7 @@ export default class AppDetalhesTarefa extends Component {
       'prazo': '',
       'responsaveis': '',
       'duracao': '',
+      listaMinhasTarefas: [], // BARRA LATERAL
       'tags': '',
       'dependencias': '',
       'ratingInput': '',
@@ -310,7 +312,7 @@ export default class AppDetalhesTarefa extends Component {
       'dependenciasInicial': '',
       'numeroProgressoInicial': 0,
       'descricaoProgressoInicial': '',
-      descricaoTarefaInicial: '',
+      descricaoTarefaInicial: ''
     }
   }
 
@@ -327,7 +329,7 @@ export default class AppDetalhesTarefa extends Component {
     return rgb
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
 
     window.fetch(apiUrl + '/projetos/' + this.state.idProjeto + '/tarefas/' + this.state.idTarefa, {
@@ -358,5 +360,25 @@ export default class AppDetalhesTarefa extends Component {
         'responsaveisInicial': response.responsaveis.map(x => x.substring('/usuarios/'.length)).join(', ')
       })
       )
-  }
+    // CODIGO BARRA LATERAL
+    let responseTarefas = await window.fetch(apiUrl + '/usuarios/' + this.state.nomeUsuario, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    }).then(response => response.json())
+
+    for (let i = 0; i < responseTarefas.tarefas.length; i++) {
+      await window.fetch(apiUrl + responseTarefas.tarefas[i], {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          'Content-Type': 'application/json'
+        }
+      }).then(resp => resp.json())
+        .then(resp => this.setState(prevState => ({
+          listaMinhasTarefas: [...prevState.listaMinhasTarefas, { 'nomeTarefa': resp.nome + ' (' + resp.id + ')', 'resourceTarefa': responseTarefas.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem) }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+        }))
+        )
+    }  }
 };
