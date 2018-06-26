@@ -19,11 +19,25 @@
 }
 
 .iconepessoa-oval_2 {
-    width: 59px;
-    height: 63px;
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 3px;
+    padding-bottom: 9px;
     border-radius: 100%;
     background: #D8D8D8;
+}
+
+.iconepessoa-0-0-0-0-0 {
+    display: flex;
+    padding-left: 8px;
+    padding-right: 7px;
+}
+
+.iconepessoa-image_6 {
+    width: 44px;
+    height: 51px;
+    flex-shrink: 0;
+    border-width: 0px;
 }
 
 .iconepessoa-0-0-0-1 {
@@ -237,11 +251,25 @@
 }
 
 .iconepessoa-oval_2-2 {
-    width: 59px;
-    height: 63px;
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4px;
+    padding-bottom: 8px;
     border-radius: 100%;
     background: #D8D8D8;
+}
+
+.iconepessoa-1-0-2-0-0-0 {
+    display: flex;
+    padding-left: 7px;
+    padding-right: 8px;
+}
+
+.iconepessoa-image_6-3 {
+    width: 44px;
+    height: 51px;
+    flex-shrink: 0;
+    border-width: 0px;
 }
 
 .iconepessoa-1-0-3 {

@@ -8,7 +8,11 @@ function render() {
         { (('default') === "default") ?
             <div className="iconepessoa-default-4">
                 <div className="iconepessoa-0-0-0">
-                    <div className="iconepessoa-oval_2" /> 
+                    <div className="iconepessoa-oval_2">
+                        <div className="iconepessoa-0-0-0-0-0">
+                            <img src="https://ucarecdn.com/7b47cb9a-5afc-41ed-929c-73ad0016edc3/" className="iconepessoa-image_6" /> 
+                        </div>
+                    </div>
                     <div className="iconepessoa-0-0-0-1">
                         <div className="iconepessoa-0-0-0-1-0">
                             <div className="iconepessoa-text_7">
@@ -62,7 +66,11 @@ function render() {
                 </div>
                 <div className="iconepessoa-1-0-2">
                     <div className="iconepessoa-1-0-2-0">
-                        <div className="iconepessoa-oval_2-2" /> 
+                        <div className="iconepessoa-oval_2-2">
+                            <div className="iconepessoa-1-0-2-0-0-0">
+                                <img src="https://ucarecdn.com/7b47cb9a-5afc-41ed-929c-73ad0016edc3/" className="iconepessoa-image_6-3" /> 
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="iconepessoa-1-0-3">

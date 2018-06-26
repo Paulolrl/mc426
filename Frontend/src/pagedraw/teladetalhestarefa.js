@@ -11,7 +11,7 @@ function render() {
     return <div className="teladetalhestarefa-teladetalhestarefa-8">
         <div className="teladetalhestarefa-0">
             <div className="teladetalhestarefa-menu_instance_1">
-                <Menu nomeUsuario={""} /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="teladetalhestarefa-1">
@@ -25,6 +25,7 @@ function render() {
                 <Barraagenda /> 
             </div>
         </div>
+        <div className="teladetalhestarefa-2" /> 
     </div>;
 };
 
