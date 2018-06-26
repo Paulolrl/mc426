@@ -19,7 +19,7 @@ function render() {
                 <Barratarefas listaTarefas={[]} /> 
             </div>
             <div className="teladetalheequipe-centordetalheequipe_instance-1">
-                <Centordetalheequipe nomeEquipe={this.props.nomeEquipe} membros={this.props.membrosEquipe} handleClick={this.props.handleClick} setMembros={this.props.setMembros} /> 
+                <Centordetalheequipe nomeEquipe={this.props.nomeEquipe} membros={this.props.membrosEquipe} handleClick={this.props.handleClick} setMembros={this.props.setMembros} mensagemErro={this.props.mensagemErro} corBotao={this.props.corBotao} /> 
             </div>
             <div className="teladetalheequipe-barraagenda_instance_2">
                 <Barraagenda /> 

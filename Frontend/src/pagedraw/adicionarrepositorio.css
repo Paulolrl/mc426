@@ -135,9 +135,19 @@
 
 .adicionarrepositorio-3 {
     display: flex;
-    margin-top: 19px;
-    padding-left: 477px;
-    padding-right: 46px;
+    margin-top: 23px;
+    padding-left: 421px;
+    padding-right: 102px;
+}
+
+.adicionarrepositorio-rectangle_2 {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.adicionarrepositorio-3-0-0 {
+    display: flex;
 }
 
 .adicionarrepositorio-componentebotao_instance-3 {
@@ -150,7 +160,7 @@
 
 .adicionarrepositorio-4 {
     display: flex;
-    margin-top: 26px;
+    margin-top: 22px;
     padding-left: 60px;
     padding-right: 435px;
 }
@@ -177,9 +187,13 @@
     padding-right: 400px;
 }
 
+.adicionarrepositorio-5-0 {
+    flex-shrink: 0;
+    display: flex;
+}
+
 .adicionarrepositorio-github-7 {
     width: 228px;
-    flex-shrink: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(4, 141, 208);
     font-size: 17px;
@@ -190,6 +204,7 @@
     text-decoration: underline;
     text-align: left;
     word-wrap: break-word;
+    flex-grow: 1;
 }
 
 * {

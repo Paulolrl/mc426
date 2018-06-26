@@ -22,10 +22,15 @@ function render() {
             </div>
         </div>
         <div className="centordetalheequipe-2">
+            <div className="centordetalheequipe-mensagemerro-7">
+                { this.props.mensagemErro }
+            </div>
+        </div>
+        <div className="centordetalheequipe-3">
             <div className="centordetalheequipe-rectangle_1">
-                <div className="centordetalheequipe-2-0-0">
+                <div className="centordetalheequipe-3-0-0">
                     <div onClick={this.props.handleClick} className="centordetalheequipe-componentebotao_instance-0">
-                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={this.props.corBotao} /> 
                     </div>
                 </div>
             </div>

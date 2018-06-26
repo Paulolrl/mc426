@@ -11,7 +11,7 @@ function render() {
     return <div className="telauploadarquivo-telauploadarquivo-3">
         <div className="telauploadarquivo-0">
             <div className="telauploadarquivo-menu_instance_1">
-                <Menu nomeUsuario={""} /> 
+                <Menu nomeUsuario={this.props.nomeUsuario} /> 
             </div>
         </div>
         <div className="telauploadarquivo-1">
@@ -25,6 +25,7 @@ function render() {
                 <Barraagenda /> 
             </div>
         </div>
+        <div className="telauploadarquivo-2" /> 
     </div>;
 };
 

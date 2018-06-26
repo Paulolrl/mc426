@@ -15,7 +15,7 @@ function render() {
                     <div className="docgoogle-text_1">{"Nome: "}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Nome do Documento" value={this.props.nome} className="docgoogle-nome-9" /> 
+            <input type="text" placeholder="Nome do Documento" value={this.props.nome} onChange={(e) => this.props.setNome(e.target.value)} className="docgoogle-nome-9" /> 
         </div>
         <div className="docgoogle-2">
             <div className="docgoogle-2-0">
@@ -23,11 +23,15 @@ function render() {
                     <div className="docgoogle-text_3">{"Link:"}</div>
                 </div>
             </div>
-            <input type="text" value={this.props.link} className="docgoogle-link-6" /> 
+            <input type="text" value={this.props.link} onChange={(e) => this.props.setLink(e.target.value)} className="docgoogle-link-6" /> 
         </div>
         <div className="docgoogle-3">
-            <div className="docgoogle-botaosalvar-1">
-                <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+            <div onClick={this.props.handleClick} className="docgoogle-rectangle_2">
+                <div className="docgoogle-3-0-0">
+                    <div className="docgoogle-botaosalvar-1">
+                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>;

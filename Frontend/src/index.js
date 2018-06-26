@@ -18,6 +18,9 @@ import AppCriarTarefa from './appcriartarefa'
 import AppDecideProjeto from './appdecideprojeto'
 import AppDetalhesTarefa from './appdetalhestarefa'
 import AppUploadArquivo from './appuploadarquivo'
+import AppCriarDiretorio from './appcriardiretorio'
+import AppCriarRepositorio from './appcriarrepositorio'
+import AppCriarDoc from './appcriardoc'
 // There's no special libraries or javascript layout systems, just code written for you.
 
 render((
@@ -35,5 +38,8 @@ render((
       <Route exact path='/projetos/:idProjeto([0-9]{1,40})/tarefas/nova' component={AppCriarTarefa} />
       <Route exact path='/projetos/:idProjeto([0-9]{1,40})/tarefas/:idTarefa([0-9]{1,40})' component={AppDetalhesTarefa} />
       <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/novoArquivo' component={AppUploadArquivo} />
+      <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/subdiretorio' component={AppCriarDiretorio} />
+      <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/repositorio' component={AppCriarRepositorio} />
+      <Route exact path='/diretorios/:idDiretorio([0-9]{1,40})/doc' component={AppCriarDoc} />
     </Switch>
   </Router>), document.getElementById('root'))

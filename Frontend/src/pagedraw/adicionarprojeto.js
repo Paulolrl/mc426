@@ -42,18 +42,27 @@ function render() {
         <div className="adicionarprojeto-4">
             <div className="adicionarprojeto-4-0">
                 <div className="adicionarprojeto-4-0-0">
-                    <div className="adicionarprojeto-text_24">{"Prazo:"}</div>
+                    <div className="adicionarprojeto-4-0-0-0">
+                        <div className="adicionarprojeto-4-0-0-0-0">
+                            <div className="adicionarprojeto-text_24">{"Prazo:"}</div>
+                        </div>
+                    </div>
+                    <input type="text" placeholder="aaaa-mm-dd" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionarprojeto-prazo-4" /> 
+                </div>
+                <div className="adicionarprojeto-4-0-1">
+                    <div className="adicionarprojeto-mensagemerro-8">
+                        { this.props.mensagemErro }
+                    </div>
                 </div>
             </div>
             <div className="adicionarprojeto-4-1">
                 <div className="adicionarprojeto-4-1-0">
-                    <input type="text" placeholder="aaaa-mm-dd" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="adicionarprojeto-prazo-4" /> 
-                </div>
-            </div>
-            <div className="adicionarprojeto-rectangle_1">
-                <div className="adicionarprojeto-4-2-0">
-                    <div onClick={this.props.handleClick} className="adicionarprojeto-botaosalvar-4">
-                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                    <div className="adicionarprojeto-rectangle_1">
+                        <div className="adicionarprojeto-4-1-0-0-0">
+                            <div onClick={this.props.handleClick} className="adicionarprojeto-botaosalvar-4">
+                                <Componentebotao textoBotao={"Salvar"} color={this.props.corBotao} /> 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

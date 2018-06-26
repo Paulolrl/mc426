@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import axios, { post } from 'axios'
 
 // Step 1: import the design from above
 // Pagedraw generates the JSX and CSS files you need.
-import TelaUploadArquivo from './pagedraw/telauploadarquivo'
+import TelaCriarDiretorio from './pagedraw/telacriardiretorio'
 
 import 'semantic-ui-css/semantic.min.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 const apiUrl = 'http://localhost:8080/Backend/mc426'
 
-export default class AppUploadArquivo extends Component {
+export default class AppCriarDiretorio extends Component {
   render () {
     return (
-      <TelaUploadArquivo handleChange={this.handleChange}
+      <TelaCriarDiretorio setNome={this.setNome}
+        nome={this.state.nome}
         handleClick={this.handleClick}
         nomeUsuario={this.state.nomeUsuario}
       />
@@ -25,34 +25,31 @@ export default class AppUploadArquivo extends Component {
 
     this.state = {
       'nomeUsuario': window.localStorage.getItem('usuarioADA'),
-      'arquivo': null,
+      nome: '',
       idDiretorio: this.props.match.params.idDiretorio
     }
 
-    this.handleChange = this.handleChange.bind(this)
+    this.setNome = this.setNome.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  async handleChange (fileList) {
-    console.log(fileList)
-    if (fileList.length > 0) {
-      await this.setState({arquivo: fileList[0]})
-    } else {
-      this.setState({arquivo: null})
-    }
+  setNome (value) {
+    this.setState({
+      nome: value
+    })
   }
 
   async handleClick () {
-    const url = apiUrl + '/diretorios/' + this.state.idDiretorio + '/upload'
-    const formData = new FormData()
-    formData.append('file', this.state.arquivo)
-    const config = {
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
+    await window.fetch(apiUrl + '/diretorios/' + this.state.idDiretorio + '/subdiretorio', {
+      method: 'POST',
       headers: {
-        'content-type': 'multipart/form-data'
-      }
-    }
-    post(url, formData, config)
-
+        'Authorization': 'Basic ' + authorizationBasic
+      },
+      body: JSON.stringify({
+        nome: this.state.nome
+      })
+    })
     window.location = '/diretorios/' + this.state.idDiretorio
   }
 
