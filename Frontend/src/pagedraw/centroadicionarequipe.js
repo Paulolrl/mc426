@@ -22,12 +22,8 @@ function render() {
             <input type="text" placeholder="Nome da nova equipe" value={this.props.nomeEquipe} onChange={(e) => this.props.setNome(e.target.value)} className="centroadicionarequipe-nome-0" /> 
         </div>
         <div className="centroadicionarequipe-2">
-            <div className="centroadicionarequipe-2-0">
-                <div className="centroadicionarequipe-2-0-0">
-                    <div className="centroadicionarequipe-link-3">
-                        {"Usuários Membros:"}
-                    </div>
-                </div>
+            <div className="centroadicionarequipe-link-3">
+                {"Usuários Membros:"}
             </div>
             <div className="centroadicionarequipe-2-1">
                 <div className="centroadicionarequipe-2-1-0">
@@ -36,10 +32,15 @@ function render() {
             </div>
         </div>
         <div className="centroadicionarequipe-3">
+            <div className="centroadicionarequipe-mensagemerro-8">
+                { this.props.mensagemErro }
+            </div>
+        </div>
+        <div className="centroadicionarequipe-4">
             <div className="centroadicionarequipe-rectangle_4">
-                <div className="centroadicionarequipe-3-0-0">
+                <div className="centroadicionarequipe-4-0-0">
                     <div onClick={this.props.handleClick} className="centroadicionarequipe-componentebotao_instance-8">
-                        <Componentebotao textoBotao={"Adicionar"} /> 
+                        <Componentebotao textoBotao={"Adicionar"} color={this.props.corBotao} /> 
                     </div>
                 </div>
             </div>

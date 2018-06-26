@@ -15,7 +15,7 @@ function render() {
             </div>
             <a href="/projetos/novo" className="projetos-0-1">
                 <div className="projetos-botaoadicionarprojeto-0">
-                    <Componentebotao textoBotao={"Adicionar Projeto"} /> 
+                    <Componentebotao textoBotao={"Adicionar Projeto"} color={"rgb(17, 39, 73)"} /> 
                 </div>
             </a>
         </div>

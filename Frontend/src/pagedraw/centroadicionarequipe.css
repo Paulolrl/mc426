@@ -4,7 +4,7 @@
     flex-direction: column;
     flex-grow: 1;
     padding-top: 33px;
-    padding-bottom: 89px;
+    padding-bottom: 61px;
     background: #FFFFFF;
 }
 
@@ -31,7 +31,7 @@
 
 .centroadicionarequipe-1 {
     display: flex;
-    margin-top: 33px;
+    margin-top: 28px;
     padding-left: 48px;
     padding-right: 114px;
 }
@@ -39,7 +39,8 @@
 .centroadicionarequipe-1-0 {
     display: flex;
     flex-direction: column;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .centroadicionarequipe-1-0-0 {
@@ -63,14 +64,14 @@
 
 .centroadicionarequipe-nome-0 {
     width: 405px;
-    height: 26px;
+    height: 33px;
     flex-shrink: 0;
     margin-left: 40px;
     border-radius: 4px;
     background: #FFFFFF;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     font-style: normal;
     text-align: left;
@@ -83,19 +84,9 @@
 
 .centroadicionarequipe-2 {
     display: flex;
-    margin-top: 14px;
+    margin-top: 12px;
     padding-left: 48px;
     padding-right: 114px;
-}
-
-.centroadicionarequipe-2-0 {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 3px;
-}
-
-.centroadicionarequipe-2-0-0 {
-    display: flex;
 }
 
 .centroadicionarequipe-link-3 {
@@ -117,7 +108,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 14px;
-    padding-top: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .centroadicionarequipe-2-1-0 {
@@ -126,13 +118,13 @@
 
 .centroadicionarequipe-membros-7 {
     width: 405px;
-    height: 46px;
+    height: 33px;
     flex-shrink: 0;
     border-radius: 4px;
     background: #FFFFFF;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     font-style: normal;
     text-align: left;
@@ -145,9 +137,31 @@
 
 .centroadicionarequipe-3 {
     display: flex;
-    margin-top: 25px;
-    padding-left: 461px;
-    padding-right: 46px;
+    margin-top: 10px;
+    padding-left: 169px;
+    padding-right: 114px;
+}
+
+.centroadicionarequipe-mensagemerro-8 {
+    width: 405px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 0, 0);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.centroadicionarequipe-4 {
+    display: flex;
+    margin-top: 30px;
+    padding-left: 412px;
+    padding-right: 95px;
 }
 
 .centroadicionarequipe-rectangle_4 {
@@ -156,9 +170,10 @@
     cursor: pointer;
 }
 
-.centroadicionarequipe-3-0-0 {
+.centroadicionarequipe-4-0-0 {
     display: flex;
-    padding-right: 16px;
+    padding-left: 2px;
+    padding-right: 14px;
 }
 
 .centroadicionarequipe-componentebotao_instance-8 {

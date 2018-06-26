@@ -19,7 +19,7 @@ function render() {
             <div onClick={() => { window.location += "/nova" }} className="centrotarefas-rectangle_1">
                 <div className="centrotarefas-0-1-0">
                     <div className="centrotarefas-botaoadicionarprojeto-3">
-                        <Componentebotao textoBotao={"Adicionar Tarefa"} /> 
+                        <Componentebotao textoBotao={"Adicionar Tarefa"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>

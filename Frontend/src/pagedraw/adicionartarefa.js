@@ -69,7 +69,7 @@ function render() {
             <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
                 <div className="adicionartarefa-7-0-0">
                     <div className="adicionartarefa-botaosalvar-4">
-                        <Componentebotao textoBotao={"Salvar"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>

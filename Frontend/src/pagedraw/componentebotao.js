@@ -7,7 +7,7 @@ function render() {
     return <div className="componentebotao-componentebotao-2">
         <div className="componentebotao-0">
             <div className="componentebotao-0-0" /> 
-            <div className="componentebotao-botaoadicionararquivo-2">
+            <div className="componentebotao-botaoadicionararquivo-2" style={{"background": this.props.color}}>
                 <div className="componentebotao-0-1-0">
                     <div className="componentebotao-text_1">
                         { this.props.textoBotao }

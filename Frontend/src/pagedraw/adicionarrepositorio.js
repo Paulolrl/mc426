@@ -33,7 +33,7 @@ function render() {
         </div>
         <div className="adicionarrepositorio-3">
             <div className="adicionarrepositorio-componentebotao_instance-3">
-                <Componentebotao textoBotao={"Adicionar"} /> 
+                <Componentebotao textoBotao={"Adicionar"} color={"#ffffff"} /> 
             </div>
         </div>
         <div className="adicionarrepositorio-4">

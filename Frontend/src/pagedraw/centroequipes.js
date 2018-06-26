@@ -11,7 +11,7 @@ function render() {
             <div className="centroequipes-text_1">Equipes</div>
             <a href="/equipes/nova" className="centroequipes-0-1">
                 <div className="centroequipes-componentebotao_instance_3">
-                    <Componentebotao textoBotao={"Adicionar Equipe"} /> 
+                    <Componentebotao textoBotao={"Adicionar Equipe"} color={"rgb(17, 39, 73)"} /> 
                 </div>
             </a>
         </div>

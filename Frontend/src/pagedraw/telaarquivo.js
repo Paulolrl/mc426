@@ -15,7 +15,7 @@ function render() {
                 <Semanticuidropdown value={this.props.valueDropdown} onChange={this.props.onChangeDropdown} placeholder={"Projetos"} options={this.props.listaOpcoes} /> 
             </div>
             <div className="telaarquivo-semanticuidropdown_instance_3">
-                <Semanticuidropdown value={""} onChange={()} placeholder={"Adicionar"} options={[{"text": "Pasta", "value": "pasta"}, {"text": "Upload Arquivo", "value": "arquivo"}, {"text": "Repositório Github", "value": "github"}, {"text": "Documento Google", "value": "docGoogle"}]} /> 
+                <Semanticuidropdown value={""} onChange={this.props.onChangeDropdown} placeholder={"Adicionar"} options={[{"text": "Pasta", "value": "pasta"}, {"text": "Upload Arquivo", "value": "arquivo"}, {"text": "Repositório Github", "value": "github"}, {"text": "Documento Google", "value": "docGoogle"}]} /> 
             </div>
         </div>
         <div className="telaarquivo-2">

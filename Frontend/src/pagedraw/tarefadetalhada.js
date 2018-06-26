@@ -91,7 +91,7 @@ function render() {
             <div className="tarefadetalhada-rectangle_2">
                 <div className="tarefadetalhada-8-0-0">
                     <div onClick={this.props.handleClickSalvar} className="tarefadetalhada-botaosalvar-2">
-                        <Componentebotao textoBotao={"Salvar"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ function render() {
             <div className="tarefadetalhada-rectangle_20">
                 <div className="tarefadetalhada-11-2-0">
                     <div onClick={this.props.handleClickEnviar} className="tarefadetalhada-botaoenviar-3">
-                        <Componentebotao textoBotao={"Enviar"} /> 
+                        <Componentebotao textoBotao={"Enviar"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>

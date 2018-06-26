@@ -41,7 +41,7 @@ function render() {
             <div className="detalhesprojeto-rectangle_2">
                 <div className="detalhesprojeto-4-0-0">
                     <div onClick={this.props.handleClick} className="detalhesprojeto-botaosalvar-2">
-                        <Componentebotao textoBotao={"Salvar"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>

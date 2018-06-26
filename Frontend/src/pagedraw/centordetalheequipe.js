@@ -17,7 +17,7 @@ function render() {
             </div>
             <div className="centordetalheequipe-1-1">
                 <div className="centordetalheequipe-1-1-0">
-                    <input type="text" placeholder="Placeholder" value={this.props.membros} onChange={(e) => this.props.setMembros(e.target.value)} className="centordetalheequipe-responsaveis-6" /> 
+                    <input type="text" placeholder="usuario1, usuario2" value={this.props.membros} onChange={(e) => this.props.setMembros(e.target.value)} className="centordetalheequipe-responsaveis-6" /> 
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@ function render() {
             <div className="centordetalheequipe-rectangle_1">
                 <div className="centordetalheequipe-2-0-0">
                     <div onClick={this.props.handleClick} className="centordetalheequipe-componentebotao_instance-0">
-                        <Componentebotao textoBotao={"Salvar"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
                     </div>
                 </div>
             </div>

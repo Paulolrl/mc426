@@ -15,11 +15,11 @@ function render() {
                     <div className="novapasta-text_1">{"Nome da Pasta:"}</div>
                 </div>
             </div>
-            <input type="text" placeholder="Nome Pasta" className="novapasta-text_input_3" /> 
+            <input type="text" placeholder="Nome Pasta" value={this.props.nome} className="novapasta-nome-9" /> 
         </div>
         <div className="novapasta-2">
-            <div className="novapasta-botaoupload-3">
-                <Componentebotao textoBotao={"Upload"} /> 
+            <div className="novapasta-botaosalvar-3">
+                <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
             </div>
         </div>
     </div>;
