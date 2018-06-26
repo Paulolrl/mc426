@@ -6,7 +6,11 @@ import './barraagenda.css';
 function render() {
     return <div className="barraagenda-barraagenda-4">
         <div className="barraagenda-0">
-            <div className="barraagenda-barraagenda-1" /> 
+            <div className="barraagenda-barraagenda-1">
+                <div className="barraagenda-0-0-0">
+                    <div className="barraagenda-text_1">Minha Agenda </div>
+                </div>
+            </div>
         </div>
     </div>;
 };

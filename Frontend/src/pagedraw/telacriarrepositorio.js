@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telacriarrepositorio-1">
             <div className="telacriarrepositorio-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="telacriarrepositorio-adicionarrepositorio-0">
                 <Adicionarrepositorio nome={this.props.nome} link={this.props.link} setNome={this.props.setNome} setLink={this.props.setLink} handleClick={this.props.handleClick} /> 

@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telacriartarefa-1">
             <div className="telacriartarefa-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="telacriartarefa-adicionartarefa_instance-9">
                 <Adicionartarefa nomeTarefa={this.props.nomeTarefa} tags={this.props.tags} descricao={this.props.descricao} responsaveis={this.props.responsaveis} data={this.props.data} handleClick={this.props.handleClick} setNomeTarefa={this.props.setNomeTarefa} setTags={this.props.setTags} setDescricao={this.props.setDescricao} setResponsaveis={this.props.setResponsaveis} setPrazo={this.props.setPrazo} dependencias={this.props.dependencias} setDependencias={this.props.setDependencias} mensagemErro={this.props.mensagemErro} corBotao={this.props.corBotao} /> 

@@ -88,10 +88,17 @@ function render() {
             </div>
         </div>
         <div className="tarefadetalhada-8">
-            <div className="tarefadetalhada-rectangle_2">
+            <div className="tarefadetalhada-8-0">
                 <div className="tarefadetalhada-8-0-0">
+                    <div className="tarefadetalhada-mensagemerro-7">
+                        { this.props.mensagemErro }
+                    </div>
+                </div>
+            </div>
+            <div className="tarefadetalhada-rectangle_2">
+                <div className="tarefadetalhada-8-1-0">
                     <div onClick={this.props.handleClickSalvar} className="tarefadetalhada-botaosalvar-2">
-                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={this.props.corBotao} /> 
                     </div>
                 </div>
             </div>

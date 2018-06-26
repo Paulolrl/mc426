@@ -13,9 +13,11 @@ function render() {
                     <Botao_menu item={"Tarefas"} /> 
                 </div>
             </a>
-            <div className="menu-bot_o_menu_instance_2">
-                <Botao_menu item={"Arquivos"} /> 
-            </div>
+            <a href="/arquivos" className="menu-0-1">
+                <div className="menu-bot_o_menu_instance_2">
+                    <Botao_menu item={"Arquivos"} /> 
+                </div>
+            </a>
             <div className="menu-bot_o_menu_instance_2-3">
                 <Botao_menu item={"Agenda"} /> 
             </div>

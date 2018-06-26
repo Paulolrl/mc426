@@ -16,7 +16,7 @@ function render() {
         </div>
         <div className="telacriardoc-1">
             <div className="telacriardoc-barratarefas_instance_2">
-                <Barratarefas listaTarefas={[]} /> 
+                <Barratarefas listaTarefas={this.props.listaMinhasTarefas} /> 
             </div>
             <div className="telacriardoc-docgoogle_instance-9">
                 <Docgoogle nome={this.props.nome} link={this.props.link} setNome={this.props.setNome} setLink={this.props.setLink} handleClick={this.props.handleClick} /> 
