@@ -20,36 +20,60 @@ export default class AppDetalhesProjeto extends Component {
         setIdEquipes={this.setIdEquipes}
         setPrazo={this.setPrazo}
         nomeUsuario={this.state.nomeUsuario}
+        corBotao={this.state.corBotao}
+        mensagemErro={this.state.mensagemErro}
       />
     )
   }
 
   async handleSubmit () {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
-    let response1 = await window.fetch(apiUrl + '/projetos/' + this.state.idProjeto, {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + authorizationBasic
-      },
-      body: JSON.stringify({
-        nome: this.state.nomeProjeto,
-        descricao: this.state.descricao,
-        prazo: this.state.prazo
-      })
-    })
+    if (this.state.corBotao === "rgba(17, 39, 73, 1)") {
 
-    console.log(this.state.idEquipes)
-    let responseJson = await response1.json()
-    await window.fetch(apiUrl + '/projetos/' + responseJson.id + '/equipes/', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + authorizationBasic
-      },
-      body: JSON.stringify({
-        equipes: this.state.idEquipes.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/equipes/' + x)
+      let response1 = await window.fetch(apiUrl + '/projetos/' + this.state.idProjeto, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic
+        },
+        body: JSON.stringify({
+          nome: this.state.nomeProjeto,
+          descricao: this.state.descricao,
+          prazo: this.state.prazo
+        })
       })
-    })
-    window.location = '/projetos'
+
+      if (response1.ok) {
+        let responseJson = await response1.json()
+
+        let response2 = await window.fetch(apiUrl + '/projetos/' + responseJson.id + '/equipes/', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Basic ' + authorizationBasic
+          },
+          body: JSON.stringify({
+            equipes: this.state.idEquipes.split(/[ ,]/).filter(function (el) { return el.length !== 0 }).map(x => '/equipes/' + x)
+          })
+        })
+
+        if (response2.ok) {
+          window.location = '/projetos'
+        } else {
+          let responseErro = await response2.text();
+          console.log(responseErro)
+          this.setState({
+            mensagemErro: responseErro
+          })
+          setTimeout(() => this.setState({ mensagemErro: '' }), 5000)
+        }
+      } else {
+        let responseErro = await response1.text();
+        console.log(responseErro)
+        this.setState({
+          mensagemErro: responseErro
+        })
+        setTimeout(() => this.setState({ mensagemErro: '' }), 5000)
+      }
+    }
   }
 
   setNomeProjeto (value) {
@@ -59,18 +83,51 @@ export default class AppDetalhesProjeto extends Component {
   }
 
   setDescricao (value) {
+    if (value === this.state.descricaoInicial && 
+      this.state.idEquipes === this.state.idEquipesInicial && 
+      this.state.prazo === this.state.prazoInicial){
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    }else{
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       descricao: value
     })
   }
 
   setIdEquipes (value) {
+    if (this.state.descricao === this.state.descricaoInicial && 
+      value === this.state.idEquipesInicial && 
+      this.state.prazo === this.state.prazoInicial){
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    }else{
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       idEquipes: value
     })
   }
 
   setPrazo (value) {
+    if (this.state.descricao === this.state.descricaoInicial && 
+      this.state.idEquipes === this.state.idEquipesInicial && 
+      value === this.state.prazoInicial){
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 0.15)'
+      })
+    }else{
+      this.setState({
+        corBotao: 'rgba(17, 39, 73, 1)'
+      })
+    }
     this.setState({
       prazo: value
     })
@@ -90,7 +147,11 @@ export default class AppDetalhesProjeto extends Component {
       descricao: '',
       idEquipes: '',
       prazo: '',
-      idProjeto: this.props.match.params.idProjeto
+      idProjeto: this.props.match.params.idProjeto,
+      corBotao: 'rgba(17, 39, 73, 0.15)',
+      descricaoInicial:'',
+      idEquipesInicial:'',
+      prazoInicial:''
     }
   }
 
@@ -108,7 +169,11 @@ export default class AppDetalhesProjeto extends Component {
     }).then(response => response.json())
       .then(response => this.setState({ 'nomeProjeto': response.nome,
         'descricao': response.descricao,
+        'descricaoInicial': response.descricao,
         'prazo': response.prazo,
-        'idEquipes': response.equipes.map(x => x.substring('/equipes/'.length)).join(', ')}))
+        'prazoInicial': response.prazo,
+        'idEquipes': response.equipes.map(x => x.substring('/equipes/'.length)).join(', '),
+        'idEquipesInicial': response.equipes.map(x => x.substring('/equipes/'.length)).join(', ')   
+      }))
   }
 };

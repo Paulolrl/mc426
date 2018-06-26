@@ -59,7 +59,6 @@ export default class AppCriarProjeto extends Component {
           window.location = '/projetos'
         } else {
           let responseErro = await response2.text();
-          console.log(responseErro)
           this.setState({
             mensagemErro: responseErro
           })
