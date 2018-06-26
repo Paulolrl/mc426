@@ -16,6 +16,7 @@ export default class AppCriarDiretorio extends Component {
         nome={this.state.nome}
         handleClick={this.handleClick}
         nomeUsuario={this.state.nomeUsuario}
+        listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
       />
     )
   }
@@ -26,11 +27,14 @@ export default class AppCriarDiretorio extends Component {
     this.state = {
       'nomeUsuario': window.localStorage.getItem('usuarioADA'),
       nome: '',
-      idDiretorio: this.props.match.params.idDiretorio
+      idDiretorio: this.props.match.params.idDiretorio,
+      listaMinhasTarefas: [] // BARRA LATERAL
     }
 
     this.setNome = this.setNome.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    // BARRA LATERAL
+    this.toColor = this.toColor.bind(this)
   }
 
   setNome (value) {
@@ -53,7 +57,42 @@ export default class AppCriarDiretorio extends Component {
     window.location = '/diretorios/' + this.state.idDiretorio
   }
 
-  componentDidMount () {
+  // BARRA LATERAL
+  toColor (progresso) {
+    progresso = parseInt(progresso)
+    progresso = (30 + progresso) * (70 / 130.0)
+    let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16)
+    if (r.length === 1) { r = '0' + r }
+    let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16)
+    if (g.length === 1) { g = '0' + g }
+    let rgb = '#' + r + g + '00'
 
+    console.log(rgb)
+    return rgb
+  }
+
+  async componentDidMount () {
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
+    // CODIGO BARRA LATERAL
+    let responseTarefas = await window.fetch(apiUrl + '/usuarios/' + this.state.nomeUsuario, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    }).then(response => response.json())
+
+    for (let i = 0; i < responseTarefas.tarefas.length; i++) {
+      await window.fetch(apiUrl + responseTarefas.tarefas[i], {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          'Content-Type': 'application/json'
+        }
+      }).then(resp => resp.json())
+        .then(resp => this.setState(prevState => ({
+          listaMinhasTarefas: [...prevState.listaMinhasTarefas, { 'nomeTarefa': resp.nome + ' (' + resp.id + ')', 'resourceTarefa': responseTarefas.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem) }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+        }))
+        )
+    }
   }
 };

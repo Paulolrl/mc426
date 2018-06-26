@@ -8,7 +8,7 @@ import TelaCriarTarefa from './pagedraw/telacriartarefa'
 const apiUrl = 'http://localhost:8080/Backend/mc426'
 
 export default class AppCriarTarefa extends Component {
-  render() {
+  render () {
     return (
       <TelaCriarTarefa handleClick={this.handleSubmit}
         nomeTarefa={this.state.nomeTarefa}
@@ -25,13 +25,14 @@ export default class AppCriarTarefa extends Component {
         setDependencias={this.setDependencias}
         corBotao={this.state.corBotao}
         mensagemErro={this.state.mensagemErro}
+        listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
       />
     )
   }
 
-  async handleSubmit() {
+  async handleSubmit () {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
-    if (this.state.corBotao === "rgba(17, 39, 73, 1)") {
+    if (this.state.corBotao === 'rgba(17, 39, 73, 1)') {
       let response = await window.fetch(apiUrl + '/projetos/' + this.state.idProjeto + '/tarefas/', {
         method: 'POST',
         headers: {
@@ -51,8 +52,8 @@ export default class AppCriarTarefa extends Component {
       })
       if (response.ok) {
         window.location = '/tarefas'
-      }else{
-        let response2 = await response.text();
+      } else {
+        let response2 = await response.text()
         this.setState({
           mensagemErro: response2
         })
@@ -61,7 +62,7 @@ export default class AppCriarTarefa extends Component {
     }
   }
 
-  setNomeTarefa(value) {
+  setNomeTarefa (value) {
     if (value === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -76,7 +77,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  setDescricao(value) {
+  setDescricao (value) {
     if (this.state.nomeTarefa === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -91,7 +92,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  setTags(value) {
+  setTags (value) {
     if (this.state.nomeTarefa === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -106,7 +107,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  setResponsaveis(value) {
+  setResponsaveis (value) {
     if (this.state.nomeTarefa === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -121,7 +122,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  setPrazo(value) {
+  setPrazo (value) {
     if (this.state.nomeTarefa === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -136,7 +137,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  setDependencias(value) {
+  setDependencias (value) {
     if (this.state.nomeTarefa === '') {
       this.setState({
         corBotao: 'rgba(17, 39, 73, 0.15)'
@@ -151,7 +152,7 @@ export default class AppCriarTarefa extends Component {
     })
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.setNomeTarefa = this.setNomeTarefa.bind(this)
@@ -170,10 +171,47 @@ export default class AppCriarTarefa extends Component {
       data: '',
       dependencias: '',
       idProjeto: '' + this.props.match.params.idProjeto,
-      corBotao: 'rgba(17, 39, 73, 0.15)'
+      corBotao: 'rgba(17, 39, 73, 0.15)',
+      listaMinhasTarefas: [] // BARRA LATERAL
     }
   }
 
-  componentDidMount() {
+  // BARRA LATERAL
+  toColor (progresso) {
+    progresso = parseInt(progresso)
+    progresso = (30 + progresso) * (70 / 130.0)
+    let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16)
+    if (r.length === 1) { r = '0' + r }
+    let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16)
+    if (g.length === 1) { g = '0' + g }
+    let rgb = '#' + r + g + '00'
+
+    console.log(rgb)
+    return rgb
+  }
+
+  async componentDidMount () {
+    var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
+    // CODIGO BARRA LATERAL
+    let responseTarefas = await window.fetch(apiUrl + '/usuarios/' + this.state.nomeUsuario, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    }).then(response => response.json())
+
+    for (let i = 0; i < responseTarefas.tarefas.length; i++) {
+      await window.fetch(apiUrl + responseTarefas.tarefas[i], {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          'Content-Type': 'application/json'
+        }
+      }).then(resp => resp.json())
+        .then(resp => this.setState(prevState => ({
+          listaMinhasTarefas: [...prevState.listaMinhasTarefas, { 'nomeTarefa': resp.nome + ' (' + resp.id + ')', 'resourceTarefa': responseTarefas.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem) }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+        }))
+        )
+    }
   }
 };
