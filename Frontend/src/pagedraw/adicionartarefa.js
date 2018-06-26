@@ -66,10 +66,17 @@ function render() {
             <input type="text" placeholder="32, 47, 58" value={this.props.dependencias} onChange={(e) => this.props.setDependencias(e.target.value)} className="adicionartarefa-responsaveis-8" /> 
         </div>
         <div className="adicionartarefa-7">
-            <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
+            <div className="adicionartarefa-7-0">
                 <div className="adicionartarefa-7-0-0">
+                    <div className="adicionartarefa-mensagemerro-5">
+                        { this.props.mensagemErro }
+                    </div>
+                </div>
+            </div>
+            <div onClick={this.props.handleClick} className="adicionartarefa-rectangle_1">
+                <div className="adicionartarefa-7-1-0">
                     <div className="adicionartarefa-botaosalvar-4">
-                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={this.props.corBotao} /> 
                     </div>
                 </div>
             </div>

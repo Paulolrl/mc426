@@ -12,10 +12,10 @@ function render() {
         </div>
         <div className="telaarquivo-1">
             <div className="telaarquivo-semanticuidropdown_instance_2">
-                <Semanticuidropdown value={this.props.valueDropdown} onChange={this.props.onChangeDropdown} placeholder={"Projetos"} options={this.props.listaOpcoes} /> 
+                <Semanticuidropdown value={this.props.dados.valueDropdown} onChange={this.props.dados.onChangeDropdown} placeholder={"Projetos"} options={this.props.dados.listaOpcoes} /> 
             </div>
             <div className="telaarquivo-semanticuidropdown_instance_3">
-                <Semanticuidropdown value={""} onChange={this.props.onSelectOption} placeholder={"Adicionar"} options={[{"text": "Pasta", "value": "pasta"}, {"text": "Upload Arquivo", "value": "arquivo"}, {"text": "Repositório Github", "value": "github"}, {"text": "Documento Google", "value": "docGoogle"}]} /> 
+                <Semanticuidropdown value={""} onChange={this.props.dados.onSelectOption} placeholder={"Adicionar"} options={[{"text": "Pasta", "value": "subdiretorio"}, {"text": "Upload Arquivo", "value": "novoArquivo"}, {"text": "Repositório Github", "value": "repositorio"}, {"text": "Documento Google", "value": "doc"}]} /> 
             </div>
         </div>
         <div className="telaarquivo-2">
@@ -24,40 +24,40 @@ function render() {
                     return <div key={i} className="telaarquivo-lista1">
                         <div className="telaarquivo-2-0-0-0-0">
                             <div className="telaarquivo-pasta_instance-2">
-                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} /> 
+                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} resource={elem.resource} /> 
                             </div>
                         </div>
                     </div>;
                 }) }
             </div>
             <div className="telaarquivo-2-1">
-                { (this.props.lista2).map((elem, i) => {
+                { (this.props.dados.lista2).map((elem, i) => {
                     return <div key={i} className="telaarquivo-rectangle_2">
                         <div className="telaarquivo-2-1-0-0-0">
                             <div className="telaarquivo-pasta_instance-9">
-                                <Arquivo icone={elem.nome} nome={elem.icone} handleClick={elem.handleClick} /> 
+                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} resource={elem.resource} /> 
                             </div>
                         </div>
                     </div>;
                 }) }
             </div>
             <div className="telaarquivo-2-2">
-                { (this.props.lista3).map((elem, i) => {
+                { (this.props.dados.lista3).map((elem, i) => {
                     return <div key={i} className="telaarquivo-rectangle_22">
                         <div className="telaarquivo-2-2-0-0-0">
                             <div className="telaarquivo-pasta_instance-3">
-                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} /> 
+                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} resource={elem.resource} /> 
                             </div>
                         </div>
                     </div>;
                 }) }
             </div>
             <div className="telaarquivo-2-3">
-                { (this.props.lista4).map((elem, i) => {
+                { (this.props.dados.lista4).map((elem, i) => {
                     return <div key={i} className="telaarquivo-rectangle_22-8">
                         <div className="telaarquivo-2-3-0-0-0">
                             <div className="telaarquivo-pasta_instance-1">
-                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} /> 
+                                <Arquivo icone={elem.icone} nome={elem.nome} handleClick={elem.handleClick} resource={elem.resource} /> 
                             </div>
                         </div>
                     </div>;

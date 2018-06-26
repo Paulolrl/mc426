@@ -38,10 +38,17 @@ function render() {
             <input type="text" placeholder="aaaa-mm-dd" value={this.props.prazo} onChange={(e) => this.props.setPrazo(e.target.value)} className="detalhesprojeto-prazo-6" /> 
         </div>
         <div className="detalhesprojeto-4">
-            <div className="detalhesprojeto-rectangle_2">
+            <div className="detalhesprojeto-4-0">
                 <div className="detalhesprojeto-4-0-0">
+                    <div className="detalhesprojeto-mensagemerro-7">
+                        { this.props.mensagemErro }
+                    </div>
+                </div>
+            </div>
+            <div className="detalhesprojeto-rectangle_2">
+                <div className="detalhesprojeto-4-1-0">
                     <div onClick={this.props.handleClick} className="detalhesprojeto-botaosalvar-2">
-                        <Componentebotao textoBotao={"Salvar"} color={"rgb(17, 39, 73)"} /> 
+                        <Componentebotao textoBotao={"Salvar"} color={this.props.corBotao} /> 
                     </div>
                 </div>
             </div>

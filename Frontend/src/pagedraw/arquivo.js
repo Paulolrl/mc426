@@ -6,7 +6,7 @@ import './arquivo.css';
 function render() {
     return <div className="arquivo-arquivo-9">
         <div className="arquivo-0">
-            <div onClick={this.props.handleClick} className="arquivo-rectangle_2">
+            <div onClick={() => window.location = this.props.resource} className="arquivo-rectangle_2">
                 <div className="arquivo-0-0-0">
                     <img src={this.props.icone} className="arquivo-icone-8" /> 
                 </div>

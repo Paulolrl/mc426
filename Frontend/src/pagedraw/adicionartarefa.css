@@ -348,17 +348,44 @@
 
 .adicionartarefa-7 {
     display: flex;
-    padding-left: 467px;
+    padding-left: 41px;
     padding-right: 42px;
+}
+
+.adicionartarefa-7-0 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+    padding-bottom: 23px;
+}
+
+.adicionartarefa-7-0-0 {
+    display: flex;
+}
+
+.adicionartarefa-mensagemerro-5 {
+    width: 372px;
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(255, 0, 0);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    word-wrap: break-word;
 }
 
 .adicionartarefa-rectangle_1 {
     display: flex;
     flex-direction: column;
+    margin-left: 54px;
     cursor: pointer;
 }
 
-.adicionartarefa-7-0-0 {
+.adicionartarefa-7-1-0 {
     display: flex;
 }
 
