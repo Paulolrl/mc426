@@ -19,6 +19,7 @@ export default class AppTarefas extends Component {
           listaOpcoes={this.state.listaOpcoes}
           onChangeDropdown={this.onChangeDropdown}
           valueDropdown={this.state.valueDropdown}
+          listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
         />
       </MuiThemeProvider>
     )
@@ -31,7 +32,8 @@ export default class AppTarefas extends Component {
       'nomeUsuario': window.localStorage.getItem('usuarioADA'),
       'listaTarefas': [],
       valueDropdown: '' + this.props.match.params.idProjeto,
-      listaOpcoes: []
+      listaOpcoes: [],
+      listaMinhasTarefas: [] // BARRA LATERAL
     }
 
     this.handleResponse = this.handleResponse.bind(this)
@@ -106,7 +108,7 @@ export default class AppTarefas extends Component {
     }
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     console.log(window.localStorage.getItem('usuarioADA'))
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
 
@@ -119,5 +121,26 @@ export default class AppTarefas extends Component {
       }
     }).then(response => response.json())
       .then(response => this.handleResponse(response))
+      // CODIGO BARRA LATERAL
+    let responseTarefas = await window.fetch(apiUrl + '/usuarios/' + this.state.nomeUsuario, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    }).then(response => response.json())
+
+    for (let i = 0; i < responseTarefas.tarefas.length; i++) {
+      await window.fetch(apiUrl + responseTarefas.tarefas[i], {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          'Content-Type': 'application/json'
+        }
+      }).then(resp => resp.json())
+        .then(resp => this.setState(prevState => ({
+          listaMinhasTarefas: [...prevState.listaMinhasTarefas, { 'nomeTarefa': resp.nome + ' (' + resp.id + ')', 'resourceTarefa': responseTarefas.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem) }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+        }))
+        )
+    }
   }
 };

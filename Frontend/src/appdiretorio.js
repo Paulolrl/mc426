@@ -11,17 +11,18 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 const apiUrl = 'http://localhost:8080/Backend/mc426'
 
 export default class AppTarefas extends Component {
-  render () {
+  render() {
     return (
       <MuiThemeProvider>
         <TelaDiretorio nomeUsuario={this.state.nomeUsuario}
           dados={this.state.dados}
+          listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
         />
       </MuiThemeProvider>
     )
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleResponse = this.handleResponse.bind(this)
     this.onChangeDropdown = this.onChangeDropdown.bind(this)
@@ -40,15 +41,32 @@ export default class AppTarefas extends Component {
         'onSelectOption': this.onSelectOption
       },
       idDiretorio: '' + this.props.match.params.idDiretorio,
-      'nomeUsuario': window.localStorage.getItem('usuarioADA')
+      'nomeUsuario': window.localStorage.getItem('usuarioADA'),
+      listaMinhasTarefas: [] // BARRA LATERAL
     }
+    // BARRA LATERAL
+    this.toColor = this.toColor.bind(this)
   }
 
-  async onSelectOption (evt, data) {
+  // BARRA LATERAL
+  toColor(progresso) {
+    progresso = parseInt(progresso)
+    progresso = (30 + progresso) * (70 / 130.0)
+    let r = Math.round(255.0 * Math.min(1, (100 - progresso) / 50.0)).toString(16)
+    if (r.length === 1) { r = '0' + r }
+    let g = Math.round(255.0 * Math.min(1, (progresso) / 50.0)).toString(16)
+    if (g.length === 1) { g = '0' + g }
+    let rgb = '#' + r + g + '00'
+
+    console.log(rgb)
+    return rgb
+  }
+
+  async onSelectOption(evt, data) {
     window.location += '/' + data.value
   }
 
-  async onChangeDropdown (evt, data) {
+  async onChangeDropdown(evt, data) {
     let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
 
     if (data.value !== this.state.dados.valueDropdown) {
@@ -63,7 +81,7 @@ export default class AppTarefas extends Component {
     }
   }
 
-  async handleDirResponse (response) {
+  async handleDirResponse(response) {
     let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
     let i = 0
 
@@ -78,20 +96,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista1': [...prevState.dados.lista1, {
-              'nome': response.nome,
-              'resource': '/diretorios/' + response.id,
-              'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista3': prevState.dados.lista3,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista1': [...prevState.dados.lista1, {
+                'nome': response.nome,
+                'resource': '/diretorios/' + response.id,
+                'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista3': prevState.dados.lista3,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -103,20 +122,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista2': [...prevState.dados.lista2, {
-              'nome': response.nome,
-              'resource': '/diretorios/' + response.id,
-              'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
-            }],
-            'lista1': prevState.dados.lista1,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista3': prevState.dados.lista3,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista2': [...prevState.dados.lista2, {
+                'nome': response.nome,
+                'resource': '/diretorios/' + response.id,
+                'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
+              }],
+              'lista1': prevState.dados.lista1,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista3': prevState.dados.lista3,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -128,20 +148,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista3': [...prevState.dados.lista3, {
-              'nome': response.nome,
-              'resource': '/diretorios/' + response.id,
-              'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista1': prevState.dados.lista1,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista3': [...prevState.dados.lista3, {
+                'nome': response.nome,
+                'resource': '/diretorios/' + response.id,
+                'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista1': prevState.dados.lista1,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -153,25 +174,26 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista4': [...prevState.dados.lista4, {
-              'nome': response.nome,
-              'resource': '/diretorios/' + response.id,
-              'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista1': prevState.dados.lista1,
-            'lista3': prevState.dados.lista3,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista4': [...prevState.dados.lista4, {
+                'nome': response.nome,
+                'resource': '/diretorios/' + response.id,
+                'icone': 'http://pngimg.com/uploads/folder/folder_PNG8773.png'
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista1': prevState.dados.lista1,
+              'lista3': prevState.dados.lista3,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
     }
 
-    for (let j = 0; j < response.itens.length; i++, j++) {
+    for (let j = 0; j < response.itens.length; i++ , j++) {
       if (i % 4 === 0) {
         window.fetch(apiUrl + response.itens[j], {
           method: 'GET',
@@ -180,20 +202,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista1': [...prevState.dados.lista1, {
-              'nome': response.nome,
-              'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
-              'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista3': prevState.dados.lista3,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista1': [...prevState.dados.lista1, {
+                'nome': response.nome,
+                'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
+                'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista3': prevState.dados.lista3,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -205,20 +228,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista2': [...prevState.dados.lista2, {
-              'nome': response.nome,
-              'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
-              'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
-            }],
-            'lista1': prevState.dados.lista1,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista3': prevState.dados.lista3,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista2': [...prevState.dados.lista2, {
+                'nome': response.nome,
+                'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
+                'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
+              }],
+              'lista1': prevState.dados.lista1,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista3': prevState.dados.lista3,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -230,20 +254,21 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista3': [...prevState.dados.lista3, {
-              'nome': response.nome,
-              'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
-              'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista1': prevState.dados.lista1,
-            'lista4': prevState.dados.lista4,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista3': [...prevState.dados.lista3, {
+                'nome': response.nome,
+                'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
+                'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista1': prevState.dados.lista1,
+              'lista4': prevState.dados.lista4,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
 
@@ -255,25 +280,26 @@ export default class AppTarefas extends Component {
             'Content-Type': 'application/json'
           }
         }).then(response => response.json())
-          .then(response => this.setState(prevState => ({ dados: {
-            'lista4': [...prevState.dados.lista4, {
-              'nome': response.nome,
-              'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
-              'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
-            }],
-            'lista2': prevState.dados.lista2,
-            'onChangeDropdown': prevState.dados.onChangeDropdown,
-            valueDropdown: prevState.dados.valueDropdown,
-            'lista1': prevState.dados.lista1,
-            'lista3': prevState.dados.lista3,
-            'onSelectOption': prevState.dados.onSelectOption,
-            listaOpcoes: prevState.dados.listaOpcoes
-          }
+          .then(response => this.setState(prevState => ({
+            dados: {
+              'lista4': [...prevState.dados.lista4, {
+                'nome': response.nome,
+                'resource': (response.tipo === 'arquivo') ? (window.location.toString() + '/itens/' + response.id + '/download') : response.link,
+                'icone': (response.tipo === 'repositorio') ? 'https://image.flaticon.com/icons/svg/25/25231.svg' : (response.tipo === 'documentoGoogle' ? 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google-Docs-logo-transparent.max-300x300.png' : 'http://www.iconhot.com/icon/png/devine-icons-part-2/512/defult-text.png')
+              }],
+              'lista2': prevState.dados.lista2,
+              'onChangeDropdown': prevState.dados.onChangeDropdown,
+              valueDropdown: prevState.dados.valueDropdown,
+              'lista1': prevState.dados.lista1,
+              'lista3': prevState.dados.lista3,
+              'onSelectOption': prevState.dados.onSelectOption,
+              listaOpcoes: prevState.dados.listaOpcoes
+            }
           })))
       }
     }
   }
-  async handleResponse (response) {
+  async handleResponse(response) {
     let authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
 
     // Preenche a lista de opcoes do dropdown com os projetos do usuario
@@ -284,16 +310,17 @@ export default class AppTarefas extends Component {
           'Authorization': 'Basic ' + authorizationBasic
         }
       }).then(response => response.json())
-        .then(response => this.setState(prevState => ({ dados: {
-          'lista1': prevState.dados.lista1,
-          'lista2': prevState.dados.lista2,
-          'onChangeDropdown': prevState.dados.onChangeDropdown,
-          valueDropdown: prevState.dados.valueDropdown,
-          'lista3': prevState.dados.lista3,
-          'lista4': prevState.dados.lista4,
-          'onSelectOption': prevState.dados.onSelectOption,
-          listaOpcoes: [...prevState.dados.listaOpcoes, { 'text': response.nome + ' (' + response.id + ')', 'value': '' + response.id }]
-        }
+        .then(response => this.setState(prevState => ({
+          dados: {
+            'lista1': prevState.dados.lista1,
+            'lista2': prevState.dados.lista2,
+            'onChangeDropdown': prevState.dados.onChangeDropdown,
+            valueDropdown: prevState.dados.valueDropdown,
+            'lista3': prevState.dados.lista3,
+            'lista4': prevState.dados.lista4,
+            'onSelectOption': prevState.dados.onSelectOption,
+            listaOpcoes: [...prevState.dados.listaOpcoes, { 'text': response.nome + ' (' + response.id + ')', 'value': '' + response.id }]
+          }
         })))
       // IMPORTANTE: "value": "" + response.id Isso eh pra converter o id para string
     }
@@ -330,7 +357,7 @@ export default class AppTarefas extends Component {
     console.log(responseProjeto)
   }
 
-  componentDidMount () {
+  async componentDidMount() {
     var authorizationBasic = window.btoa(window.localStorage.getItem('usuarioADA') + ':' + window.localStorage.getItem('senhaADA'))
 
     console.log('GET ' + apiUrl + '/projetos')
@@ -350,5 +377,27 @@ export default class AppTarefas extends Component {
       }
     }).then(response => response.json())
       .then(response => this.handleDirResponse(response))
+
+    // CODIGO BARRA LATERAL
+    let responseTarefas = await window.fetch(apiUrl + '/usuarios/' + this.state.nomeUsuario, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic ' + authorizationBasic
+      }
+    }).then(response => response.json())
+
+    for (let i = 0; i < responseTarefas.tarefas.length; i++) {
+      await window.fetch(apiUrl + responseTarefas.tarefas[i], {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + authorizationBasic,
+          'Content-Type': 'application/json'
+        }
+      }).then(resp => resp.json())
+        .then(resp => this.setState(prevState => ({
+          listaMinhasTarefas: [...prevState.listaMinhasTarefas, { 'nomeTarefa': resp.nome + ' (' + resp.id + ')', 'resourceTarefa': responseTarefas.tarefas[i], prazo: resp.prazo, descricao: resp.descricao, progresso: this.toColor(resp.progresso.porcentagem) }].sort((a, b) => (new Date(a.prazo) - new Date(b.prazo)))
+        }))
+        )
+    }
   }
 };
