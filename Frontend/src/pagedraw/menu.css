@@ -25,12 +25,17 @@
     flex-grow: 1;
 }
 
-.menu-bot_o_menu_instance_2 {
+.menu-0-1 {
     flex-shrink: 0;
+    display: flex;
+}
+
+.menu-bot_o_menu_instance_2 {
     display: flex;
     flex-direction: column;
     min-width: 129px;
     min-height: 110px;
+    flex-grow: 1;
 }
 
 .menu-bot_o_menu_instance_2-3 {
