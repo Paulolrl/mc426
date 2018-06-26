@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -211,6 +212,48 @@ public class ControllerProjetos {
 		}
 	}
 
+	@Path("{id}")
+	@DELETE
+	@Produces("application/json")
+	public Response DeleteProjeto(@Context HttpHeaders httpheaders, @PathParam("id") int id) {
+		String resposta;
+		try {
+			if (httpheaders.getRequestHeaders().get("Authorization") == null) {
+				resposta = "Forneca um Header do tipo Authorization.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Usuario usuario = Login.verifica(httpheaders.getRequestHeaders().get("Authorization").get(0));
+
+			if (usuario == null) {
+				resposta = "Usuario nao encontrado.";
+				return Response.status(401).entity(resposta).build();
+			}
+
+			Projeto projeto = Projeto.getPorId(id);
+
+			if (projeto == null) {
+				resposta = "Projeto nao encontrado";
+				return Response.status(404).entity(resposta).build();
+			}
+
+			if (!projeto.getDono().equals(usuario)) {
+				resposta = "Usuario nao e dono";
+				return Response.status(401).entity(resposta).build();
+			}
+			Gerente gerente = (Gerente) usuario;
+
+			gerente.removerProjeto(projeto);
+			return Response.status(200).entity(projeto.toJson().toString()).build();
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			resposta = sw.toString(); // stack trace as a string
+			return Response.status(500).entity(resposta).build();
+		}
+	}
+	
 	@POST
 	@Path("/{idProjeto}/tarefas/")
 	@Produces("application/json")
