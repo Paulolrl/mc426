@@ -13,7 +13,8 @@ export default class AppProjetos extends Component {
         listaProjetos2={this.state.listaProjetos2}
         listaProjetos3={this.state.listaProjetos3}
         listaProjetos4={this.state.listaProjetos4}
-        listaMinhasTarefas={this.state.listaMinhasTarefas} />
+        listaMinhasTarefas={this.state.listaMinhasTarefas} // BARRA LATERAL
+        />
     )
   }
 
@@ -30,10 +31,12 @@ export default class AppProjetos extends Component {
       ],
       'listaProjetos4': [
       ],
-      listaMinhasTarefas: []
+      listaMinhasTarefas: [] // BARRA LATERAL
     }
 
+    // BARRA LATERAL
     this.toColor = this.toColor.bind(this)
+
     this.handleResponse = this.handleResponse.bind(this)
   }
 
@@ -94,6 +97,7 @@ export default class AppProjetos extends Component {
     }
   }
 
+  // BARRA LATERAL
   toColor (progresso) {
     progresso = parseInt(progresso)
     progresso = (30 + progresso) * (70 / 130.0)
